@@ -1,0 +1,20 @@
+{
+  "created": 1780601618,
+  "model": "gpt-image-1.5",
+  "usage": {
+    "input_tokens": 1122,
+    "input_tokens_details": {
+      "image_tokens": 0,
+      "text_tokens": 1122
+    },
+    "output_tokens": 6876,
+    "output_tokens_details": {
+      "image_tokens": 6208,
+      "text_tokens": 668
+    },
+    "total_tokens": 7998
+  },
+  "data_keys": [
+    "b64_json"
+  ]
+}

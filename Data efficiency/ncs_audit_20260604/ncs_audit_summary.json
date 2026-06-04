@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-06-04T11:35:20",
+  "overall_strong_ncs_ready": false,
+  "figure2_axes": 4,
+  "figure2_axis_level_classes": 15,
+  "figure3_axes": 6,
+  "figure3_axis_level_classes": 20,
+  "gate_status_counts": {
+    "MISSING": 6,
+    "PASS": 3,
+    "YELLOW": 2
+  }
+}

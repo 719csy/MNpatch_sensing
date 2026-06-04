@@ -1,0 +1,6 @@
+﻿dimension,classes,minimum_classes_for_claim,current_support,domain_randomization_goal
+operator,MMP; PIEZO_PASSIVE; ULTRASOUND_STRAIN,3,MMP trainable 445; piezo 150; US 150,Treat real MMP/phantom/animal/ex vivo readout as a variation inside simulated operator-feature support; piezo/US are simulated cross-operator benchmarks unless paired real data exist.
+morphology,geometric primitive; clinical lesion prior; phantom anchor,3,clinical datasets 4; canonical terms 21,"Cover lesion size, irregularity, roughness, and public/clinical priors rather than only idealized circles."
+depth,shallow; mid; deep; OOD-deep,4,3D rigidity depth levels 14,ID bins support posterior learning; OOD-deep is reserved for failure utility and observability limits.
+contrast,soft/hypoelastic; matched-low; stiff/hyperelastic,3,A_contrast/H_heterogeneity and ck/log_ck available in reference manifests,Low contrast should be deliberately included because it creates non-identifiable/multimodal posteriors.
+contact/load/noise,baseline; mild shift; hard shift,3,piezo/US bonded/tilted x five load/compression levels; MMP has multi-strain Bz rows,Make operator metadata q_d variation explicit while preventing split leakage across noise/load siblings.

@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-06-04T12:55:14",
+  "output_dir": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Data efficiency\\data_efficiency_results_20260604",
+  "fig2_rows": 225,
+  "fig3_rows": 432,
+  "summary_rows": 39,
+  "fig2_devices": [
+    "sheet piezo",
+    "soft MMP",
+    "ultrasound"
+  ],
+  "fig3_devices": [
+    "sheet piezo",
+    "soft MMP",
+    "ultrasound"
+  ],
+  "fig2_models": [
+    "DPS inverse diffusion",
+    "SRCNN",
+    "U-Net",
+    "operator-conditioned diffusion",
+    "vanilla diffusion"
+  ],
+  "fig3_models": [
+    "3D U-Net",
+    "DPS inverse diffusion",
+    "Eapp-only diffusion",
+    "SRCNN 3D proxy",
+    "direct scalar regression",
+    "kernel GP",
+    "operator-conditioned diffusion",
+    "vanilla 3D diffusion"
+  ]
+}

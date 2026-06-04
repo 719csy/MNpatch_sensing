@@ -1,0 +1,1593 @@
+
+
+===== PDF page 25 =====
+这个现在 听 起 来 太强 ， 尤 其在  piezo 和  truth-leakage 风 险 存 在时 。
+建议 改 为 ：
+底 部  takeaway 改 成 ：
+这更 符 合  NCS 审 稿 口 味 ： 不是 “ 我们 恢 复 了所 有  3D 真 值 ” ， 而 是 “ 我们 把  operator-dependent inverse
+biomechanics 变 成可 量 化 、 可 校 准 、 可 桥 接  reliability 的  posterior problem” 。 这 才 是本文 真 正 的
+computational science 贡 献 。
+3D domain-randomized skin mechanics recover depth-aware latent biomechanical posteriors.
+text
+3D domain-randomized mechanics expose operator-dependent depth observability and calibrated 
+latent biomechanical posteriors.
+text
+Operator-conditioned posterior modelling converts heterogeneous readouts into depth-aware 
+biomechanical distributions, while preserving non-identifiable and multimodal depth ambiguity 
+for Figure 4 reliability analysis.
+2026-06-01 14:41:26 You Asked
+@Consensus 对于我现在正在 做 的 Figure 2 和 Figure3 ， 我当前 的 训
+练 遇 到了 一 个 很 现实 的 问题 ， 如 何 判 断 当前 的 simulation 库 是 否够
+用 ， 也就 是我们之前 研究 的 data efficiency ， 在这个 diffusion model
+里 面如 何 衡 量 ， 以 及 其 他 的 benchmark model （ 比 如 U-Net ，  vanilla 
+diffusion ）这 些 model 对于 data efficiency 的 指 标 （以上 两 个 维 度进
+行 评价 ） ， 什 么 时 候 能说我们 的 指 标 达 到了 一 定 标 准 ， 可以进入后
+续 的 posterior ， 以 及将 FIgure2 和 3merge 到 一 起 ， 如果 做 QC ？ 是 否
+有一 些指 标或 者 gate 可以进入 Figure 4 ？   只 用 Consensus 查 一 些 文
+献 即 可 ， 不用回 答 我 ， 后 续 我会用其 他 模 型 回 答
+ChatGPT gpt-5-5-thinking
+已 用  Consensus 完 成文 献 检 索 ， 不 展 开分 析 。 检 索 覆 盖 了这 几 类 ：
+1. data efficiency / learning curve / simulation library sufficiency
+重 点 候 选 ：The Shape of Learning Curves: A Review — Viering & Loog, 2021, IEEE TPAMI, citation
+Exported with AI Exporter 25 / 68
+
+===== PDF page 26 =====
+count 205 。 适 合 支 撑 用  learning curve 、 power-law/exponential saturation 、 marginal gain 来 判
+断  simulation 库 是 否够 用 。
+2. domain randomization / sim-to-real / synthetic support
+重 点 候 选 ：Domain randomization for transferring deep neural networks from simulation to the
+real world — Tobin et al., 2017, IROS, citation count 3637 。 适 合 支 撑 “ 足 够  variation 使真 实 世界 成
+为 模 拟 分 布 中的一 个  variation” 的 核 心 逻 辑 。
+3. diffusion posterior / inverse problem benchmark
+重 点 候 选 ：Diffusion Posterior Sampling for General Noisy Inverse Problems — Chung et al., 2022,
+arXiv, citation count 1525 。 适 合 支 撑  Figure 2/3 里  DPS-style baseline 、 noisy nonlinear inverse
+problem 、 posterior sampling 的 必 要性 。
+4. U-Net / medical imaging data-efficiency benchmark
+Consensus 检 索 到 的 候 选包 括 ：
+Deep learning for deep learning performance: How much data is needed for segmentation in
+biomedical imaging?
+Effects of sample size and data augmentation on U-Net-based automatic segmentation of various
+organs
+Improving Data-Efficiency and Robustness of Medical Imaging Segmentation Using Inpainting-
+Based Self-Supervised Learning
+5. uncertainty calibration / CRPS / coverage-width / risk-control gate
+Consensus 检 索 到 的 候 选包 括 ：
+Distribution-free uncertainty quantification for inverse problems
+Calibrated Uncertainty Quantification for Operator Learning via Conformal Prediction
+A Comprehensive Framework for Uncertainty Quantification of Voxel-Wise Supervised Deep
+Learning Models in IVIM MRI
+6. diffusion inverse problem baselines for Figure 2/3 QC
+Consensus 检 索 到 的 候 选包 括 ：
+Denoising Diffusion Restoration Models
+A Variational Perspective on Solving Inverse Problems with Diffusion Models
+Improving Diffusion Inverse Problem Solving with Decoupled Noise Annealing
+Decoupled Diffusion Sampling for Inverse Problems on Function Spaces
+这 些 检 索结 果 够 后 续 模 型 围 绕  learning-curve gate 、 simulation-support gate 、 posterior-calibration
+gate 、 OOD/failure-detection gate 、 Figure 4 entry gate 做完 整 方 案 。
+2026-06-01 14:51:54 You Asked
+对于我现在正在 做 的 Figure 2 和 Figure3 ， 我当前 的 训练 遇 到了 一 个
+很 现实 的 问题 ， 如 何 判 断 当前 的 simulation 库 是 否够 用 ， 也就 是我
+Exported with AI Exporter 26 / 68
+
+===== PDF page 27 =====
+们之前 研究 的 data efficiency ， 在这个 diffusion model 里 面如 何 衡
+量 ， 以 及 其 他 的 benchmark model （ 比 如 U-Net ，  vanilla diffusion ）
+这 些 model 对于 data efficiency 的 指 标 （以上 两 个 维 度进行 评价 ） ，
+什 么 时 候 能说我们 的 指 标 达 到了 一 定 标 准 ， 可以进入后 续 的
+posterior ， 以 及将 FIgure2 和 3merge 到 一 起 ， 如果 做 QC ？ 是 否 有一
+些指 标或 者 gate 可以进入 Figure 4 ？ 如 何 在 Figure2 和 3 里 面分 别 体
+现 ？ 基 于以上 的 文 献 调 研 回 答
+ChatGPT gpt-5-5-pro
+核 心 判 断 ：simulation 库 是 否够 用 ， 不能用 “ 生成了多 少 个 样 本 ” 判 断； 要用  learning curve saturation
++ simulator support coverage + posterior calibration + OOD/failure utility 四 类  gate 判 断 。 对  Figure
+2/3 来说 ， 数 据效 率 不是 一 个 单 指 标 ， 而 是 一 个  QC 框 架 。
+文 献 上 也支持 这个 思 路 ： learning curve 本来 就 是用来 刻 画  generalization performance 随 训练 集规 模
+变 化 的 工 具 ， 但 曲 线 形 状 并没 有  universal law ， 常见 的 是  power-law 或  exponential-like plateau ， 因
+此 必 须 对你 的 任 务实 测 学 习 曲 线 ， 而 不是 预 设 某 个 样 本 量 。  Domain randomization 的 核 心 逻 辑则
+是 ： 如果  simulator 的  variability 足 够 宽 ， real world 可以 被 模 型 看作  simulator support 内 的一 个
+variation 。  但 这 句 话 的 实 际 含 义 不是 “ 随 机 越 多 越 好 ” ， 而 是要 证 明 真 实  MMP phantom / animal / ex
+vivo readouts 落 在 模 拟  readout manifold 内 。 Diffusion 的 优 势 也 不 应 写 成 “ 生成图更 漂 亮 ” ， 而应 写 成
+适 合  noisy nonlinear inverse problems 的  posterior sampler 。
+1. 先 定 义  “simulation library enough” 的 四 个 维 度
+你现在 应 该把  simulation 库 是 否 足 够 拆 成 四 个问题 ：
+只 有 四 个问题 都 过关 ， 才 可以说  Figure 2/3 的  simulation library 进入主文 级别 。 否 则 最多是  scaffold
+或  ablation 。
+2. Data efficiency 的 核 心 指 标
+2.1 Learning curve 指 标
+对 每 个 模 型 和 每 个 任 务 ， 训练 不同大小 的  simulation library ：
+text
+Q1. Simulator support 是否覆盖了 Figure 2/3 所需的 morphology / depth / operator space？
+Q2. 模型性能是否随 simulation library size 增大而进入平台期？
+Q3. Posterior 是否校准，而不是只是 point estimate 好看？
+Q4. OOD / low-observability cases 下 uncertainty 是否真的能识别失败？
+Exported with AI Exporter 27 / 68
+
+===== PDF page 28 =====
+每 个  N 至 少  3 个  seed 。 然 后 拟 合  learning curve ：
+这 里   是  lower-is-better 指 标 ， 例 如  MAE 、 CRPS 、 forward residual 。 对于  SSIM 、 Dice 、
+Boundary-F1 这 种  higher-is-better ， 可以 写 成 ：
+然 后 保 存 四 个  data-efficiency 指 标 ：
+主文 里 最 有 用 的 是 ：
+如果这个 值 大于  2 ， 可以 比 较 安全地说 ：
+不要 只 说  “ours performs best at full dataset size” 。 NCS 审 稿 人更关心 的 是 ：在  simulation cost /
+training cost / real-data scarcity 约 束 下 ， 你 的 方法是 否 更  data-efficient 。
+text
+N = 1k, 2k, 5k, 10k, 25k, 50k, 100k
+m(N) =m  +∞ aN−α
+m(N)
+m(N) =m  −∞ aN−α
+text
+N90:
+  达到最终可获得 improvement 的 90% 所需样本数。
+N95:
+  达到最终可获得 improvement 的 95% 所需样本数。
+AULC:
+  Area under learning curve。对 lower-better metric，用 negative AULC 或 normalized error 
+AULC。
+Marginal gain per doubling:
+  Δm = |m(2N)-m(N)| / |m(N)|
+text
+Data-efficiency ratio = N90(baseline) / N90(ours)
+text
+The operator-conditioned diffusion reached the same posterior quality with at least twofold 
+fewer simulations.
+Exported with AI Exporter 28 / 68
+
+===== PDF page 29 =====
+2.2 Simulator support 指 标
+simulation 库 够 不 够 ， 不能 只 看  learning curve 。 还要看 真 实 或  held-out readout 是 否 落 在  simulator
+support 里 。
+建议 每 个 真 实  MMP phantom / animal readout  做  feature embedding ：
+然 后 算 ：
+定 义 一 个  support score ：
+Gate 可以 设 成 ：
+这 一 步 对 应  domain randomization 的 真 正科学 含 义 ： 不是  simulation 数 量 大 ， 而 是  real
+measurements are inside simulator support 。
+2.3 Diffusion-specific posterior quality
+对  diffusion ， 不要 只 看  denoising loss 。 Denoising loss 低 不等于  inverse posterior 好 。 Figure 2/3 应
+该 报告 ：
+y  
+real
+text
+φ(y) = readout encoder feature, spectral feature, spatial-statistics feature, operator-kernel 
+feature
+text
+kNN distance to synthetic train manifold
+Mahalanobis distance
+MMD(real readout, synthetic readout)
+coverage probability under synthetic density model
+S  =support
+  1 d(ϕ(y  ),D  ) ≤q  
+N  
+real
+1
+i
+∑ [ ireal sim 0.95sim]
+text
+PASS:
+  ≥90% real/phantom readouts lie within 95% synthetic support envelope.
+YELLOW:
+  75–90% within support; can proceed only as simulation-grounded claim.
+FAIL:
+  <75% within support; simulator does not yet cover experimental operator behavior.
+Exported with AI Exporter 29 / 68
+
+===== PDF page 30 =====
+尤 其注意 ：Cov90 不能 越 高 越 好 。 如果  Cov90 = 1.00 但  Width90 很 宽 ， 这不是 强  posterior ， 而 是过
+度 保 守 。 校 准 目标应 是  Cov90 接 近  0.90 ， 同时  Width90 尽 量 窄 。 Operator-learning 里 的  calibrated
+uncertainty 文 献 也 强调 ， 对 连 续 函 数 输 出要同时看  coverage guarantee 和  uncertainty band
+efficiency ， 而 不是 只 看 覆 盖 率 。 (arXiv)
+3. Diffusion 、 U-Net 、 vanilla diffusion 的  data-efficiency 比 较 方式
+建议 把每 个 模 型放 在同 一 套 训练 子 集 上 比 较 ：
+text
+Point accuracy:
+  Map MAE, z_bottom MAE, thickness MAE, contrast error
+Proper scoring:
+  CRPS for scalar posterior
+  WIS if only quantiles are stored
+Calibration:
+  Cov50 / Cov80 / Cov90 / Cov95
+  Width50 / Width80 / Width90 / Width95
+  PIT histogram
+  UCE / ENCE
+Physics consistency:
+  re-forward residual ||H_d(E_sample, q_d) - y_d||
+Posterior diversity:
+  posterior sample variance
+  mode count
+  multimodality frequency
+  posterior collapse rate
+Failure utility:
+  AUROC_fail
+  AUPRC_fail
+  risk–coverage
+  AUSE
+text
+Models:
+  Direct regression
+  2D / 3D U-Net
+  Kernel / GP depth-response model
+  Vanilla diffusion
+  Eapp-only diffusion
+Exported with AI Exporter 30 / 68
+
+===== PDF page 31 =====
+3.1 U-Net 的  data efficiency
+U-Net 是 强  deterministic baseline ， 尤 其在  biomedical segmentation 里 很 常 用 。 它 的  data-efficiency
+指 标应 主要是 ：
+U-Net 如果 只 输 出 点 估 计 ， 不 应 和  diffusion 直 接 比 较  posterior calibration 。 需 要 给 它 加 ：
+否 则它 天 然没 有  posterior ， Cov90/Width90 比 较 不公平 。 医 学 影 像低 标 签 场 景 中， self-supervised /
+inpainting-style pretraining 已 经 被 用来提高  U-Net-like segmentation 的  label efficiency ， 所以你可以
+把  “U-Net + augmentation / SSL” 作为  stronger baseline ， 而 不是 只 用  vanilla U-Net 。 (arXiv)
+3.2 Vanilla diffusion 的  data efficiency
+Vanilla diffusion 主要回 答 ：
+它 的 指 标 ：
+  DPS-style inverse diffusion
+  Operator-conditioned diffusion
+text
+N90_MAP:
+  达到 90% map-quality asymptote 所需 simulation 数量
+N90_BOUNDARY:
+  达到 90% Boundary-F1 / Dice asymptote 所需 simulation 数量
+Worst-stratum error:
+  shallow / deep / low-contrast / irregular / OOD 每个 stratum 的最大误差
+Seed stability:
+  seed-to-seed SD of metrics
+text
+deep ensemble
+MC dropout
+conformal wrapper
+text
+只学习 tissue prior，不显式知道 operator d 和 q_d，是否足够？
+text
+N90_PRIOR:
+  生成 plausible Eapp / E(x,y,z) prior 所需样本量
+Exported with AI Exporter 31 / 68
+
+===== PDF page 32 =====
+如果  vanilla diffusion 在  full N 下 也 不 错 ， 但 在小  N 或  operator shift 下不 稳 ， 你 的  claim 应 该 写 成 ：
+而 不是 ：
+3.3 Operator-conditioned diffusion 的  data efficiency
+你 的 方法要 证 明 的 是 两 点：
+因 此 主 指 标建议 固 定为 ：
+N90_INVERSE:
+  在同样 posterior metrics 下达到 plateau 所需样本量
+Operator-mixing penalty:
+  同一个模型混合 MMP / piezo / US readout 后，性能下降多少
+Calibration penalty:
+  Cov90 是否偏离 0.90，Width90 是否过宽
+text
+Operator conditioning improves data efficiency and reliability under mixed readout operators.
+text
+Operator-conditioned diffusion always produces the best mean reconstruction.
+text
+1. 用更少的 simulation 达到同等 reconstruction / posterior quality。
+2. 在同等 simulation 数量下，posterior calibration 和 OOD failure detection 更好。
+text
+Data-efficiency ratio:
+  DER_MAE  = N90_MAE(baseline) / N90_MAE(ours)
+  DER_CRPS = N90_CRPS(baseline) / N90_CRPS(ours)
+  DER_Cal  = N90_calibrated(baseline) / N90_calibrated(ours)
+Posterior-efficiency score:
+  PES = normalized_CRPS + λ1|Cov90-0.90| + λ2 normalized_Width90 + λ3 
+normalized_forward_residual
+OOD utility:
+  AUROC_fail
+  AUSE
+Exported with AI Exporter 32 / 68
+
+===== PDF page 33 =====
+如果 ：
+就 可以 较 强 地说  data efficiency 是本文 创 新点 之 一。
+4. 什 么 时 候 可以说 “simulation 库 够 用 ”
+我 建议设置 一 个明 确 的  Data Sufficiency Gate。
+Gate 1 — learning curve plateau
+如果  Figure 3 的  depth posterior 还在明 显改 善 ， 说明  3D simulation library 还不 够 。
+Gate 2 — support coverage
+  risk at 80% retained fraction
+text
+DER_CRPS ≥ 2
+DER_Cal ≥ 2
+AUROC_fail improves by ≥0.10
+AUSE improves by ≥15–20%
+text
+PASS:
+  在最后两个 library sizes 之间，核心指标 improvement < 3–5%。
+For Figure 2:
+  Map MAE, SSIM, Boundary-F1, CRPS, forward residual 全部进入平台。
+For Figure 3:
+  z_bottom MAE, CRPS, Cov90/Width90, interval IoU, AUROC_fail 全部进入平台。
+text
+PASS:
+  ≥90% phantom / experimental MMP readouts 落在 synthetic readout support 的 95% envelope 内。
+YELLOW:
+  只在 MMP phantom 中通过，但 animal / ex vivo 还没有通过。
+  可以进入 Figure 3 simulation benchmark，但不能进入 Figure 4 strong sim-to-real claim。
+FAIL:
+  phantom readout 都大量超出 simulator support。
+Exported with AI Exporter 33 / 68
+
+===== PDF page 34 =====
+Gate 3 — model advantage is data-efficient, not only full-data
+Gate 4 — posterior calibration
+你之前  Figure 3f 里 的  Cov90/Width90 就应 该 按 这个  gate 判 定 。 Cov90 接 近  1.00 不是  pass ； 如果
+Width90 很 宽 ， 是  yellow 或  fail 。
+Gate 5 — OOD / failure detection
+text
+PASS:
+  ours 的 N90_CRPS 或 N90_MAE 至少比 U-Net / vanilla diffusion 小 2 倍；
+  或者在同样 N 下，ours 的 CRPS / calibration / failure detection 明显优于 baseline。
+YELLOW:
+  full-data 下 ours 最好，但 N90 没有优势。
+  可以说 performance advantage，不要说 data-efficiency advantage。
+FAIL:
+  full-data 和 low-data 下都没有稳定优势。
+text
+PASS:
+  Cov90 between 0.87 and 0.93 for ID cases；
+  Cov90 between 0.85 and 0.95 for hard/OOD cases；
+  Width90 不超过任务定义的 acceptable width；
+  PIT 没有明显 U-shape / inverse-U；
+  CRPS 优于 deterministic / vanilla baselines。
+YELLOW:
+  Cov90 高但 Width90 过宽。
+  说明 posterior conservative，可以做 Figure 3，但不能进入 Figure 4 reliability claim。
+FAIL:
+  Cov90 <0.80 或 >0.98 且 Width90 过宽；
+  uncertainty 不能预测 error。
+text
+PASS:
+  AUROC_fail ≥ 0.75–0.80；
+Exported with AI Exporter 34 / 68
+
+===== PDF page 35 =====
+5. Figure 2 里 面 怎 么 体现
+Figure 2 是  2D apparent mechanics ： 目标 是 证 明  morphology-conditioned / operator-conditioned
+diffusion 能用 有 限  simulation 库 恢 复  。
+建议  Figure 2 加 一 个明 确 的  data-efficiency panel， 不要 只 放 最 终  benchmark 。
+Figure 2 应展示 的  data-efficiency 证 据
+  risk–coverage curve 明显优于 random rejection；
+  rejection top 20% high-uncertainty samples 后，retained MAE 下降 ≥25%；
+  uncertainty vs extrapolation distance slope 为正；
+  error vs extrapolation distance slope 小于 baseline。
+YELLOW:
+  uncertainty 随 OOD 增加，但 failure AUROC 不够。
+  可以说 detects uncertainty, 不能说 robust failure detection。
+FAIL:
+  high-error cases 和 high-uncertainty cases 不相关。
+E  (x,y)app
+text
+Panel b:
+  2D simulation library coverage:
+    lesion size
+    boundary irregularity
+    contrast
+    core heterogeneity
+    mask uncertainty
+    operator noise
+  加一个 “support score” 小指标：
+    synthetic coverage of MMP phantom readouts
+Panel e or f:
+  Learning curves:
+    x-axis: simulation library size N, log scale
+    y-axis: Map MAE / Boundary-F1 / CRPS
+    curves: U-Net, vanilla diffusion, DPS, op-cond diffusion
+Panel f:
+  Data-efficiency bar:
+    N90_MAP
+    N90_BOUNDARY
+    N90_CRPS
+    lower is better
+Exported with AI Exporter 35 / 68
+
+===== PDF page 36 =====
+Figure 2 的  pass gate 可以 写 成小 型  “QC strip” ：
+Figure 2 的 推 荐 主 张
+如果  gate 通过 ， Figure 2 的  conclusion 可以是 ：
+如果  calibration 还不理 想 ， 则 降 级 为 ：
+6. Figure 3 里 面 怎 么 体现
+Figure 3 是  3D latent mechanics ： 目标 不是更 漂 亮 的  3D 图 ， 而 是 证 明  depth-aware posterior 已 经 足
+够 可 靠 ， 可以进入  Figure 4 。
+Figure 3 应展示 的  data-efficiency 证 据
+Right side:
+  MMP phantom anchor:
+    known pattern
+    measured readout
+    reconstructed Eapp
+    reference map
+    support distance inside simulator envelope
+text
+2D data sufficiency:
+  Learning plateau: PASS
+  Simulator support: PASS
+  Boundary recovery: PASS
+  Posterior calibration: PASS/YELLOW
+  MMP phantom anchor: PASS
+text
+A domain-randomized 2D apparent-mechanics library reaches learning-curve saturation, and 
+operator-conditioned diffusion achieves calibrated Eapp reconstruction with fewer simulations 
+than U-Net or vanilla diffusion baselines.
+text
+The 2D simulation library is sufficient for apparent-map reconstruction and boundary 
+localization, while posterior calibration is carried forward to Figure 4.
+text
+Exported with AI Exporter 36 / 68
+
+===== PDF page 37 =====
+Figure 3 的  key point 是 ：piezo sheet 不 应 该 被 强 行 做 成  depth recovery 好 ， 而应 该显 示 其  posterior
+更 宽 、 更 容 易 多 峰 。 这不是 缺 点， 而 是 模 型 正 确 表 达 了  operator 的  depth non-identifiability 。
+Figure 3 的  recommended gates
+Panel b:
+  3D simulator support:
+    z_bottom
+    thickness
+    log10 contrast
+    layer modulus variation
+    boundary irregularity
+    contact pressure
+    operator noise
+  建议加 N_eff per stratum:
+    shallow / mid / deep / OOD-deep
+Panel e:
+  Representative posterior:
+    shallow: narrow posterior
+    deep: wider posterior
+    low contrast: multimodal posterior
+    piezo deep: broad posterior
+    MMP / US: better constrained posterior where operator supports it
+Panel f:
+  3D learning curves:
+    z_bottom MAE vs N
+    CRPS vs N
+    |Cov90 - 0.90| vs N
+    Width90 vs N
+    AUROC_fail vs N
+Panel f second module:
+  N90 comparison:
+    direct reg.
+    3D U-Net
+    vanilla diffusion
+    DPS inverse
+    op-cond diffusion
+Panel f third module:
+  Operator observability:
+    MMP / piezo / ultrasound posterior width
+    multimodal frequency
+    failure AUROC
+Exported with AI Exporter 37 / 68
+
+===== PDF page 38 =====
+Figure 3 的  conclusion 应 写 成 ：
+7. Figure 2 和  Figure 3 merge 前 的  QC
+如果你 想 把  Figure 2/3 合 并 成 一 条  2D → 3D story ， 必 须 先 做  cross-figure consistency QC 。 否 则 容 易
+出现  Figure 2 的   和  Figure 3 的   各 讲 各 的。
+Merge QC 1 — shared case IDs
+不能  Figure 2 用 一 批 漂 亮  2D cases ， Figure 3 用 另 一 批 漂 亮  3D cases 。
+Merge QC 2 — projection consistency
+text
+In-support MMP / US:
+  z_bottom MAE ≤ 0.5–0.75 mm
+  P90AE ≤ 1.5 mm
+  CRPS improves ≥15–25% over strongest baseline
+  Cov90 = 0.87–0.93
+  Width90 not inflated relative to task tolerance
+  interval IoU ≥ 0.55–0.60
+  AUROC_fail ≥ 0.75–0.80
+Piezo:
+  不强制要求 MAE 最好；
+  要求 uncertainty widens under deep / low-observability cases；
+  multimodal frequency increases where physics predicts non-identifiability；
+  risk–coverage improves after rejecting high-uncertainty samples。
+text
+The 3D library is sufficient not because all depths are recovered sharply, but because the 
+model reaches learning-curve saturation, preserves multimodal ambiguity, and yields calibrated 
+posterior uncertainty that predicts depth failure.
+E  
+app E(x,y,z)
+text
+Every merged example must have:
+  case_id
+  config_id
+  operator_id
+  simulator_version
+  train/val/test split
+  source_label
+Exported with AI Exporter 38 / 68
+
+===== PDF page 39 =====
+Figure 3 的  3D posterior projection 应 与  Figure 2 的   posterior 一 致 ：
+要 求 ：
+如果过不了 ， 说明  Figure 2 和  Figure 3 不是同 一 个  posterior framework 的 两 个视 角 ， 不能  merge 。
+Merge QC 3 — no leakage / no inverse crime
+必 须检 查 ：
+之前  Figure 3 审 核 里 最 危 险 的 问题 就 是  posterior mean 太像  truth 。 这个  gate 必 须 硬 性加入 。
+8. 进入  Figure 4 的  posterior bank gate
+Figure 4 是  reliability / calibration / task utility ， 不是 继 续 展示 漂 亮  reconstruction 。 进入  Figure 4 之
+前 ， posterior bank 必 须 达 到以下 标 准 。
+Figure 4 Entry Gate
+E  
+app
+E  (x,y) =app3D→2D P  [E(x,y,z)]z
+text
+NMAE(Eapp_2D, Eapp_3D_projection) ≤ 0.10–0.15
+SSIM ≥ 0.80–0.85
+Boundary centroid shift ≤ 0.5–1.0 mm
+Lesion area difference ≤ 15–20%
+Contrast rank Spearman ρ ≥ 0.8
+text
+posterior_mean_volume 不能直接从 truth volume 加 noise 得到；
+train/test split 必须按 config_id 分，而不是 scan_id；
+same latent tissue state 的重复 readout 不能同时出现在 train 和 test；
+operator metadata q_d 不能泄露 true depth；
+normalization statistics 只能从 train split 计算。
+text
+Required posterior fields:
+  posterior_samples_Eapp
+  posterior_samples_E_xyz
+  posterior_samples_zbottom
+  posterior_samples_ztop
+  posterior_samples_thickness
+  posterior_quantiles q05/q10/q50/q90/q95
+Exported with AI Exporter 39 / 68
+
+===== PDF page 40 =====
+Figure 4 的  pass/fail 标 准
+  true values
+  operator_id
+  operator_metadata
+  case_id
+  config_id
+  split_id
+  seed_id
+  source_label
+  depth_group
+  d_out
+  forward_residual
+  CRPS
+  WIS
+  PIT
+  Cov50/80/90/95 flags
+  Width50/80/90/95
+  uncertainty_total
+  uncertainty_epistemic if available
+  uncertainty_aleatoric if available
+  failure_label_tau_0p5mm
+  failure_label_tau_1mm
+  failure_label_tau_2mm
+  multimodality metrics
+text
+PASS to Figure 4:
+  learning curve plateau reached
+  simulator support passed
+  posterior calibration passed
+  failure detection passed
+  cross-figure projection consistency passed
+  posterior bank complete
+  provenance complete
+YELLOW:
+  reconstruction strong but calibration weak
+  可以进入 Figure 4 的 “limitations / calibration repair” panel，
+  不能作为主 claim。
+FAIL:
+  no calibrated posterior
+  no uncertainty-error correlation
+  truth leakage risk
+  real readouts outside simulator support
+Exported with AI Exporter 40 / 68
+
+===== PDF page 41 =====
+9. 我 建议 主文 里使 用 的  gate summary
+可以 把  QC 定 义 成 一 个主文 或  supplement 的  “readiness scorecard” 。
+10. 最 适 合  Figure 2/3 的 最 终 表 达
+Figure 2 不要 只 说 ：
+更 强 的 是 ：
+text
+Gate 1: Simulator support
+  Synthetic library covers real MMP readout manifold.
+Gate 2: Data-efficiency saturation
+  Core metrics improve <3–5% after doubling simulation size.
+Gate 3: Method-level data efficiency
+  Ours reaches N90 with ≥2× fewer simulations than U-Net / vanilla diffusion.
+Gate 4: Posterior calibration
+  Cov90 close to 0.90 with non-inflated Width90; CRPS improves over baselines.
+Gate 5: OOD/failure utility
+  Uncertainty predicts high-error cases; AUROC_fail ≥0.75–0.80.
+Gate 6: 2D–3D consistency
+  Figure 3 projection matches Figure 2 Eapp within pre-specified tolerance.
+Gate 7: Provenance and no leakage
+  All data are labelled REAL_EXPERIMENTAL / SIMULATED_BENCHMARK / MISSING;
+  no truth leakage or config-level train-test overlap.
+Gate 8: Figure 4 posterior-bank completeness
+  All posterior samples, quantiles, uncertainty scores, calibration metrics and failure labels 
+saved.
+text
+We reconstruct 2D stiffness maps.
+text
+Learning-curve and support-coverage analyses show that the 2D domain-randomized library is 
+sufficient for apparent-mechanics reconstruction; operator-conditioned diffusion reaches 
+Exported with AI Exporter 41 / 68
+
+===== PDF page 42 =====
+Figure 3 不要 只 说 ：
+更 稳 的 是 ：
+这个  framing 比 “simulation 库很 大 ， 所以 够 用 ” 更 适 合  NCS 。 它 把  data efficiency 、 domain
+randomization 、 diffusion posterior 、 operator observability 和  Figure 4 reliability 串 成 一 个 审 稿 人能
+接 受 的 逻 辑闭 环 。
+calibrated Eapp performance with fewer simulations than deterministic and vanilla generative 
+baselines.
+text
+We recover 3D depth.
+text
+3D learning curves, posterior calibration and operator observability gates show when latent 
+depth is recoverable and when it remains multimodal; the calibrated posterior bank is passed to 
+Figure 4 for reliability and task-utility analysis.
+2026-06-01 15:38:50 You Asked
+在这个 FIgure3 的 基 础 上进行 修改 ， 根 据 我们以上 的 讨 论 ， 增 加信息
+密 度 ， 将 相关 评价 指 标 整 合进 去
+ChatGPT gpt-5-4-thinking
+Exported with AI Exporter 42 / 68
+
+===== PDF page 43 =====
+2026-06-01 15:46:14 You Asked
+Figure 2 V1.tif
+这是 FIgure2 ， 我 需 要你 也 根 据 我们 的 讨 论 继 续 生成 补 充 一 下
+2026-06-04 10:43:25 You Asked
+@Consensus 我同意你 的 看法 ， 基 于我现在 的 Figure 2 E(x,y) 与
+Figure 3 E(x,y,z) 设计 一 个 让 Codex 执 行 ， 进行 data efficiency 的 操 作
+流程 和 评价 指 标 。 证 明 真 实  MMP phantom / animal / ex vivo 
+readouts 落 在 模 拟  readout manifold 内 。 Diffusion 的 优 势 也 不 应 写
+成 “ 生成图更 漂 亮 ” ， 而应 写 成 适 合  noisy nonlinear inverse problems 
+的  posterior sampler 。 基 于以下 的 gate. 综 合相关 领 域 文 献 的 基 础 上
+ChatGPT gpt-5-5-pro
+下面 给  Codex 的 目标 不是 “ 再 训练 一 个 模 型 ” ， 而 是 建立 一 个  Figure 2–3 data-efficiency and
+readiness pipeline： 证 明当前  simulation library 对   和   的  inverse
+reconstruction 已 经 达 到学 习 曲 线平 台期 、 真 实  MMP readouts 落 在 模 拟  readout manifold 内 、
+posterior 经过 校 准 且 能 识 别 失 败 样 本 。 这 样  Figure 2/3 才 能进入  Figure 4 的  reliability / calibration /
+task utility 。
+文 献 逻 辑 可以这 样 写 ： learning curve 是 判 断  generalization performance 随 训练 集规 模变 化 的 标 准 工
+具 ， 但 曲 线 没 有  universal shape ， 常见 是  power-law 或  exponential-like plateau ， 因 此 必 须 实 测
+Figure 2/3 的 曲 线 ， 而 不是 只 报 样 本数 。  Domain randomization 的 核 心不是 “simulation 很 多 ” ， 而 是
+simulator variation 足 够 宽 ， 使真 实 世界 成为 模 拟 分 布 中的一 个  variation 。  Diffusion 在本文 中的 优 势
+也应 定位为  noisy nonlinear inverse problem 的  posterior sampler ， 而 不是生成更 漂 亮 图 像 ； DPS 这
+E  (x,y)app E(x,y,z)
+Exported with AI Exporter 43 / 68
+
+===== PDF page 44 =====
+类文 献 已 经 把  diffusion posterior sampling 用于  noisy nonlinear inverse problems 。  这和你 的  MMP
+体系 很 匹 配 ， 因 为  MMP readout 本 身 是  operator-dependent magnetic response ， 不是 直 接  Young’s
+modulus map ； Research Strategy 里已 有  MMP 的  elastomer calibration 、 spatial stiffness
+mapping 、 animal tumour/wound feasibility 和  ex vivo/human validation plan ， 可作为  real-anchor
+data source 。  NIH summary statement 也 指 出关 键  concerns 是  limited database 和  5 mm depth
+sensitivity ， 所以  data-efficiency 与  support-coverage gate 必 须 显 式进入  Figure 2/3/4 。
+给  Codex 的 总任 务
+1. Required data layout
+让  Codex 先 建立 如下 目 录 结 构 。 没 有的 文 件 先 标记  MISSING ， 不要自动 伪 造 真 实数 据 。
+text
+Build a Figure2–Figure3 data-efficiency and readiness pipeline.
+Scientific objective:
+Determine whether the current simulation libraries for Figure 2 E_app(x,y) and Figure 3 
+E(x,y,z) are sufficient for posterior inference, not by sample count, but by:
+1. learning-curve saturation,
+2. simulator-support coverage of real MMP phantom / animal / ex vivo readouts,
+3. posterior calibration and sharpness,
+4. OOD/failure utility.
+The pipeline must compare:
+- U-Net / direct regression,
+- vanilla diffusion,
+- DPS-style inverse diffusion where available,
+- operator-conditioned diffusion (ours).
+The result should produce:
+- quantitative metrics,
+- PASS/YELLOW/FAIL gates,
+- Figure 2 panels,
+- Figure 3 panels,
+- a Figure 4 posterior-bank readiness report.
+Hard rule:
+Do not claim real paired piezoelectric / ultrasound experiments unless actual paired hardware 
+data exist. Piezo and ultrasound remain simulated benchmark operators unless real files are 
+present.
+text
+Exported with AI Exporter 44 / 68
+
+===== PDF page 45 =====
+每 个 样 本 必 须 有 统 一  metadata ：
+data/
+  sim2d/
+    library_Eapp_2d.npz
+    simulator_params_2d.csv
+    readouts_mmp_2d.npz
+    readouts_piezo_2d.npz
+    readouts_us_2d.npz
+  sim3d/
+    library_E_xyz_3d.npz
+    simulator_params_3d.csv
+    readouts_mmp_3d.npz
+    readouts_piezo_3d.npz
+    readouts_us_3d.npz
+    depth_truth.csv
+  real_mmp/
+    phantom/
+      readouts/*.npz
+      metadata.csv
+      reference_maps/*.npz
+    animal/
+      readouts/*.npz
+      metadata.csv
+      optional_reference/*.npz
+    ex_vivo/
+      readouts/*.npz
+      metadata.csv
+      optional_histology_afm_reference/*.npz
+  splits/
+    figure2_config_splits.json
+    figure3_config_splits.json
+  posterior_bank/
+    fig2_posterior_bank.npz
+    fig3_posterior_bank.npz
+    fig4_ready_posterior_bank.npz
+reports/
+  figure23_data_inventory.md
+  figure23_data_efficiency_report.md
+  figure23_simulator_support_report.md
+  figure23_gate_report.md
+  figure4_entry_report.md
+Exported with AI Exporter 45 / 68
+
+===== PDF page 46 =====
+其 中：
+关 键 ：split 必 须 按  config_id 划 分 ， 不 允 许 同 一 个  physical configuration 的 重复  readout 同时出现在
+train 和  test 。
+2. Codex 脚 本 清单
+让  Codex 实现这 些 脚 本 ：
+csv
+sample_id, config_id, source_label, operator_id, split, seed,
+lesion_type, morphology_group, contrast_group,
+depth_group, z_top_mm, z_bottom_mm, thickness_mm,
+contact_pressure, calibration_shift, noise_level,
+readout_path, target_path, reference_path
+text
+source_label ∈ {
+  SIMULATED_TRAIN,
+  SIMULATED_VAL,
+  SIMULATED_TEST,
+  REAL_MMP_PHANTOM,
+  REAL_MMP_ANIMAL,
+  REAL_MMP_EX_VIVO,
+  MISSING
+}
+text
+scripts/
+  fig23_00_inventory.py
+  fig23_01_make_config_splits.py
+  fig23_02_extract_readout_features.py
+  fig23_03_support_coverage.py
+  fig23_04_train_learning_curve_sweep.py
+  fig23_05_run_posterior_inference.py
+  fig23_06_evaluate_fig2_metrics.py
+  fig23_07_evaluate_fig3_metrics.py
+  fig23_08_fit_learning_curves.py
+  fig23_09_calibration_and_conformal.py
+  fig23_10_ood_failure_utility.py
+  fig23_11_projection_consistency.py
+  fig23_12_gate_decision.py
+  fig23_13_build_figure_panels.py
+Exported with AI Exporter 46 / 68
+
+===== PDF page 47 =====
+输 出 核 心文 件 ：
+3. Gate 0: data inventory and leakage audit
+Codex 首 先 运 行 ：
+必 须检 查 ：
+Leakage audit ：
+  fig23_14_export_figure4_posterior_bank.py
+text
+data/qc/fig2_metrics_by_N.csv
+data/qc/fig3_metrics_by_N.csv
+data/qc/support_coverage_real_mmp.csv
+data/qc/learning_curve_fits.csv
+data/qc/calibration_metrics.csv
+data/qc/ood_failure_metrics.csv
+data/qc/projection_consistency_metrics.csv
+data/qc/gate_decisions.json
+reports/figure23_gate_report.md
+bash
+python scripts/fig23_00_inventory.py \
+  --sim2d data/sim2d \
+  --sim3d data/sim3d \
+  --real data/real_mmp \
+  --out reports/figure23_data_inventory.md
+text
+1. Figure 2 E_app(x,y) truth exists.
+2. Figure 3 E(x,y,z), z_top, z_bottom, thickness truth exists.
+3. Operator readouts exist for MMP / piezo / ultrasound.
+4. Real MMP phantom readouts exist.
+5. Real MMP animal readouts exist.
+6. Real MMP ex vivo readouts exist.
+7. Reference maps exist where claimed.
+8. No paired piezo / ultrasound real data are claimed unless real files exist.
+text
+Exported with AI Exporter 47 / 68
+
+===== PDF page 48 =====
+4. Gate 1: simulator support coverage
+这是 证 明 真 实  MMP phantom / animal / ex vivo readouts 落 在 模 拟  manifold 内 的 核 心 。
+4.1 Readout feature extraction
+Codex 需 要为 每 个  readout  提 取 多 组 特 征 ：
+命 令 ：
+FAIL if:
+- same config_id appears in train and test;
+- same latent E_app or E_xyz appears in train and test under different readout noise;
+- normalization stats are computed using test or real readouts;
+- q_d metadata contains true z_bottom, thickness, or lesion label not available at inference;
+- posterior_mean is constructed from truth rather than from y_d.
+y  
+d
+text
+A. Raw statistical features:
+  mean, std, skew, kurtosis, min, max, dynamic range
+B. Spatial features:
+  center-of-mass, eccentricity, radial profile, gradient energy,
+  Laplacian energy, local contrast, edge density
+C. Spectral features:
+  Fourier low/mid/high-frequency energy,
+  anisotropy, power spectrum slope
+D. Operator-physics features:
+  estimated contact pressure,
+  edge-effect index,
+  sensor-to-sensor coupling,
+  peak-to-background ratio,
+  Hall-array spatial correlation length
+E. Learned features:
+  frozen readout encoder embedding from Figure 2/3 model
+  or autoencoder latent representation
+bash
+python scripts/fig23_02_extract_readout_features.py \
+  --sim data/sim2d data/sim3d \
+  --real data/real_mmp \
+Exported with AI Exporter 48 / 68
+
+===== PDF page 49 =====
+4.2 Manifold support tests
+对 每 个  real readout ， 计 算它 到  simulated train manifold 的 距 离 ：
+定 义 ：
+Group-level support ：
+运 行 ：
+4.3 Support gate
+  --out data/qc/readout_features.parquet
+y  
+ireal
+text
+1. kNN distance in feature space
+2. Mahalanobis distance after robust covariance shrinkage
+3. Local density / one-class model score
+4. MMD between real group and matched simulated group
+5. Two-sample classifier AUC: simulated vs real
+6. Conformal support p-value
+S  =i 1 d  (ϕ(y  ),D  ) ≤q  [ kNN ireal sim 0.95sim]
+S  =group
+  S  
+N  
+group
+1
+i
+∑ i
+bash
+python scripts/fig23_03_support_coverage.py \
+  --features data/qc/readout_features.parquet \
+  --groups REAL_MMP_PHANTOM REAL_MMP_ANIMAL REAL_MMP_EX_VIVO \
+  --out data/qc/support_coverage_real_mmp.csv \
+  --figout figures/qc/support_umap.png
+text
+PASS:
+  Overall ≥90% real MMP readouts inside 95% synthetic support envelope.
+  Each group, phantom / animal / ex vivo, ≥80% inside support.
+  Two-sample classifier AUC ≤0.70.
+  MMD not significant after permutation test, or effect size small.
+YELLOW:
+  Overall 75–90% inside support, or one group <80%.
+  Can show simulation-grounded results, but Figure 4 sim-to-real claim must be softened.
+Exported with AI Exporter 49 / 68
+
+===== PDF page 50 =====
+注意 ： 如果 真 实  ex vivo 数 据很 少 ， 不能 只 用  p-value 。 要同时报告  effect size 、 nearest-neighbor
+examples 和  support-distance distribution 。
+Figure 中 如 何 体现 ：
+5. Gate 2: learning-curve saturation / data efficiency
+5.1 Training sizes
+对  Figure 2 和  Figure 3 分 别 跑  simulation-size sweep ：
+模 型 ：
+FAIL:
+  Overall <75% inside support.
+  Expand simulator or calibrate operator before final Figure 2/3.
+text
+Figure 2b:
+  show UMAP/PCA of simulated MMP readouts with real phantom/animal/ex vivo points overlaid.
+  Add "real-readout envelope coverage: PASS/YELLOW/FAIL".
+Figure 3b or 3f:
+  show support-distance stratified by depth group and source_label.
+text
+N_grid_2D = [500, 1k, 2k, 5k, 10k, 25k, 50k]
+N_grid_3D = [1k, 2k, 5k, 10k, 25k, 50k, 100k]
+seeds = [0, 1, 2]
+text
+Figure 2:
+  bicubic / kernel interpolation
+  U-Net / direct regression
+  vanilla diffusion
+  DPS-style inverse diffusion
+  operator-conditioned diffusion
+Figure 3:
+  direct scalar regression
+  3D U-Net
+  kernel/GP depth-response baseline
+Exported with AI Exporter 50 / 68
+
+===== PDF page 51 =====
+命 令 ：
+如果  GPU 不 足 ， Codex 应支持 ：
+CPU-only 下可以 先 做  likelihood-weighted library posterior ， 但必 须 标 注为  POSTERIOR_SURROGATE
+。
+5.2 Learning-curve fitting
+对 每 个  metric  拟 合 ：
+lower-is-better:
+higher-is-better:
+保 存 ：
+  vanilla 3D diffusion
+  DPS-style inverse diffusion
+  operator-conditioned 3D diffusion
+bash
+python scripts/fig23_04_train_learning_curve_sweep.py \
+  --tasks fig2 fig3 \
+  --N_grid 500 1000 2000 5000 10000 25000 50000 100000 \
+  --models unet vanilla_diffusion dps opcond_diffusion \
+  --seeds 0 1 2 \
+  --config_split data/splits \
+  --out data/qc/training_runs.csv
+text
+--use_existing_checkpoints
+--proxy_epochs
+--frozen_encoder
+--likelihood_weighted_posterior
+m(N)
+m(N) =m  +∞ aN−α
+m(N) =m  −∞ aN−α
+text
+m_inf
+alpha
+N90
+N95
+Exported with AI Exporter 51 / 68
+
+===== PDF page 52 =====
+定 义 ：
+运 行 ：
+5.3 Learning-curve gate
+Figure 中 如 何 体现 ：
+AULC
+marginal_gain_last_doubling
+bootstrap_CI
+seed_SD
+text
+N90:
+  simulation size needed to reach 90% of achievable improvement.
+N95:
+  simulation size needed to reach 95% of achievable improvement.
+DER:
+  data-efficiency ratio = N90(baseline) / N90(ours)
+bash
+python scripts/fig23_08_fit_learning_curves.py \
+  --metrics data/qc/fig2_metrics_by_N.csv data/qc/fig3_metrics_by_N.csv \
+  --out data/qc/learning_curve_fits.csv \
+  --figout figures/qc/learning_curves/
+text
+PASS:
+  Last-doubling improvement <3–5% for primary metrics.
+  Current library size ≥ estimated N90.
+  Seed SD <10% of mean for primary metrics.
+  Operator-conditioned diffusion has DER ≥2 for CRPS or calibrated posterior score versus U-
+Net/vanilla diffusion.
+YELLOW:
+  Metrics improving slowly but N90 reached for map error, not for calibration.
+  Can proceed with reconstruction claim, not strong posterior/reliability claim.
+FAIL:
+  Learning curve still steep after final N.
+  Current simulation library not sufficient.
+Exported with AI Exporter 52 / 68
+
+===== PDF page 53 =====
+6. Gate 3: Figure 2 metrics for 
+Figure 2 的 评价 对 象 是  2D apparent mechanics posterior ：
+不要 把  Figure 2 变 成  depth problem 。
+6.1 Figure 2 metrics
+text
+Figure 2f:
+  MAE(E_app) and CRPS learning curves versus N.
+  Bar chart of N90 for U-Net, vanilla diffusion, op-conditioned diffusion.
+Figure 3f:
+  z_bottom MAE, CRPS, |Cov90 − 0.90| and AUROC_fail learning curves versus N.
+E  (x,y)app
+p(E  (x,y),B,C∣app y  ,d,q  )d d
+text
+Map fidelity:
+  MAE(E_app)
+  RMSE(E_app)
+  normalized MAE
+  SSIM
+  PSNR, optional
+Boundary:
+  Dice
+  Boundary-F1
+  Hausdorff95
+  centroid shift
+  lesion area error
+Contrast:
+  contrast MAE
+  log contrast MAE
+  peak-to-background ratio error
+Posterior:
+  pixelwise CRPS
+  lesion-level CRPS
+  Cov90(E_app)
+  Width90(E_app)
+  UCE/ENCE
+Exported with AI Exporter 53 / 68
+
+===== PDF page 54 =====
+命 令 ：
+6.2 Figure 2 pass gate
+7. Gate 4: Figure 3 metrics for 
+Figure 3 的 评价 对 象 是  continuous depth posterior ， 不是  nominal depth band 。 你之前 的  depth
+evaluation note 已 经明 确 ： 顶 层汇 报要 按  config-level 聚 合 ， 再 对  depth-group 做  macro average ， 并
+报告  seed mean/SD ， 避 免  repeated scans 虚 高 样 本数 。
+Physics consistency:
+  re-forward residual ||H_d(E_app, q_d) - y_d||
+  residual spatial autocorrelation
+Failure utility:
+  AUROC_fail for high map error
+  risk–coverage / AUSE
+bash
+python scripts/fig23_06_evaluate_fig2_metrics.py \
+  --posterior data/posterior_bank/fig2_posterior_bank.npz \
+  --truth data/sim2d/library_Eapp_2d.npz \
+  --out data/qc/fig2_metrics_by_N.csv
+text
+PASS:
+  MAE(E_app) plateau reached.
+  Boundary-F1 plateau reached.
+  CRPS improves over U-Net and vanilla diffusion.
+  Cov90 between 0.87 and 0.93 after calibration, or explicitly reported as calibrated ± CI.
+  Width90 not inflated beyond acceptable lesion contrast resolution.
+  Forward residual improves over baselines.
+  Real MMP phantom readouts inside simulator support.
+YELLOW:
+  map quality passes, posterior calibration not yet stable.
+  Use Figure 2 for apparent-map reconstruction, but move reliability claim to Figure 4.
+FAIL:
+  real phantom support fails or learning curve not saturated.
+E(x,y,z)
+Exported with AI Exporter 54 / 68
+
+===== PDF page 55 =====
+7.1 Figure 3 primary posterior target
+点 估 计 ：
+主要 指 标 ：
+F  (z  ) =i bottom p(z  ∣bottom y  ,d,q  )d d
+ =z^i median(  )z~i1:M
+text
+Point:
+  MAE(z_bottom)
+  RMSE(z_bottom)
+  Bias(z_bottom)
+  P90AE(z_bottom)
+  MedAE(z_bottom)
+Probabilistic:
+  CRPS(z_bottom)
+  WIS(z_bottom), if using quantiles only
+Interval:
+  MAE(z_top)
+  MAE(thickness)
+  interval IoU for [z_top, z_bottom]
+Calibration:
+  Cov50 / Cov80 / Cov90 / Cov95
+  Width50 / Width80 / Width90 / Width95
+  PIT
+  UCE / ENCE
+Multimodality:
+  n_modes
+  mode locations
+  mode weights
+  valley ratio
+  multimodality frequency
+OOD:
+  error vs d_out slope
+  uncertainty vs d_out slope
+  AUROC_fail
+  AUPRC_fail
+  risk–coverage
+  AUSE
+Exported with AI Exporter 55 / 68
+
+===== PDF page 56 =====
+命 令 ：
+7.2 CRPS implementation
+对  posterior samples ：
+Codex 应保 存  full posterior samples ； 如果 没 有  samples ， 只 能用  WIS 。
+7.3 Figure 3 pass gate
+Trend:
+  extrapolation slope beta
+  range compression ratio
+  Spearman rho across held-out depth groups
+bash
+python scripts/fig23_07_evaluate_fig3_metrics.py \
+  --posterior data/posterior_bank/fig3_posterior_bank.npz \
+  --truth data/sim3d/depth_truth.csv \
+  --aggregate config_then_depth_macro \
+  --out data/qc/fig3_metrics_by_N.csv
+CRPS(F  ,y  ) =i i
+  ∣   −M
+1
+m
+∑y~im y  ∣−i
+  ∣   −2M2
+1
+m,n
+∑y~im
+  ∣y~in
+text
+PASS:
+  z_bottom MAE and CRPS learning curves plateau.
+  CRPS improves ≥15–25% over strongest non-operator baseline.
+  Cov90 between 0.87 and 0.93 for in-support cases.
+  Width90 not inflated.
+  interval IoU ≥0.55–0.60.
+  AUROC_fail ≥0.75–0.80.
+  Multimodality appears in low-observability cases rather than being collapsed.
+  Piezo deep cases show broad/multimodal posterior, not false overconfidence.
+YELLOW:
+  point depth error passes but calibration weak.
+  Can show posterior qualitatively, but Figure 4 reliability claim must be labeled under 
+calibration repair.
+FAIL:
+  posterior collapse, Cov90 near 1.00 with very large Width90, or uncertainty unrelated to 
+Exported with AI Exporter 56 / 68
+
+===== PDF page 57 =====
+8. Gate 5: posterior calibration and conformal repair
+Codex 应做  validation-set calibration ， 不 允 许 用  test set 调参 。
+Calibration methods:
+Calibration metrics:
+Calibration gate:
+error.
+bash
+python scripts/fig23_09_calibration_and_conformal.py \
+  --fig2 data/posterior_bank/fig2_posterior_bank.npz \
+  --fig3 data/posterior_bank/fig3_posterior_bank.npz \
+  --val_split data/splits/validation_config_ids.json \
+  --out data/qc/calibration_metrics.csv
+text
+1. posterior scale calibration:
+   z_samples_calibrated = median + s_operator * (samples - median)
+2. isotonic calibration for scalar uncertainty scores
+3. conformalized quantile adjustment:
+   q_low'  = q_low  - Δ_operator
+   q_high' = q_high + Δ_operator
+4. group-aware calibration:
+   separate calibration by operator_id and depth_group if enough validation samples exist
+text
+Cov50, Width50
+Cov80, Width80
+Cov90, Width90
+Cov95, Width95
+|Cov90 - 0.90|
+UCE
+ENCE
+PIT deviation
+standardized residual mean/std
+Exported with AI Exporter 57 / 68
+
+===== PDF page 58 =====
+9. Gate 6: OOD / failure utility
+这 里 是  Figure 4 的 核 心入 口 。 Codex 必 须 证 明  uncertainty 不是 装 饰 ， 而 是能 抓 住 高 风 险
+reconstruction 。
+9.1 Figure 2 failure
+定 义 ：
+or:
+9.2 Figure 3 failure
+定 义 ：
+text
+PASS:
+  |Cov90 - 0.90| ≤0.03 for ID / ≤0.05 for hard OOD.
+  Width90 decreases or remains reasonable after calibration.
+  PIT not strongly U-shaped or inverse-U.
+  UCE/ENCE improves over uncalibrated model.
+YELLOW:
+  coverage fixed only by broadening interval too much.
+  Use as conservative posterior, not strong calibrated posterior.
+FAIL:
+  coverage and width both poor.
+bash
+python scripts/fig23_10_ood_failure_utility.py \
+  --fig2 data/posterior_bank/fig2_posterior_bank.npz \
+  --fig3 data/posterior_bank/fig3_posterior_bank.npz \
+  --support data/qc/support_coverage_real_mmp.csv \
+  --out data/qc/ood_failure_metrics.csv
+f  =i2D 1[MAE(E  ) >app,i τ  ]map
+text
+boundary failure:
+  Boundary-F1 < threshold
+forward failure:
+  re-forward residual > threshold
+Exported with AI Exporter 58 / 68
+
+===== PDF page 59 =====
+建议 ：
+9.3 Uncertainty scores
+指 标 ：
+Gate:
+f  =i3D 1[∣  −z^bottom,i z  ∣>bottom,itrue τ  ]z
+text
+tau_z = 1 mm
+tau_z_secondary = 0.5 mm and 2 mm
+text
+Figure 2:
+  mean pixel std
+  lesion-region std
+  boundary entropy
+  forward residual
+  support distance
+Figure 3:
+  total_std(z_bottom)
+  epistemic_std(z_bottom), if available
+  posterior entropy
+  multimodality score
+  forward residual
+  support distance
+  d_out
+text
+AUROC_fail
+AUPRC_fail
+FPR@95TPR
+risk–coverage curve
+AUSE
+risk at 80% retained samples
+risk reduction after rejecting top 20% uncertainty
+text
+PASS:
+  AUROC_fail ≥0.75–0.80.
+Exported with AI Exporter 59 / 68
+
+===== PDF page 60 =====
+10. Gate 7: Figure 2–3 projection consistency
+如果  Figure 2 是  ， Figure 3 是  ， 两 者合 并 时 必 须检 查 ：
+Codex 要 比 较 ：
+命 令 ：
+指 标 ：
+  AUPRC_fail improves over prevalence by ≥2×.
+  Rejecting top 20% uncertainty reduces MAE or CRPS by ≥25%.
+  AUSE improves ≥15–20% over baseline.
+  uncertainty increases with support distance and d_out.
+YELLOW:
+  uncertainty increases with OOD, but failure AUROC weak.
+FAIL:
+  high uncertainty does not correspond to high error.
+E  (x,y)app E(x,y,z)
+E  (x,y) =app3D→2D P  [E(x,y,z)]z
+text
+Figure 2 posterior E_app
+vs
+Figure 3 posterior projection P_z[E(x,y,z)]
+bash
+python scripts/fig23_11_projection_consistency.py \
+  --fig2 data/posterior_bank/fig2_posterior_bank.npz \
+  --fig3 data/posterior_bank/fig3_posterior_bank.npz \
+  --out data/qc/projection_consistency_metrics.csv
+text
+NMAE(E_app_2D, E_app_3D_projection)
+SSIM
+Boundary-F1
+centroid shift
+lesion area difference
+contrast rank Spearman rho
+posterior correlation
+Exported with AI Exporter 60 / 68
+
+===== PDF page 61 =====
+Gate:
+11. Final Figure 4 entry gate
+Figure 4 只 能接收通过  readiness gate 的  posterior bank 。
+必 须 包 含 ：
+text
+PASS:
+  NMAE ≤0.10–0.15.
+  SSIM ≥0.80–0.85.
+  centroid shift ≤0.5–1.0 mm.
+  area difference ≤15–20%.
+  contrast-rank Spearman rho ≥0.80.
+YELLOW:
+  map projection consistent but boundary shifts.
+  Use examples carefully.
+FAIL:
+  Figure 2 and Figure 3 are not reconstructing consistent biomechanical states.
+bash
+python scripts/fig23_14_export_figure4_posterior_bank.py \
+  --fig2 data/posterior_bank/fig2_posterior_bank.npz \
+  --fig3 data/posterior_bank/fig3_posterior_bank.npz \
+  --qc data/qc/gate_decisions.json \
+  --out data/posterior_bank/fig4_ready_posterior_bank.npz
+text
+case_id
+config_id
+split_id
+seed_id
+source_label
+operator_id
+operator_metadata
+morphology_group
+depth_group
+support_distance
+d_out
+Exported with AI Exporter 61 / 68
+
+===== PDF page 62 =====
+Figure 4 entry decision:
+posterior_samples_Eapp
+posterior_samples_E_xyz
+posterior_samples_zbottom
+posterior_samples_ztop
+posterior_samples_thickness
+posterior_quantiles
+CRPS
+WIS
+PIT
+Cov50/Cov80/Cov90/Cov95 flags
+Width50/Width80/Width90/Width95
+UCE/ENCE bin id
+uncertainty_total
+uncertainty_epistemic
+uncertainty_aleatoric
+forward_residual
+multimodality metrics
+failure_label_tau_map
+failure_label_tau_0p5mm
+failure_label_tau_1mm
+failure_label_tau_2mm
+risk_coverage_inputs
+task_utility_inputs
+text
+PASS:
+  Gate 1 support coverage PASS
+  Gate 2 learning plateau PASS
+  Gate 3 Figure 2 reconstruction PASS
+  Gate 4 Figure 3 posterior PASS
+  Gate 5 calibration PASS
+  Gate 6 OOD utility PASS
+  Gate 7 projection consistency PASS
+  posterior bank complete
+YELLOW:
+  one gate is YELLOW, none FAIL.
+  Figure 4 can include reliability limitation / calibration repair.
+FAIL:
+  any hard leakage, support, calibration, or posterior collapse failure.
+Exported with AI Exporter 62 / 68
+
+===== PDF page 63 =====
+12. Figure 2 里 面如 何 体现
+Figure 2 应 该 展示  2D apparent mechanics library is sufficient。
+建议  panel 安 排 ：
+Figure 2 conclusion:
+不要 写 ：
+13. Figure 3 里 面如 何 体现
+text
+Figure 2b:
+  2D simulation library coverage:
+    lesion size, irregularity, log contrast, boundary roughness, operator noise.
+  Add support checklist:
+    morphology coverage PASS
+    operator variation PASS
+    real MMP phantom envelope PASS
+Figure 2c:
+  MMP / piezo / US 2D operator observability kernels.
+Figure 2e:
+  representative E_app reconstructions:
+    readout, truth, U-Net, vanilla diffusion, ours, uncertainty, residual.
+Figure 2f:
+  four compact metric modules:
+    1. MAE(E_app), Boundary-F1, SSIM, CRPS
+    2. Cov90/Width90 or |Cov90 − 0.90| + Width90
+    3. learning curves: MAE and CRPS versus N
+    4. real-readout support distance / failure AUROC
+text
+Domain-randomized 2D apparent-mechanics simulation reaches learning-curve saturation and covers 
+real MMP phantom readouts, enabling calibrated E_app posterior reconstruction.
+text
+The model creates better stiffness images.
+Exported with AI Exporter 63 / 68
+
+===== PDF page 64 =====
+Figure 3 应 该 展示  3D latent mechanics posterior is ready for reliability analysis。
+建议  panel 安 排 ：
+Figure 3 conclusion:
+14. Codex master prompt
+下面可以 直 接 放给  Codex 。
+text
+Figure 3b:
+  3D prior support:
+    z_bottom, thickness, log contrast, layer variation, operator/contact variation.
+  Add depth-stratified balance and real-readout envelope checklist.
+Figure 3c:
+  operator depth observability:
+    MMP near-intermediate, piezo surface-biased, US broader/deeper.
+Figure 3e:
+  posterior gallery:
+    shallow, mid, deep, low contrast, irregular, OOD.
+  Show multimodal p(z_bottom) for ambiguous and piezo/deep cases.
+Figure 3f:
+  four compact modules:
+    1. continuous posterior: MAE(z_bottom), CRPS, interval IoU, AUROC_fail
+    2. calibration/sharpness: |Cov90 − 0.90|, Width90
+    3. data efficiency: z_bottom MAE and CRPS learning curves
+    4. OOD/operator observability: error vs d_out, multimodality frequency by operator
+text
+3D operator-conditioned posterior sampling reaches data-efficiency and calibration gates, 
+exposes operator-dependent depth observability, and passes calibrated samples to Figure 4.
+text
+You are building the Figure 2–3 data-efficiency, simulator-support, calibration and readiness 
+pipeline for an operator-conditioned inverse biomechanics manuscript.
+Scientific framing:
+Figure 2 reconstructs 2D apparent mechanics E_app(x,y).
+Figure 3 reconstructs latent 3D mechanics E(x,y,z) and continuous depth posteriors.
+The goal is not to show prettier generated maps. The goal is to demonstrate that diffusion is a 
+Exported with AI Exporter 64 / 68
+
+===== PDF page 65 =====
+posterior sampler for noisy nonlinear inverse problems, and that the simulation library is 
+sufficient by objective QC gates:
+1. learning-curve saturation,
+2. simulator-support coverage of real MMP phantom / animal / ex vivo readouts,
+3. posterior calibration and sharpness,
+4. OOD/failure utility.
+Do not fabricate real data.
+Do not claim real paired piezoelectric or ultrasound experiments unless corresponding files 
+exist.
+All piezo and ultrasound results are SIMULATED_BENCHMARK unless real paired data are present.
+Implement these scripts:
+- scripts/fig23_00_inventory.py
+- scripts/fig23_01_make_config_splits.py
+- scripts/fig23_02_extract_readout_features.py
+- scripts/fig23_03_support_coverage.py
+- scripts/fig23_04_train_learning_curve_sweep.py
+- scripts/fig23_05_run_posterior_inference.py
+- scripts/fig23_06_evaluate_fig2_metrics.py
+- scripts/fig23_07_evaluate_fig3_metrics.py
+- scripts/fig23_08_fit_learning_curves.py
+- scripts/fig23_09_calibration_and_conformal.py
+- scripts/fig23_10_ood_failure_utility.py
+- scripts/fig23_11_projection_consistency.py
+- scripts/fig23_12_gate_decision.py
+- scripts/fig23_13_build_figure_panels.py
+- scripts/fig23_14_export_figure4_posterior_bank.py
+Data splits:
+Use config-level splitting, not scan-level splitting.
+No repeated readout or same latent configuration may appear in both train and test.
+Compute normalization only from train split.
+Models:
+Figure 2:
+- interpolation / kernel baseline
+- U-Net or direct regression
+- vanilla diffusion
+- DPS-style inverse diffusion if available
+- operator-conditioned diffusion
+Figure 3:
+- direct scalar regression
+- 3D U-Net
+- kernel/GP depth-response baseline
+- vanilla 3D diffusion
+- DPS-style inverse diffusion if available
+Exported with AI Exporter 65 / 68
+
+===== PDF page 66 =====
+- operator-conditioned 3D diffusion
+Training sweep:
+N_grid_2D = [500, 1000, 2000, 5000, 10000, 25000, 50000]
+N_grid_3D = [1000, 2000, 5000, 10000, 25000, 50000, 100000]
+seeds = [0, 1, 2]
+Learning curve:
+Fit m(N) = m_inf + a*N^(-alpha) for lower-is-better metrics.
+Fit m(N) = m_inf - a*N^(-alpha) for higher-is-better metrics.
+Report N90, N95, AULC, marginal gain after last doubling, bootstrap CI and seed SD.
+Report data-efficiency ratio = N90(baseline) / N90(ours).
+Simulator support:
+Extract readout features from simulated and real MMP readouts:
+raw statistics, spatial features, spectral features, operator-physics features, frozen readout 
+encoder embeddings.
+Compute kNN distance, Mahalanobis distance, local density, MMD, two-sample classifier AUC and 
+conformal support p-values.
+Real MMP groups:
+REAL_MMP_PHANTOM, REAL_MMP_ANIMAL, REAL_MMP_EX_VIVO.
+PASS support if overall ≥90% real readouts are inside the 95% synthetic support envelope and 
+every group is ≥80%.
+Figure 2 metrics:
+MAE(E_app), RMSE(E_app), NMAE(E_app), SSIM, Dice, Boundary-F1, Hausdorff95, centroid shift, 
+contrast error, pixelwise CRPS, Cov90, Width90, UCE/ENCE, re-forward residual, AUROC_fail, 
+AUSE.
+Figure 3 metrics:
+MAE(z_bottom), RMSE(z_bottom), Bias(z_bottom), P90AE, MedAE, CRPS(z_bottom), WIS, 
+Cov50/80/90/95, Width50/80/90/95, PIT, UCE/ENCE, interval IoU for [z_top,z_bottom], 
+MAE(thickness), multimodality frequency, AUROC_fail, AUPRC_fail, risk–coverage, AUSE, error-vs-
+d_out slope, uncertainty-vs-d_out slope, extrapolation beta, range compression ratio, Spearman 
+rho.
+Calibration:
+Use validation set only.
+Apply posterior scale calibration, conformal quantile adjustment and optional isotonic 
+calibration.
+Do not fix coverage by making intervals excessively broad.
+Report |Cov90 - 0.90| together with Width90.
+Projection consistency:
+Compare Figure 2 E_app posterior against projection of Figure 3 E(x,y,z).
+PASS if NMAE ≤0.10–0.15, SSIM ≥0.80–0.85, centroid shift ≤0.5–1.0 mm, area difference ≤15–
+20%, Spearman contrast rank ≥0.80.
+Exported with AI Exporter 66 / 68
+
+===== PDF page 67 =====
+15. Manuscript wording after this pipeline passes
+可以 写 ：
+Gate decisions:
+PASS / YELLOW / FAIL for:
+- data inventory and leakage
+- simulator support
+- learning plateau
+- Figure 2 reconstruction
+- Figure 3 posterior
+- calibration
+- OOD/failure utility
+- projection consistency
+- Figure 4 posterior-bank completeness
+Figure outputs:
+Create figure-ready panels:
+- Figure 2: support UMAP, 2D learning curves, 2D metrics, calibration/sharpness, real phantom 
+support, representative E_app reconstructions.
+- Figure 3: 3D learning curves, continuous depth posterior metrics, calibration/sharpness, 
+OOD/failure, multimodality, operator observability.
+- Figure 4: posterior bank summary and readiness report.
+Final files:
+- data/qc/fig2_metrics_by_N.csv
+- data/qc/fig3_metrics_by_N.csv
+- data/qc/support_coverage_real_mmp.csv
+- data/qc/learning_curve_fits.csv
+- data/qc/calibration_metrics.csv
+- data/qc/ood_failure_metrics.csv
+- data/qc/projection_consistency_metrics.csv
+- data/qc/gate_decisions.json
+- reports/figure23_gate_report.md
+- reports/figure4_entry_report.md
+- data/posterior_bank/fig4_ready_posterior_bank.npz
+Hard fail:
+- posterior mean suspiciously equals truth;
+- test leakage by config_id;
+- real readouts outside support but reported as validated;
+- Cov90 close to 1.00 only because Width90 is huge;
+- uncertainty does not predict failure;
+- Figure 2 and Figure 3 projections are inconsistent.
+text
+Exported with AI Exporter 67 / 68
+
+===== PDF page 68 =====
+Diffusion 的 表 述 ：
+这 样  Figure 2/3 的  story 会 从 “simulation library 很 大  + 图 很 好看 ” 升 级 为 ：
+We assessed simulation sufficiency using a pre-specified data-efficiency and readiness protocol 
+rather than by the number of simulated samples. Learning curves were fitted across 
+progressively larger domain-randomized libraries, real MMP phantom/animal/ex vivo readouts were 
+tested against the simulated readout manifold, and posterior calibration and failure detection 
+were evaluated before passing samples to the Figure 4 reliability analysis.
+text
+The diffusion model is used as an operator-conditioned posterior sampler for a noisy nonlinear 
+inverse problem, not as an image generator. Its advantage is evaluated by CRPS, calibration, 
+forward consistency and failure detection under operator shift, rather than by visual sharpness 
+alone.
+text
+simulation support is sufficient,
+training is data-efficient,
+posterior is calibrated,
+uncertainty is useful,
+and the posterior bank is ready for Figure 4.
+Exported with AI Exporter 68 / 68

@@ -1,0 +1,40 @@
+﻿figure,dimension,device_label,model_label,n_N,n_seeds,n_rows,evidence_level
+Figure 2,2D,sheet piezo,DPS inverse diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,sheet piezo,SRCNN,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,sheet piezo,U-Net,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,sheet piezo,operator-conditioned diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,sheet piezo,vanilla diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,soft MMP,DPS inverse diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps+mmp_full_endpoint_anchor
+Figure 2,2D,soft MMP,SRCNN,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps+mmp_full_endpoint_anchor
+Figure 2,2D,soft MMP,U-Net,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps+mmp_full_endpoint_anchor
+Figure 2,2D,soft MMP,operator-conditioned diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps+mmp_full_endpoint_anchor
+Figure 2,2D,soft MMP,vanilla diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps+mmp_full_endpoint_anchor
+Figure 2,2D,ultrasound,DPS inverse diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,ultrasound,SRCNN,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,ultrasound,U-Net,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,ultrasound,operator-conditioned diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 2,2D,ultrasound,vanilla diffusion,5,3,15,fast_surrogate_benchmark_from_207_lesion_maps
+Figure 3,3D,sheet piezo,3D U-Net,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,sheet piezo,DPS inverse diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,sheet piezo,Eapp-only diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,sheet piezo,SRCNN 3D proxy,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,sheet piezo,direct scalar regression,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,sheet piezo,kernel GP,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,sheet piezo,operator-conditioned diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,sheet piezo,vanilla 3D diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,soft MMP,3D U-Net,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,soft MMP,DPS inverse diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,soft MMP,Eapp-only diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,soft MMP,SRCNN 3D proxy,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,soft MMP,direct scalar regression,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,soft MMP,kernel GP,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,soft MMP,operator-conditioned diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,soft MMP,vanilla 3D diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,ultrasound,3D U-Net,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,ultrasound,DPS inverse diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,ultrasound,Eapp-only diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,ultrasound,SRCNN 3D proxy,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,ultrasound,direct scalar regression,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,ultrasound,kernel GP,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,ultrasound,operator-conditioned diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics
+Figure 3,3D,ultrasound,vanilla 3D diffusion,6,3,18,fast_surrogate_curve_anchorable_to_existing_depth_metrics+full_endpoint_anchor_depth_metrics

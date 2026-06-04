@@ -1,0 +1,168 @@
+{
+  "not_executed_reason": "No NanoBanana connector/tool or API key was available in this Codex session.",
+  "requested_user_label": "NanoBanana API",
+  "model": "NANOBANANA_MODEL_ID_FROM_PROVIDER",
+  "input": {
+    "visual_goal": "Create a Nature Computational Science-style data-efficiency readiness visualization for Figure 2 and Figure 3. Do not invent values. Use only the provided gate table and class counts. Make missing gates visually explicit.",
+    "data_constraints": {
+      "gate_table": [
+        {
+          "gate": "G0 provenance/leakage",
+          "figure": "Figure 2 + Figure 3",
+          "status": "YELLOW",
+          "current_value": "duplicate_hash=209; strain_monotonicity_fail=38; figure3_visual_guardrail=True",
+          "claim_level": "Simulation scaffold until split audit is attached."
+        },
+        {
+          "gate": "G1 simulator support",
+          "figure": "Figure 2",
+          "status": "MISSING",
+          "current_value": "real MMP phantom/animal/ex vivo anchors not found",
+          "claim_level": "Cannot claim strong sim-to-real domain randomization yet."
+        },
+        {
+          "gate": "G1 simulator support",
+          "figure": "Figure 3",
+          "status": "MISSING",
+          "current_value": "no real MMP support-envelope table found for 3D posterior readouts",
+          "claim_level": "Simulation benchmark can remain; real-transfer claim must wait."
+        },
+        {
+          "gate": "G2 learning plateau",
+          "figure": "Figure 2",
+          "status": "MISSING",
+          "current_value": "no fig2_metrics_by_N.csv / fitted N90 table found",
+          "claim_level": "Full-data benchmark only, not data-efficiency claim."
+        },
+        {
+          "gate": "G2 learning plateau",
+          "figure": "Figure 3",
+          "status": "MISSING",
+          "current_value": "no fig3_metrics_by_N.csv / fitted N90 table found",
+          "claim_level": "Posterior benchmark only, not data-efficiency claim."
+        },
+        {
+          "gate": "G3 method-level data efficiency",
+          "figure": "Figure 2 + Figure 3",
+          "status": "MISSING",
+          "current_value": "DER_MAE / DER_CRPS not estimable without N90 curves",
+          "claim_level": "Do not say 'twofold fewer simulations' yet."
+        },
+        {
+          "gate": "G4 Figure 2 reconstruction",
+          "figure": "Figure 2",
+          "status": "YELLOW",
+          "current_value": "MAE=1.728 kPa; SSIM=0.899; Dice=0.974",
+          "claim_level": "Reconstruction evidence is strong but not a complete data-efficiency package."
+        },
+        {
+          "gate": "G5 Figure 3 posterior",
+          "figure": "Figure 3",
+          "status": "PASS",
+          "current_value": "MMP: MAE=0.201mm Cov90=0.936 IoU=0.851; PIEZO: MAE=0.612mm Cov90=0.906 IoU=0.642; US: MAE=0.220mm Cov90=0.938 IoU=0.841",
+          "claim_level": "Passes simulation benchmark; not sufficient alone for NCS data-efficiency claim."
+        },
+        {
+          "gate": "G6 calibration/sharpness",
+          "figure": "Figure 3",
+          "status": "PASS",
+          "current_value": "MMP: Cov90=0.936, Width90=0.900mm; PIEZO: Cov90=0.906, Width90=2.078mm; US: Cov90=0.938, Width90=0.931mm",
+          "claim_level": "Use exact operator-specific language."
+        },
+        {
+          "gate": "G7 OOD/failure utility",
+          "figure": "Figure 3",
+          "status": "PASS",
+          "current_value": "MMP: AUROC_fail_1mm=1.000; PIEZO: AUROC_fail_1mm=0.812; US: AUROC_fail_1mm=0.995",
+          "claim_level": "May support failure-screening claim if prevalence diagnostics are attached."
+        },
+        {
+          "gate": "G8 projection consistency",
+          "figure": "Figure 2 + Figure 3",
+          "status": "MISSING",
+          "current_value": "projection arrays exist, but no projection_consistency_metrics.csv found",
+          "claim_level": "Do not merge as a single posterior framework until this gate is measured."
+        }
+      ],
+      "class_summary": [
+        {
+          "figure": "Figure 2",
+          "axis": "contrast",
+          "n_classes": 3,
+          "min_current_n": 31.0,
+          "overall_status": "YELLOW"
+        },
+        {
+          "figure": "Figure 2",
+          "axis": "morphology phenotype",
+          "n_classes": 6,
+          "min_current_n": 5.0,
+          "overall_status": "FAIL"
+        },
+        {
+          "figure": "Figure 2",
+          "axis": "operator/readout",
+          "n_classes": 3,
+          "min_current_n": 150.0,
+          "overall_status": "YELLOW"
+        },
+        {
+          "figure": "Figure 2",
+          "axis": "source/support tier",
+          "n_classes": 3,
+          "min_current_n": 0.0,
+          "overall_status": "MISSING"
+        },
+        {
+          "figure": "Figure 3",
+          "axis": "contact/load/noise",
+          "n_classes": 3,
+          "min_current_n": 197.0,
+          "overall_status": "YELLOW"
+        },
+        {
+          "figure": "Figure 3",
+          "axis": "contrast",
+          "n_classes": 3,
+          "min_current_n": 235.0,
+          "overall_status": "YELLOW"
+        },
+        {
+          "figure": "Figure 3",
+          "axis": "depth",
+          "n_classes": 4,
+          "min_current_n": 400.0,
+          "overall_status": "PASS"
+        },
+        {
+          "figure": "Figure 3",
+          "axis": "morphological complexity",
+          "n_classes": 4,
+          "min_current_n": 172.0,
+          "overall_status": "FAIL"
+        },
+        {
+          "figure": "Figure 3",
+          "axis": "operator/readout",
+          "n_classes": 3,
+          "min_current_n": 181.0,
+          "overall_status": "PASS"
+        },
+        {
+          "figure": "Figure 3",
+          "axis": "thickness",
+          "n_classes": 3,
+          "min_current_n": 202.0,
+          "overall_status": "FAIL"
+        }
+      ],
+      "local_reference_images": {
+        "scorecard": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Data efficiency\\ncs_audit_20260604\\visualizations\\ncs_readiness_scorecard.png",
+        "coverage": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Data efficiency\\ncs_audit_20260604\\visualizations\\domain_randomization_class_coverage.png",
+        "dashboard": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Data efficiency\\ncs_audit_20260604\\visualizations\\figure2_figure3_data_efficiency_dashboard.png"
+      }
+    },
+    "style": "clean scientific dashboard, white background, restrained color, panel labels, exact numeric callouts, no decorative stock imagery"
+  },
+  "negative_instruction": "Do not synthesize new data, do not change PASS/YELLOW/FAIL/MISSING labels, and do not replace numeric tables with decorative graphics."
+}

@@ -1,0 +1,36 @@
+﻿figure,axis,class_label,current_n,target_min_n,count_basis,status,note,coverage_fraction
+Figure 2,operator/readout,MMP soft magnetoelastic microneedle patch,445,500,unique MMP config_id,YELLOW,Close to target; split/QC duplicates separately.,0.89
+Figure 2,operator/readout,sheet piezoelectric device,150,150,simulation benchmark readouts,PASS,Benchmark support only unless paired real data are added.,1.0
+Figure 2,operator/readout,ultrasound strain device,150,150,simulation benchmark readouts,PASS,Benchmark support only unless paired real data are added.,1.0
+Figure 2,morphology phenotype,circular/compact,74,20,exclusive heuristic class from 207 lesion maps,PASS,Heuristic class for budget/QC; not a clinical diagnosis.,3.7
+Figure 2,morphology phenotype,heterogeneous,38,20,exclusive heuristic class from 207 lesion maps,PASS,Heuristic class for budget/QC; not a clinical diagnosis.,1.9
+Figure 2,morphology phenotype,irregular boundary,7,20,exclusive heuristic class from 207 lesion maps,FAIL,Heuristic class for budget/QC; not a clinical diagnosis.,0.35
+Figure 2,morphology phenotype,low contrast,30,20,exclusive heuristic class from 207 lesion maps,PASS,Heuristic class for budget/QC; not a clinical diagnosis.,1.5
+Figure 2,morphology phenotype,multifocal,5,20,exclusive heuristic class from 207 lesion maps,FAIL,Heuristic class for budget/QC; not a clinical diagnosis.,0.25
+Figure 2,morphology phenotype,other lesion prior,53,20,exclusive heuristic class from 207 lesion maps,PASS,Heuristic class for budget/QC; not a clinical diagnosis.,2.65
+Figure 2,contrast,matched/low contrast (<=2x),31,40,lesion-to-background stiffness ratio,YELLOW,"Balanced training should stratify by config_id, not image instance.",0.775
+Figure 2,contrast,moderate contrast (2-8x),90,40,lesion-to-background stiffness ratio,PASS,"Balanced training should stratify by config_id, not image instance.",2.25
+Figure 2,contrast,high contrast (>8x),86,40,lesion-to-background stiffness ratio,PASS,"Balanced training should stratify by config_id, not image instance.",2.15
+Figure 2,source/support tier,clinical/mask-derived lesion priors,207,200,lesion maps with stiffness + mask,PASS,Useful for morphology prior; not paired real MMP readout support.,1.035
+Figure 2,source/support tier,clinical ontology labels,5728,500,canonical terms/labels across datasets,PASS,"Supports prior breadth, not paired inverse-readout validation.",11.456
+Figure 2,source/support tier,real MMP phantom/animal/ex vivo anchors,0,20,physical paired readout + reference stiffness,MISSING,No physical MMP phantom raw/reference files were found in the inspected manifests.,0.0
+Figure 3,operator/readout,MMP,181,181,posterior benchmark evaluation cases per operator,PASS,Evaluation case count; simulator prior has separate 3D config coverage.,1.0
+Figure 3,operator/readout,PIEZO,181,181,posterior benchmark evaluation cases per operator,PASS,Evaluation case count; simulator prior has separate 3D config coverage.,1.0
+Figure 3,operator/readout,US,181,181,posterior benchmark evaluation cases per operator,PASS,Evaluation case count; simulator prior has separate 3D config coverage.,1.0
+Figure 3,depth,deep,400,300,domain_randomization/parameter_table.csv configs,PASS,Keep OOD-deep held out from ID learning curve.,1.3333333333333333
+Figure 3,depth,mid,400,300,domain_randomization/parameter_table.csv configs,PASS,Keep OOD-deep held out from ID learning curve.,1.3333333333333333
+Figure 3,depth,ood_deep,400,100,domain_randomization/parameter_table.csv configs,PASS,Keep OOD-deep held out from ID learning curve.,4.0
+Figure 3,depth,shallow,400,300,domain_randomization/parameter_table.csv configs,PASS,Keep OOD-deep held out from ID learning curve.,1.3333333333333333
+Figure 3,thickness,thin (<1.5 mm),202,300,explicit z_top/z_bottom thickness truth,FAIL,Thickness truth now exists in refreshed Figure 3 parameter table.,0.6733333333333333
+Figure 3,thickness,medium (1.5-3.0 mm),812,300,explicit z_top/z_bottom thickness truth,PASS,Thickness truth now exists in refreshed Figure 3 parameter table.,2.7066666666666666
+Figure 3,thickness,thick (>3.0 mm),586,300,explicit z_top/z_bottom thickness truth,PASS,Thickness truth now exists in refreshed Figure 3 parameter table.,1.9533333333333334
+Figure 3,contrast,low/matched contrast (<=2x),235,300,3D stiffness contrast ratio,YELLOW,"If soft/hypoelastic lesions are scientifically required, add explicit contrast_x < 1 cases.",0.7833333333333333
+Figure 3,contrast,moderate contrast (2-5x),970,300,3D stiffness contrast ratio,PASS,"If soft/hypoelastic lesions are scientifically required, add explicit contrast_x < 1 cases.",3.2333333333333334
+Figure 3,contrast,high contrast (>5x),395,300,3D stiffness contrast ratio,PASS,"If soft/hypoelastic lesions are scientifically required, add explicit contrast_x < 1 cases.",1.3166666666666667
+Figure 3,morphological complexity,irregular boundary,172,250,non-exclusive stressor flags from 3D parameter table,FAIL,Non-exclusive flags; one config can contribute to multiple stressors.,0.688
+Figure 3,morphological complexity,heterogeneous core,414,250,non-exclusive stressor flags from 3D parameter table,PASS,Non-exclusive flags; one config can contribute to multiple stressors.,1.656
+Figure 3,morphological complexity,rim stiffness,287,250,non-exclusive stressor flags from 3D parameter table,PASS,Non-exclusive flags; one config can contribute to multiple stressors.,1.148
+Figure 3,morphological complexity,multifocality,224,250,non-exclusive stressor flags from 3D parameter table,YELLOW,Non-exclusive flags; one config can contribute to multiple stressors.,0.896
+Figure 3,contact/load/noise,baseline,293,250,derived nuisance strata from pressure/noise/calibration shift,PASS,Use paired seeds/sibling rows for same config_id when training.,1.172
+Figure 3,contact/load/noise,hard shift,197,250,derived nuisance strata from pressure/noise/calibration shift,YELLOW,Use paired seeds/sibling rows for same config_id when training.,0.788
+Figure 3,contact/load/noise,mild shift,1110,250,derived nuisance strata from pressure/noise/calibration shift,PASS,Use paired seeds/sibling rows for same config_id when training.,4.44

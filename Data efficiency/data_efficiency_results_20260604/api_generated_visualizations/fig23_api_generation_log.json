@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-06-04T13:01:54",
+  "openai_output": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Data efficiency\\data_efficiency_results_20260604\\api_generated_visualizations\\openai_gpt-image-1.5_fig23_data_efficiency.png",
+  "nanobanana_output": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Data efficiency\\data_efficiency_results_20260604\\api_generated_visualizations\\nanobanana_gemini-2.5-flash-image_fig23_data_efficiency.png",
+  "log": [
+    {
+      "provider": "openai",
+      "status": "success",
+      "model": "gpt-image-1.5",
+      "elapsed_sec": 47.77,
+      "output": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Data efficiency\\data_efficiency_results_20260604\\api_generated_visualizations\\openai_gpt-image-1.5_fig23_data_efficiency.png"
+    },
+    {
+      "provider": "gemini_nanobanana",
+      "status": "success",
+      "model": "gemini-2.5-flash-image",
+      "elapsed_sec": 10.62,
+      "mime": "image/png",
+      "output": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Data efficiency\\data_efficiency_results_20260604\\api_generated_visualizations\\nanobanana_gemini-2.5-flash-image_fig23_data_efficiency.png"
+    }
+  ]
+}

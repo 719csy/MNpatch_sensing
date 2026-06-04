@@ -1,0 +1,23 @@
+{
+  "model": "gemini-2.5-flash-image",
+  "candidate_count": 1,
+  "promptFeedback": null,
+  "usageMetadata": {
+    "promptTokenCount": 1279,
+    "candidatesTokenCount": 1306,
+    "totalTokenCount": 2585,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 1279
+      }
+    ],
+    "candidatesTokensDetails": [
+      {
+        "modality": "IMAGE",
+        "tokenCount": 1290
+      }
+    ],
+    "serviceTier": "standard"
+  }
+}

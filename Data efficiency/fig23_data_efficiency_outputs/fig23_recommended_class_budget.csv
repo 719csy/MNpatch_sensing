@@ -1,0 +1,26 @@
+﻿figure,axis,class_label,current_support_n,target_min_n,unit,status
+Figure 2,operator/readout,MMP soft magnetoelastic microneedle patch,445,500,unique config_id for primary learning curve,"YELLOW - close, but expand or justify with plateau"
+Figure 2,operator/readout,sheet piezoelectric device,150,150,"simulated benchmark readout, operator-shift only",PASS for benchmark; expand to 500 for final data-efficiency claim
+Figure 2,operator/readout,ultrasound strain device,150,150,"simulated benchmark readout, operator-shift only",PASS for benchmark; expand to 500 for final data-efficiency claim
+Figure 2,morphology/source,synthetic/geometric simulation,298,200,configs,PASS as scaffold; add more irregular boundaries for manuscript-strength coverage
+Figure 2,morphology/source,clinical lesion priors,5728,500,clinical labels/priors; not paired MMP truth,PASS for prior/morphology support
+Figure 2,morphology/source,real MMP phantom/animal/ex vivo anchors,not found in inspected manifests,>=20 phantom plus all available animal/ex vivo,real readouts reserved for support coverage,MISSING for strong sim-to-real support gate
+Figure 2,contrast,soft / hypoelastic,available through A_contrast/log_ck bins,500,configs or balanced sampled rows,NEEDS explicit binning in simulator_params_2d.csv
+Figure 2,contrast,matched / low contrast,available through A_contrast/log_ck bins,500,configs or balanced sampled rows,NEEDS explicit binning; oversample for posterior ambiguity
+Figure 2,contrast,stiff / hyperelastic,available through A_contrast/log_ck bins,500,configs or balanced sampled rows,NEEDS explicit binning in simulator_params_2d.csv
+Figure 3,operator/readout,MMP soft magnetoelastic microneedle patch,31,1000,3D configs for primary posterior; use 445 MMP trainable as near-term scaffold,YELLOW/FAIL for full Figure 3 data-efficiency claim unless 3D cache expands or uses posterior surrogate
+Figure 3,operator/readout,sheet piezoelectric device,150,150,simulated benchmark readout,PASS for observability benchmark; do not claim real piezo
+Figure 3,operator/readout,ultrasound strain device,150,150,simulated benchmark readout,PASS for observability benchmark; do not claim real ultrasound
+Figure 3,depth,shallow 0-0.75 mm,60,300,3D rigidity rows/configs before augmentation,"YELLOW - enough for scaffold, not final N90"
+Figure 3,depth,mid 0.75-1.5 mm,58,300,3D rigidity rows/configs before augmentation,"YELLOW - enough for scaffold, not final N90"
+Figure 3,depth,deep 1.5-3 mm,60,300,3D rigidity rows/configs before augmentation,"YELLOW - enough for scaffold, not final N90"
+Figure 3,depth,OOD-deep >3 mm,120,100,held-out OOD/failure configs,"PASS for OOD utility, keep out of ID training"
+Figure 3,thickness,thin,not explicit as z_top/thickness truth,300,configs,MISSING until depth_truth.csv has z_top and thickness
+Figure 3,thickness,medium,not explicit as z_top/thickness truth,300,configs,MISSING until depth_truth.csv has z_top and thickness
+Figure 3,thickness,thick,not explicit as z_top/thickness truth,300,configs,MISSING until depth_truth.csv has z_top and thickness
+Figure 3,contrast,soft / hypoelastic,available through E_tag/log_ck bins,300,configs,NEEDS explicit binning and balance
+Figure 3,contrast,matched / low contrast,available through E_tag/log_ck bins,300,configs,NEEDS explicit binning; oversample for ambiguity
+Figure 3,contrast,stiff / hyperelastic,available through E_tag/log_ck bins,300,configs,NEEDS explicit binning and balance
+Figure 3,contact/load/noise,baseline,MMP S=0; piezo/US u=0,>=3 seeds/config,noise/load sibling rows,AVAILABLE; enforce same split by config_id
+Figure 3,contact/load/noise,mild shift,MMP low strains; piezo/US u=0.01/0.02,>=3 seeds/config,noise/load sibling rows,AVAILABLE; enforce same split by config_id
+Figure 3,contact/load/noise,hard shift,MMP high strains; piezo/US u=0.04/0.08 and tilted,>=3 seeds/config,noise/load sibling rows,AVAILABLE; enforce same split by config_id
