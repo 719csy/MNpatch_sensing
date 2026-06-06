@@ -1,11 +1,14 @@
 {
   "seed": 20260606,
-  "runtime_seconds": 18.36,
+  "runtime_seconds": 24.94,
   "source_pdf": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Clinically Informed Geometric Memory.pdf",
   "pdf_pages": "32-64",
   "manifest_rows": 213,
   "geometry_descriptors_2d": 207,
   "geometry_descriptors_3d": 6,
+  "topline_report_card_rows": 3,
+  "trend_metric_rows": 84,
+  "actual_sample_decoupling_rows": 9,
   "figures": [
     "figure_1_factorized_memory_physics.png",
     "figure_2_geometry_memory.png",
@@ -18,6 +21,7 @@
     "data_audit.md",
     "diffusion_vs_flow_decision.md",
     "main_results_summary.md",
-    "methods_reproducibility.md"
+    "methods_reproducibility.md",
+    "piezo_failure_note.md"
   ]
 }

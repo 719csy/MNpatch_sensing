@@ -17,6 +17,9 @@ Generated outputs:
 - `results/tables/independence_tests.csv`
 - `results/tables/main_ablation_table.csv`
 - `results/tables/ood_failure_metrics.csv`
+- `results/tables/topline_report_card.csv`
+- `results/tables/trend_metrics.csv`
+- `results/tables/actual_sample_decoupling_tests.csv`
 - `results/figures/*.png` and `results/figures/*.pdf`
 - `results/reports/*.md`
 

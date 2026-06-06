@@ -1,6 +1,7 @@
 style: Nature Computational Science inspired
 formats: [png_600dpi, pdf]
-primary_metrics: [MAE_E, Dice, BoundaryF1, MAE_z_bottom, CRPS, Cov90, UCE, AUROC_fail, AUSE]
+primary_metrics: [MAE_E, Dice, BoundaryF1, MAE_z_bottom, CRPS, Cov90, Width90, IntervalIoU, UCE, AUSE, AUROC_fail, failure_rate]
+trend_metrics: [beta_extrap, range_ratio, spearman_rho, toward_mean_collapse_flag]
 colormaps:
   modulus: viridis
   uncertainty: magma

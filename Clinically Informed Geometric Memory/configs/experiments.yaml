@@ -10,3 +10,6 @@ ablation_models:
   executed_from_existing_outputs: [D1, D4, D5]
   negative_controls: [geometry_only_independence_test]
   optional_not_executed: [flow_matching, stochastic_interpolant, schrodinger_bridge]
+decoupling_audits:
+  construction_sanity_check: independent geometry-mechanics recombination
+  actual_sample_check: available train/eval descriptor predictability audit

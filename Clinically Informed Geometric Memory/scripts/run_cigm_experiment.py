@@ -92,7 +92,10 @@ def write_text(path: Path, text: str) -> None:
 
 
 def markdown_table(df: pd.DataFrame) -> str:
-    table = df.reset_index()
+    if isinstance(df.index, pd.RangeIndex) and df.index.start == 0 and df.index.step == 1:
+        table = df.copy()
+    else:
+        table = df.reset_index()
     cols = [str(c) for c in table.columns]
     lines = ["| " + " | ".join(cols) + " |", "| " + " | ".join(["---"] * len(cols)) + " |"]
     for row in table.to_dict("records"):
@@ -760,10 +763,128 @@ def run_independence_tests(df2: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFram
             }
         )
     tests = pd.DataFrame(rows)
+    tests.insert(0, "decoupling_layer", "construction_sanity_check")
     heat = pd.DataFrame(heatmap_rows)
     tests.to_csv(TABLES / "independence_tests.csv", index=False)
     heat.to_csv(TABLES / "independence_heatmap_values.csv", index=False)
     return tests, decoupled
+
+
+def predictability_audit(
+    df: pd.DataFrame,
+    feature_cols: list[str],
+    target_cols: list[str],
+    layer: str,
+    dim: str,
+    min_rf_n: int = 40,
+) -> pd.DataFrame:
+    rows = []
+    features = df[feature_cols].astype(float).replace([np.inf, -np.inf], np.nan).fillna(0.0)
+    for target in target_cols:
+        valid = df[target].notna()
+        x = features.loc[valid]
+        y = df.loc[valid, target].astype(float).to_numpy()
+        if len(y) < 3 or np.nanstd(y) < 1e-12:
+            rows.append(
+                {
+                    "decoupling_layer": layer,
+                    "dim": dim,
+                    "target": target,
+                    "n_samples": int(len(y)),
+                    "max_abs_spearman": np.nan,
+                    "median_abs_spearman": np.nan,
+                    "rf_regression_r2": np.nan,
+                    "rf_bin_balanced_accuracy": np.nan,
+                    "bin_majority_chance": np.nan,
+                    "decoupling_status": "INCONCLUSIVE_constant_or_too_small",
+                }
+            )
+            continue
+
+        spears = []
+        for col in feature_cols:
+            values = x[col].to_numpy()
+            if np.nanstd(values) < 1e-12:
+                rho = 0.0
+            else:
+                rho = stats.spearmanr(values, y, nan_policy="omit").correlation
+            spears.append(abs(float(rho)) if np.isfinite(rho) else 0.0)
+
+        rf_r2 = np.nan
+        balanced_acc = np.nan
+        chance = np.nan
+        if len(y) >= min_rf_n and len(np.unique(y)) > 6:
+            try:
+                xtr, xte, ytr, yte = train_test_split(x, y, test_size=0.35, random_state=SEED)
+                rf = RandomForestRegressor(n_estimators=160, max_depth=6, random_state=SEED, n_jobs=-1)
+                rf.fit(xtr, ytr)
+                rf_r2 = float(r2_score(yte, rf.predict(xte)))
+
+                q = pd.qcut(y, q=4, labels=False, duplicates="drop")
+                if len(np.unique(q)) > 1:
+                    xtr_c, xte_c, ytr_c, yte_c = train_test_split(
+                        x, q, test_size=0.35, random_state=SEED, stratify=q
+                    )
+                    clf = RandomForestClassifier(n_estimators=160, max_depth=5, random_state=SEED, n_jobs=-1)
+                    clf.fit(xtr_c, ytr_c)
+                    pred_c = clf.predict(xte_c)
+                    balanced_acc = float(balanced_accuracy_score(yte_c, pred_c))
+                    chance = float(pd.Series(yte_c).value_counts(normalize=True).max())
+            except Exception:
+                rf_r2 = np.nan
+                balanced_acc = np.nan
+                chance = np.nan
+
+        if len(y) < min_rf_n:
+            status = "INCONCLUSIVE_sample_limited"
+        elif (np.nanmedian(spears) < 0.10) and (not np.isfinite(rf_r2) or rf_r2 < 0.05):
+            status = "PASS_no_predictability_detected"
+        else:
+            status = "WARN_possible_geometry_mechanics_association"
+
+        rows.append(
+            {
+                "decoupling_layer": layer,
+                "dim": dim,
+                "target": target,
+                "n_samples": int(len(y)),
+                "max_abs_spearman": float(np.nanmax(spears)),
+                "median_abs_spearman": float(np.nanmedian(spears)),
+                "rf_regression_r2": rf_r2,
+                "rf_bin_balanced_accuracy": balanced_acc,
+                "bin_majority_chance": chance,
+                "decoupling_status": status,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def run_actual_sample_decoupling_tests(df2: pd.DataFrame, df3: pd.DataFrame) -> pd.DataFrame:
+    actual2 = df2.dropna(subset=DESCRIPTOR_COLS_2D).copy()
+    tests2 = predictability_audit(
+        actual2,
+        DESCRIPTOR_COLS_2D,
+        ["E_bg", "E_lesion", "contrast", "heterogeneity"],
+        "actual_training_eval_available_2d_samples",
+        "2D",
+    )
+
+    cases3d = pd.read_csv(FIG3_ROOT / "metadata" / "cases.csv")
+    actual3 = df3.merge(cases3d, left_on="sample_id", right_on="case_id", how="left")
+    actual3["E_bg"] = 8.0
+    actual3["E_lesion"] = actual3["E_bg"] * actual3["contrast"].astype(float)
+    tests3 = predictability_audit(
+        actual3,
+        DESCRIPTOR_COLS_3D,
+        ["z_top_mm", "z_bottom_mm", "thickness_mm", "E_lesion", "contrast"],
+        "actual_training_eval_available_3d_samples",
+        "3D",
+        min_rf_n=20,
+    )
+
+    actual = pd.concat([tests2, tests3], ignore_index=True)
+    actual.to_csv(TABLES / "actual_sample_decoupling_tests.csv", index=False)
+    return actual
 
 
 def method_mapping_2d(method: str) -> dict:
@@ -910,6 +1031,134 @@ def build_ablation_tables() -> tuple[pd.DataFrame, pd.DataFrame]:
     ood = cal.merge(pd.DataFrame(slope_rows), on=["operator", "method"], how="left")
     ood.to_csv(TABLES / "ood_failure_metrics.csv", index=False)
     return main, ood
+
+
+def build_topline_report_card(main: pd.DataFrame, failure_threshold_mm: float = 1.0) -> pd.DataFrame:
+    target_model = "D5_operator_plus_clinical_geometry_plus_depth_physics"
+    d5 = main[(main["data_dim"] == "3D") & (main["model_name"] == target_model)].copy()
+    d5["operator"] = d5["split_type"].str.replace("figure3_depth_benchmark_", "", regex=False)
+
+    failures = pd.read_csv(FIG3_ROOT / "metrics" / "error_vs_extrapolation.csv")
+    failures = failures[failures["method"] == "op_conditioned_diffusion_ours"].copy()
+    failure_rows = []
+    for operator, grp in failures.groupby("operator"):
+        positive = grp["absolute_error_mm"] > failure_threshold_mm
+        failure_rows.append(
+            {
+                "operator": operator,
+                "failure_threshold_mm": failure_threshold_mm,
+                "n_eval_records": int(len(grp)),
+                "failure_positive_count": int(positive.sum()),
+                "failure_rate": float(positive.mean()),
+            }
+        )
+    failure_df = pd.DataFrame(failure_rows)
+
+    cols = [
+        "operator",
+        "MAE_z_bottom",
+        "CRPS",
+        "Cov90",
+        "Width90",
+        "IntervalIoU",
+        "UCE",
+        "AUSE",
+        "AUROC_fail",
+    ]
+    report = d5[cols].merge(failure_df, on="operator", how="left")
+    report = report[
+        [
+            "operator",
+            "MAE_z_bottom",
+            "CRPS",
+            "Cov90",
+            "Width90",
+            "IntervalIoU",
+            "UCE",
+            "AUSE",
+            "AUROC_fail",
+            "failure_positive_count",
+            "failure_rate",
+            "failure_threshold_mm",
+            "n_eval_records",
+        ]
+    ].sort_values("operator")
+    report.to_csv(TABLES / "topline_report_card.csv", index=False)
+    return report
+
+
+def safe_spearman(x: np.ndarray, y: np.ndarray) -> float:
+    if len(x) < 3 or np.nanstd(x) < 1e-12 or np.nanstd(y) < 1e-12:
+        return np.nan
+    rho = stats.spearmanr(x, y, nan_policy="omit").correlation
+    return float(rho) if np.isfinite(rho) else np.nan
+
+
+def safe_slope(x: np.ndarray, y: np.ndarray) -> tuple[float, float]:
+    if len(x) < 3 or np.nanstd(x) < 1e-12 or np.nanstd(y) < 1e-12:
+        return np.nan, np.nan
+    slope, intercept, r, p, stderr = stats.linregress(x, y)
+    return float(slope), float(stderr)
+
+
+def build_trend_metrics() -> pd.DataFrame:
+    z = np.load(FIG3_ROOT / "posteriors" / "zbottom_samples.npz", allow_pickle=True)
+    pred_median = np.nanmedian(z["posterior_samples_zbottom"], axis=1)
+    idx = pd.DataFrame(
+        {
+            "case_id": z["case_id"].astype(str),
+            "config_id": z["config_id"].astype(str),
+            "seed_id": z["seed_id"].astype(int),
+            "depth_group": z["depth_group"].astype(str),
+            "operator": z["operator"].astype(str),
+            "method": z["method"].astype(str),
+            "true_zbottom_mm": z["true_zbottom_mm"].astype(float),
+            "d_out_mm": z["d_out_mm"].astype(float),
+            "pred_median_zbottom_mm": pred_median.astype(float),
+        }
+    )
+    idx["absolute_error_mm"] = np.abs(idx["pred_median_zbottom_mm"] - idx["true_zbottom_mm"])
+
+    rows = []
+    for (operator, method, depth_group), grp in idx.groupby(["operator", "method", "depth_group"]):
+        true = grp["true_zbottom_mm"].to_numpy()
+        pred = grp["pred_median_zbottom_mm"].to_numpy()
+        d_out = grp["d_out_mm"].to_numpy()
+        err = grp["absolute_error_mm"].to_numpy()
+        true_range = float(np.nanmax(true) - np.nanmin(true))
+        pred_range = float(np.nanmax(pred) - np.nanmin(pred))
+        range_ratio = pred_range / true_range if true_range > 1e-12 else np.nan
+        beta_extrap, beta_stderr = safe_slope(d_out, err)
+        pred_vs_true_slope, pred_vs_true_stderr = safe_slope(true, pred)
+        rho = safe_spearman(true, pred)
+        toward_mean = bool(
+            (np.isfinite(range_ratio) and range_ratio < 0.50)
+            or (np.isfinite(pred_vs_true_slope) and pred_vs_true_slope < 0.50)
+            or (np.isfinite(rho) and rho < 0.30)
+        )
+        rows.append(
+            {
+                "operator": operator,
+                "method": method,
+                "model_name": method_mapping_3d(method)["model_name"],
+                "depth_group": depth_group,
+                "n_eval_records": int(len(grp)),
+                "mean_d_out_mm": float(np.nanmean(d_out)),
+                "beta_extrap": beta_extrap,
+                "beta_extrap_stderr": beta_stderr,
+                "range_ratio": range_ratio,
+                "spearman_rho": rho,
+                "pred_vs_true_slope": pred_vs_true_slope,
+                "pred_vs_true_slope_stderr": pred_vs_true_stderr,
+                "true_zbottom_range_mm": true_range,
+                "pred_zbottom_range_mm": pred_range,
+                "mean_absolute_error_mm": float(np.nanmean(err)),
+                "toward_mean_collapse_flag": toward_mean,
+            }
+        )
+    trend = pd.DataFrame(rows).sort_values(["operator", "method", "depth_group"])
+    trend.to_csv(TABLES / "trend_metrics.csv", index=False)
+    return trend
 
 
 def resolve_external_or_local(path_value: str, local_dir: Path) -> Path | None:
@@ -1392,8 +1641,11 @@ def write_reports(
     manifest: pd.DataFrame,
     match: pd.DataFrame,
     tests: pd.DataFrame,
+    actual_decoupling: pd.DataFrame,
     main: pd.DataFrame,
     ood: pd.DataFrame,
+    topline: pd.DataFrame,
+    trend: pd.DataFrame,
 ) -> None:
     dim_summary = manifest.groupby("dim").agg(
         samples=("sample_id", "count"),
@@ -1416,12 +1668,16 @@ def write_reports(
 
     best_match = match.sort_values("mmd_rbf_standardized").iloc[0]
     decoupling_pass = bool(tests["pass_decoupling_gate"].all())
+    actual_status = actual_decoupling.groupby(["decoupling_layer", "decoupling_status"]).size().reset_index(name="count")
     main_2d = main[main["data_dim"] == "2D"].copy()
     opmask = main_2d[main_2d["model_name"] == "D4_operator_plus_clinical_geometry"].iloc[0]
     unet = main_2d[main_2d["model_name"] == "D1_operator_only_unet"].iloc[0]
     vanilla = main_2d[main_2d["model_name"] == "D0_D1_vanilla_diffusion"].iloc[0]
     mmp3 = main[(main["data_dim"] == "3D") & (main["split_type"].str.contains("MMP"))].copy()
     mmp3_best = mmp3.sort_values("MAE_z_bottom").iloc[0]
+    mmp_d5 = topline[topline["operator"] == "MMP"].iloc[0]
+    piezo_d5 = topline[topline["operator"] == "PIEZO"].iloc[0]
+    us_d5 = topline[topline["operator"] == "US"].iloc[0]
 
     write_text(
         REPORTS / "main_results_summary.md",
@@ -1435,6 +1691,18 @@ def write_reports(
         f"- 2D operator + clinical mask MAE: {opmask['MAE_E']:.3f} kPa vs operator-only U-Net {unet['MAE_E']:.3f} kPa and vanilla diffusion {vanilla['MAE_E']:.3f} kPa.\n"
         f"- 2D operator + clinical mask Dice: {opmask['Dice']:.3f}; Boundary F1: {opmask['BoundaryF1']:.3f}.\n"
         f"- Best MMP 3D z-bottom method: `{mmp3_best['model_name']}` with MAE_z_bottom {mmp3_best['MAE_z_bottom']:.3f} mm, Cov90 {mmp3_best['Cov90']:.3f}, IntervalIoU {mmp3_best['IntervalIoU']:.3f}.\n\n"
+        "## Operator Topline Report Card\n\n"
+        + markdown_table(topline[["operator", "MAE_z_bottom", "CRPS", "Cov90", "Width90", "IntervalIoU", "UCE", "AUSE", "AUROC_fail", "failure_positive_count", "failure_rate"]])
+        + "\n\n"
+        "## Two-Layer Decoupling Audit\n\n"
+        "Layer 1 is a construction sanity check on randomly recombined geometry and independent mechanics. "
+        "Layer 2 audits the actual available training/evaluation assets and reports possible leakage or sample-limited uncertainty without overwriting the construction result.\n\n"
+        + markdown_table(actual_status)
+        + "\n\n"
+        "## PIEZO Operator Caution\n\n"
+        f"The D5 topline is strong for MMP (MAE_z_bottom {mmp_d5['MAE_z_bottom']:.3f} mm) and US ({us_d5['MAE_z_bottom']:.3f} mm), "
+        f"but weaker for PIEZO ({piezo_d5['MAE_z_bottom']:.3f} mm, failure rate {piezo_d5['failure_rate']:.3f}). "
+        "Do not extrapolate the MMP conclusion to all operators without reporting this PIEZO-specific limitation.\n\n"
         "PSNR/SSIM are deliberately not used as the primary evidence. The report emphasizes support, boundary, depth posterior, calibration, and OOD/failure behavior.\n",
     )
 
@@ -1456,7 +1724,8 @@ def write_reports(
     ood_pass = bool(len(ours_ood) and ours_ood.iloc[0]["uncertainty_vs_depth_ood_slope"] > 0)
     checks = [
         ("Does clinical geometry prior match real lesion shape distribution?", g2_match_pass, "geometry_distribution_matching.csv; figure_2_geometry_memory"),
-        ("Is geometry statistically independent from depth/stiffness?", decoupling_pass, "independence_tests.csv; figure_2_geometry_memory"),
+        ("Is construction-level geometry statistically independent from depth/stiffness?", decoupling_pass, "independence_tests.csv; figure_2_geometry_memory"),
+        ("Was actual available train/eval sample predictability audited?", True, "actual_sample_decoupling_tests.csv"),
         ("Does clinical memory improve geometry recovery?", d4_improves, "main_ablation_table.csv; figure_3_2d_ablation"),
         ("Does clinical memory improve mechanics posterior after sensor conditioning?", d5_improves, "main_ablation_table.csv; figure_4_3d_depth_posterior"),
         ("Does geometry-only model fail to infer mechanical variables?", d2_fail_pass, "independence_tests.csv"),
@@ -1466,11 +1735,39 @@ def write_reports(
     for question, passed, support in checks:
         lines.append(f"| {question} | {'PASS' if passed else 'INCONCLUSIVE'} | {support} |")
     lines.append(
-        "\nGeometry memory is statistically decoupled from randomized mechanical variables; depth and stiffness cannot be inferred from geometry alone.\n"
+        "\nConstruction-level geometry memory is statistically decoupled from randomized mechanical variables; depth and stiffness cannot be inferred from geometry alone in the randomized construction sanity check. Actual available training/evaluation assets are separately audited in `actual_sample_decoupling_tests.csv` and should be cited as an operator/data leakage check, not as a replacement for the construction proof.\n"
         if decoupling_pass
         else "\nGeometry-mechanics decoupling did not pass every configured gate; revisit randomized sampling before making the claim.\n"
     )
     write_text(REPORTS / "clinical_memory_claim_check.md", "\n".join(lines))
+
+    piezo_main = main[
+        (main["data_dim"] == "3D")
+        & (main["split_type"].str.contains("PIEZO"))
+        & main["MAE_z_bottom"].notna()
+    ].sort_values("MAE_z_bottom")
+    piezo_trend = trend[
+        (trend["operator"] == "PIEZO")
+        & (trend["method"] == "op_conditioned_diffusion_ours")
+    ]
+    collapse_groups = piezo_trend.loc[piezo_trend["toward_mean_collapse_flag"], "depth_group"].tolist()
+    write_text(
+        REPORTS / "piezo_failure_note.md",
+        "# PIEZO Failure Note\n\n"
+        "The MMP result should not be generalized to all sensing operators. "
+        "For the D5/op-conditioned clinical geometry + depth physics model, PIEZO has weaker z-bottom performance than MMP and US.\n\n"
+        "## D5 Topline\n\n"
+        + markdown_table(topline[topline["operator"].isin(["MMP", "PIEZO", "US"])])
+        + "\n\n"
+        "## PIEZO Method Ranking By z-bottom MAE\n\n"
+        + markdown_table(piezo_main[["model_name", "MAE_z_bottom", "CRPS", "Cov90", "Width90", "IntervalIoU", "UCE", "AUSE", "AUROC_fail"]].reset_index(drop=True))
+        + "\n\n"
+        "## Trend/Cancellation Check\n\n"
+        + markdown_table(piezo_trend[["depth_group", "beta_extrap", "range_ratio", "spearman_rho", "pred_vs_true_slope", "toward_mean_collapse_flag"]].reset_index(drop=True))
+        + "\n\n"
+        f"Toward-mean collapse flags for PIEZO D5: {', '.join(collapse_groups) if collapse_groups else 'none under configured rule'}.\n\n"
+        "Manuscript wording should state that clinical memory and depth-aware conditioning are strongest for MMP/US in this benchmark, while PIEZO requires operator-specific qualification and likely additional calibration or model selection.\n",
+    )
 
     write_text(
         REPORTS / "diffusion_vs_flow_decision.md",
@@ -1503,6 +1800,9 @@ def write_reports(
         "- `results/tables/independence_tests.csv`\n"
         "- `results/tables/main_ablation_table.csv`\n"
         "- `results/tables/ood_failure_metrics.csv`\n"
+        "- `results/tables/topline_report_card.csv`\n"
+        "- `results/tables/trend_metrics.csv`\n"
+        "- `results/tables/actual_sample_decoupling_tests.csv`\n"
         "- `results/figures/*.png` and `results/figures/*.pdf`\n"
         "- `results/reports/*.md`\n\n"
         "Expected runtime on this Windows workstation is a few minutes, dominated by reading mask CSVs and rendering 600 dpi figures.\n",
@@ -1522,8 +1822,12 @@ def write_project_files() -> None:
         "- `source_pdf_pages_32_64_extracted_text.txt`\n"
         "- `results/data_manifest.csv`\n"
         "- `results/tables/`\n"
+        "- `results/tables/topline_report_card.csv`\n"
+        "- `results/tables/trend_metrics.csv`\n"
+        "- `results/tables/actual_sample_decoupling_tests.csv`\n"
         "- `results/figures/`\n"
         "- `results/reports/clinical_memory_claim_check.md`\n"
+        "- `results/reports/piezo_failure_note.md`\n"
         "- `results/reports/diffusion_vs_flow_decision.md`\n\n"
         "The optional flow/stochastic-interpolant figure is intentionally not generated unless a true geometry-to-mechanics endpoint path is trained.\n",
     )
@@ -1555,13 +1859,17 @@ def write_project_files() -> None:
         "ablation_models:\n"
         "  executed_from_existing_outputs: [D1, D4, D5]\n"
         "  negative_controls: [geometry_only_independence_test]\n"
-        "  optional_not_executed: [flow_matching, stochastic_interpolant, schrodinger_bridge]\n",
+        "  optional_not_executed: [flow_matching, stochastic_interpolant, schrodinger_bridge]\n"
+        "decoupling_audits:\n"
+        "  construction_sanity_check: independent geometry-mechanics recombination\n"
+        "  actual_sample_check: available train/eval descriptor predictability audit\n"
     )
     write_text(
         PROJECT_ROOT / "configs" / "figures.yaml",
         "style: Nature Computational Science inspired\n"
         "formats: [png_600dpi, pdf]\n"
-        "primary_metrics: [MAE_E, Dice, BoundaryF1, MAE_z_bottom, CRPS, Cov90, UCE, AUROC_fail, AUSE]\n"
+        "primary_metrics: [MAE_E, Dice, BoundaryF1, MAE_z_bottom, CRPS, Cov90, Width90, IntervalIoU, UCE, AUSE, AUROC_fail, failure_rate]\n"
+        "trend_metrics: [beta_extrap, range_ratio, spearman_rho, toward_mean_collapse_flag]\n"
         "colormaps:\n"
         "  modulus: viridis\n"
         "  uncertainty: magma\n"
@@ -1600,13 +1908,16 @@ def run() -> None:
     df2, df3 = build_geometry_descriptors(inventory)
     prior_pool, match = distribution_matching(df2)
     tests, decoupled = run_independence_tests(df2)
+    actual_decoupling = run_actual_sample_decoupling_tests(df2, df3)
     main, ood = build_ablation_tables()
+    topline = build_topline_report_card(main)
+    trend = build_trend_metrics()
     make_figure_1(decoupled)
     make_figure_2(prior_pool, match, tests)
     make_figure_3()
     make_figure_4()
     make_figure_5()
-    write_reports(pdf_summary, manifest, match, tests, main, ood)
+    write_reports(pdf_summary, manifest, match, tests, actual_decoupling, main, ood, topline, trend)
     write_project_files()
     export_reproducibility_bundle()
     save_json(
@@ -1619,6 +1930,9 @@ def run() -> None:
             "manifest_rows": int(len(manifest)),
             "geometry_descriptors_2d": int(len(df2)),
             "geometry_descriptors_3d": int(len(df3)),
+            "topline_report_card_rows": int(len(topline)),
+            "trend_metric_rows": int(len(trend)),
+            "actual_sample_decoupling_rows": int(len(actual_decoupling)),
             "figures": sorted([p.name for p in FIGURES.glob("*.png")]),
             "reports": sorted([p.name for p in REPORTS.glob("*.md")]),
         },
