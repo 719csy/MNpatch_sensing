@@ -1,0 +1,3 @@
+dim,n_samples,n_geometry,mask_available,readout_available,depth_metadata,E_bg_median,E_lesion_median,contrast_median
+2d,207,195,207,0,0,3.0,83.47637484972566,5.235048329973533
+3d,6,6,6,6,6,8.0,42.8,5.35

@@ -1,0 +1,8 @@
+source_pdf: ../../Data/Clinically Informed Geometric Memory.pdf
+pdf_pages_1_indexed: [32, 64]
+figure2_root: ../../Figure2_data_reconstruction_20260526
+figure3_root: ../../Data/fig3
+mask_extraction:
+  method: provided_or_csv_threshold
+  threshold: 0.5
+  keep_largest_component_for_random_prior: true

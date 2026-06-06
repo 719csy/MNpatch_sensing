@@ -1,0 +1,1162 @@
+--- PAGE 32 ---
+Methods 里 写 ：
+We instantiate the framework using a conditional diffusion posterior sampler and evaluate a
+geometry-to-mechanics flow/interpolant variant as an alternative generative path.
+只 有 当你 真 的 实现   的  path ， 才 在主文 中 使 用 ：
+flow matching
+stochastic interpolant
+bridge
+否 则 坚 持 ：
+clinically informed conditional diffusion posterior
+最 稳 的 贡 献 表 述 是 ：
+The novelty is not that Gaussian noise becomes directional. The novelty is that the reverse
+inference process is constrained by a geometry-only clinical memory and a depth-aware
+physical operator, while stiffness and depth remain independently randomized and sensor-
+determined.
+这 句 话 基 本 就 是 审 稿 防 线 。
+G(g) →T(g,b)
+2026-06-06 11:22:30 You Asked
+我 需 要你 把 上 一 条 回 答 细 化成可以 交给 Codex 去 跑 的 任 务 ， 基 于 已 经
+有的 simulation 结 果（ 二 维 和三 维模 量 ， 分 别 ） ， 先把 “ 几 何记
+忆 ” 和 “ 力学 随 机化 ” 完 全 解 耦 ， Diffusion vs flow/bridge/stochastic 
+interpolant ， 消 融 设计 ： 证 明  clinical informed 的 作用 ， Diffusion-
+vs-flow 消 融 ： 什 么 时 候 值 得 引 入  flow/bridge ， 主 指 标 ： clinical 
+informed 的 效 果不 应 主要体现在  PSNR 。 数 据 如 何 可视化 ， 符 合
+Nature Computational Science 的 标 准
+ChatGPT gpt-5-5-pro
+我会 把 它 拆 成  Codex 可 执 行 的 工 程任 务 ： 输 入 / 输 出 规 范 、 实 验 矩 阵 、 指 标 实现 、 图表 脚 本和 验 收 标
+准 。 重 点 放 在可 复 现 ， 而 不是 再 做 概 念 论 证 。
+Exported with AI Exporter 32 / 64
+
+
+--- PAGE 33 ---
+ChatGPT gpt-5-5-pro
+下面是 一 份 可以 直 接 交给  Codex 执 行 的 任 务 书 。 目标 不是 “ 做 一 个好看 的 模 型比 较 ” ， 而 是 把 你 的 论文
+核 心  claim 变 成可 复 现 、 可 审 稿 的 计 算 实 验 ：
+让 生物力学 传感 器 拥 有 来自 真 实 皮 肤 病 图 像 分 布 的 几 何记 忆 ， 并 通过 独 立 的 物理 随 机化和 硬 件
+forward operator 转 化为  posterior mechanics 。
+这 里 的 关 键约 束 是 ：clinical image memory 只 提 供几 何 ； 刚 度 、 深 度 、 厚 度 、 背 景模 量 、 噪 声 、 接 触
+状 态 必 须 独 立 随 机化 。 Flow / bridge / stochastic interpolant 只 有 在实现了 真 实 的  geometry-to-
+mechanics data-to-data path 后 才 允 许 作为主 标 签 。
+Codex 任 务 书 ： Clinically Informed Geometric Memory for Inverse
+Biomechanical Sensing
+0. 项 目目标
+基 于 已 有  simulation 结 果 ， 分 别 处 理  2D modulus maps 和  3D modulus volumes， 建立 一 套 可 复 现实
+验 管 线 ， 用于 验 证 ：
+1. 几 何记 忆 与力学 随 机化是 否 成 功 解 耦
+Public dermatology image / lesion-shape prior 只 控 制  lesion geometry ；
+depth/stiffness/thickness 独 立 随 机化 。
+2. clinical-informed geometry prior 是 否 真 正提 升  inverse biomechanics
+提 升 不 应 主要体现在  PSNR/SSIM ， 而应 体现在  geometry support 、 boundary recovery 、
+depth/stiffness posterior 、 uncertainty calibration 、 OOD failure detection 。
+3. Diffusion vs flow/bridge/stochastic interpolant 的 边 界 是 否 清 楚
+如果 只 是  Gaussian noising + geometry condition ， 只 能 叫  conditional diffusion posterior
+sampler 。 只 有 实现了  geometry-only endpoint 到  mechanics endpoint 的  directed data-to-data
+path ， 才 允 许 使 用  flow / bridge / stochastic interpolant 标 签 。
+4. 输 出 符 合  Nature Computational Science 风格
+NCS 关注  computational techniques / frameworks 以 及 用 计 算 方法 解 决 真 实科学问题 ， 不 只 是 算
+法 指 标 堆 叠 。 NCS aims 明 确强调  computational techniques 、 mathematical models 、
+tools/frameworks 和  challenging real-world problems 。 (Nature)
+Nature Portfolio 同时要 求 数 据 、 代码 和 协 议 能 支持他 人 验 证 和 复 现 核 心 结 论 。 (Nature)
+1. 输 入数 据 假 设 与自动 适 配
+请实现 一 个  flexible loader ， 支持 以下 格 式 ：
+Exported with AI Exporter 33 / 64
+
+
+--- PAGE 34 ---
+每 个 样 本 至 少应 能 得 到 ：
+如果  mask  不 存 在 ， Codex 需 要 从  modulus field 自动推 断  lesion support ：
+需 要提 供配 置 项 ：
+text
+data/
+  raw/
+    sim2d/
+      *.npy / *.npz / *.h5 / *.tif
+    sim3d/
+      *.npy / *.npz / *.h5 / *.nii.gz
+    metadata/
+      *.csv / *.json
+    masks_optional/
+      *.npy / *.png / *.tif
+    readouts_optional/
+      *.npy / *.npz / *.h5
+python
+sample = {
+    "sample_id": str,
+    "dim": "2d" or "3d",
+    "E": np.ndarray,          # 2D: [H,W]; 3D: [D,H,W]
+    "mask": np.ndarray | None,# lesion support if available
+    "readout": np.ndarray | None, # simulated sensor output, if available
+    "geometry_id": str | None,
+    "source_geometry_type": str,  # "clinical_mask", "ellipse", "gaussian_blob", "perlin", etc.
+    "z_top": float | None,
+    "z_bottom": float | None,
+    "thickness": float | None,
+    "E_bg": float | None,
+    "E_lesion": float | None,
+    "contrast": float | None,
+    "operator_id": str | None,
+    "operator_metadata": dict | None
+}
+python
+E_bg_est = robust_median(E outside high-gradient / or global lower mode)
+mask = abs(E - E_bg_est) > threshold
+yaml
+Exported with AI Exporter 34 / 64
+
+
+--- PAGE 35 ---
+2. 项 目目 录 结 构
+生成如下工 程结 构 ：
+mask_extraction:
+  method: "otsu|kmeans|relative_threshold|provided"
+  relative_threshold: 0.15
+  min_component_area: 50
+  keep_largest_component: true
+text
+project/
+  configs/
+    data.yaml
+    experiments.yaml
+    models.yaml
+    figures.yaml
+  src/
+    data/
+      loaders.py
+      manifest.py
+      splitters.py
+      decouple.py
+    geometry_memory/
+      extract_masks.py
+      descriptors_2d.py
+      descriptors_3d.py
+      clinical_prior.py
+      random_priors.py
+      distribution_matching.py
+    mechanics/
+      reparameterize_2d.py
+      reparameterize_3d.py
+      forward_operator.py
+      depth_randomization.py
+    models/
+      deterministic_unet.py
+      diffusion_posterior.py
+      flow_matching.py
+      stochastic_interpolant.py
+      common.py
+Exported with AI Exporter 35 / 64
+
+
+--- PAGE 36 ---
+3. 数 据  manifest
+实现  scripts/00_build_manifest.py ， 输 出 ：
+字 段 ：
+    evaluation/
+      metrics_geometry.py
+      metrics_mechanics.py
+      metrics_probabilistic.py
+      metrics_ood.py
+      independence_tests.py
+      report_tables.py
+    visualization/
+      figure_geometry_memory.py
+      figure_ablation.py
+      figure_depth_physics.py
+      figure_uncertainty.py
+      figure_flow_path.py
+      style_ncs.py
+  scripts/
+    00_build_manifest.py
+    01_extract_geometry.py
+    02_build_decoupled_dataset.py
+    03_run_independence_tests.py
+    04_train_diffusion_ablation.py
+    05_train_flow_optional.py
+    06_evaluate_all.py
+    07_make_figures.py
+    08_export_reproducibility_bundle.py
+  results/
+    tables/
+    metrics/
+    predictions/
+    figures/
+    reports/
+text
+results/data_manifest.csv
+text
+Exported with AI Exporter 36 / 64
+
+
+--- PAGE 37 ---
+如果  metadata 缺 失 ， 允 许 字 段 为 空 ， 但必 须 在  report 中 记 录 。
+输 出 ：
+包 括 ：
+2D 样 本数 量 ；
+3D 样 本数 量 ；
+有  mask 的 比 例；
+有  readout 的 比 例；
+有  depth metadata 的 比 例；
+modulus range ；
+background modulus distribution ；
+lesion modulus distribution ；
+depth / thickness distribution ；
+geometry source distribution 。
+4. 几 何记 忆 与力学 随 机化 的 解 耦
+sample_id
+dim
+field_path
+mask_path
+readout_path
+metadata_path
+geometry_id
+source_geometry_type
+split_original
+z_top
+z_bottom
+thickness
+E_bg
+E_lesion
+contrast
+operator_id
+operator_metadata_path
+text
+results/reports/data_audit.md
+Exported with AI Exporter 37 / 64
+
+
+--- PAGE 38 ---
+4.1 核 心生成 模 型
+在 代码 和报告 中 固 定如下 概 念 ：
+其 中：
+： geometry-only memory ， 来自  clinical lesion masks 或已 模 拟 的  lesion support ；
+： 独 立 随 机化 的  physical variables ；
+： 2D modulus map 或  3D modulus volume ；
+： 传感 器  forward operator ；
+： operator metadata ；
+： sensor readout 。
+在 代码 中 显 式分 离 ：
+禁 止 把  diagnosis label 、 image color 、 lesion class 直 接 映 射 到  stiffness/depth 。
+4.2 2D 解 耦 数 据 生成
+实现 ：
+输 入 ：
+mask2d
+independently sampled E_bg
+independently sampled contrast  or E_lesion
+g∼p  (g)clin
+b∼p  (b)phys
+x=T(g,b)
+y  =d H  (x;q  )+d d ϵ  
+d
+g
+b
+x
+H  
+d
+q  
+d
+y  
+d
+python
+geometry = GeometryState(mask=..., descriptors=..., geometry_id=...)
+mechanics = MechanicsState(E_bg=..., E_lesion=..., contrast=..., z_top=..., z_bottom=..., 
+thickness=...)
+field = compose_field(geometry, mechanics)
+python
+src/mechanics/reparameterize_2d.py
+Exported with AI Exporter 38 / 64
+
+
+--- PAGE 39 ---
+heterogeneity noise parameter
+输 出 ：
+局 部 异 质 性 只 能在  lesion 内部 或 背 景 中 作为 随 机 场 加入 ：
+但 其 幅 度与  geometry descriptors 独 立 。
+4.3 3D 解 耦 数 据 生成
+实现 ：
+如果 已 有  3D mask ：
+如果 只 有  2D geometry ， 需 要  extrude ：
+depth variables 独 立 采 样 ：
+实现 至 少 三 种  depth profile ：
+python
+E2d_decoupled = E_bg + delta_E * mask2d + local_heterogeneity
+python
+local_heterogeneity ~ smooth_random_field
+python
+src/mechanics/reparameterize_3d.py
+python
+E3d_decoupled = E_bg + delta_E * mask3d + local_heterogeneity
+python
+mask3d[z, x, y] = mask2d[x, y] * depth_profile(z; z_top, z_bottom, taper)
+python
+z_top ~ p(z_top)
+z_bottom ~ p(z_bottom)
+thickness = z_bottom - z_top
+text
+Exported with AI Exporter 39 / 64
+
+
+--- PAGE 40 ---
+4.4 解 耦 验 证
+实现 ：
+对 每 个  dataset split 计 算 ：
+1. geometry descriptors vs depth:
+Pearson / Spearman correlation
+mutual information
+random forest 
+depth-bin classifier accuracy
+2. geometry descriptors vs stiffness:
+random forest 
+stiffness-bin classifier accuracy
+3. geometry descriptors vs thickness:
+same as above
+验 收 标 准 建议 ：
+输 出 ：
+uniform slab
+ellipsoidal taper
+irregular depth profile
+python
+scripts/03_run_independence_tests.py
+R2
+I(g;E  )lesion
+I(g;ΔE)
+R2
+text
+abs(Spearman) < 0.10 for most descriptors
+RF R^2 < 0.05 for depth/stiffness prediction
+depth-bin classification close to chance
+stiffness-bin classification close to chance
+text
+Exported with AI Exporter 40 / 64
+
+
+--- PAGE 41 ---
+报告 中 必 须 有一 句 ：
+Geometry memory is statistically decoupled from randomized mechanical variables; depth and
+stiffness cannot be inferred from geometry alone.
+如果不 满 足 ， 标记 为 失 败 。
+5. Geometry prior 设计
+实现三类  geometry prior ：
+G0 ： non-clinical Gaussian / random-field prior
+生成  smooth random blobs ， 控 制  area range ， 但 不 使 用  clinical mask distribution 。
+G1 ： analytic phantom prior
+生成  circle 、 ellipse 、 cylinder 、 layered inclusion 。
+G2 ： clinical memory prior
+来自  public dermatology image / lesion segmentation masks 或 你 已 经 从  Figure 2 pipeline 得 到 的
+masks 。
+G3 ： learned clinical geometry prior
+可 选 ：
+results/tables/independence_tests.csv
+results/figures/independence_heatmap.pdf
+results/figures/geometry_vs_mechanics_scatter_matrix.pdf
+results/reports/independence_report.md
+python
+source_geometry_type = "gaussian_random_field"
+python
+source_geometry_type = "ellipse_or_cylinder"
+python
+source_geometry_type = "clinical_mask"
+Exported with AI Exporter 41 / 64
+
+
+--- PAGE 42 ---
+训练  VAE / diffusion / shape autoencoder 只 生成  binary masks 或  signed distance functions 。 注
+意 ： 这不是  mechanics model ， 只 是  geometry generator 。
+6. Geometry descriptor extraction
+实现 ：
+2D descriptors
+每 个  mask 输 出 ：
+3D descriptors
+python
+source_geometry_type = "clinical_shape_generator"
+python
+src/geometry_memory/descriptors_2d.py
+src/geometry_memory/descriptors_3d.py
+text
+area
+perimeter
+equivalent_diameter
+aspect_ratio
+eccentricity
+solidity
+compactness
+extent
+convexity
+major_axis_length
+minor_axis_length
+boundary_curvature_mean
+boundary_curvature_std
+fractal_dimension
+asymmetry_score
+number_of_components
+text
+volume
+surface_area
+sphericity
+elongation
+Exported with AI Exporter 42 / 64
+
+
+--- PAGE 43 ---
+输 出 ：
+7. Distribution matching ： 证 明  clinical memory 是 几 何 分 布
+实现 ：
+比 较 ：
+指 标 ：
+输 出 ：
+flatness
+compactness_3d
+z_extent
+x_extent
+y_extent
+surface_roughness
+centroid_z
+text
+results/tables/geometry_descriptors_2d.csv
+results/tables/geometry_descriptors_3d.csv
+python
+src/geometry_memory/distribution_matching.py
+text
+G0 random field
+G1 ellipse/cylinder
+G2 clinical masks
+G3 generated clinical masks
+held-out clinical masks
+text
+MMD
+Wasserstein distance
+energy distance
+KS statistic per descriptor
+coverage of descriptor quantiles
+text
+Exported with AI Exporter 43 / 64
+
+
+--- PAGE 44 ---
+UMAP / PCA 只 用于可视化 ， 不作为主定 量证 据 。
+8. 数 据 拆 分
+实现 ：
+必 须 支持四 类  split 。
+Split A ： random split
+普 通 训练 / 验 证 / 测 试 。
+Split B ： geometry-held-out split
+按  geometry_id  拆 分 。 测 试 集  geometry 不 允 许 出现在 训练 中。
+Split C ： depth-held-out split
+按  depth group 拆 分 ：
+或 者自动分 箱 ：
+results/tables/geometry_distribution_matching.csv
+results/figures/geometry_descriptor_ridges.pdf
+results/figures/geometry_umap.pdf
+results/figures/geometry_pairplot_selected.pdf
+python
+src/data/splitters.py
+yaml
+split:
+  type: "geometry_heldout"
+  test_fraction: 0.2
+  group_key: "geometry_id"
+yaml
+heldout_depths:
+  - 2.0
+  - 4.0
+yaml
+Exported with AI Exporter 44 / 64
+
+
+--- PAGE 45 ---
+Split D ： combined OOD split
+测 试 集 同时 包 括 ：
+输 出 ：
+必 须检 查 ：
+9. Diffusion model 分 支
+实现 ：
+9.1 模 型 定 义
+如果 目标 是  2D ：
+depth_bins: [0, 1, 2, 3, 5]
+heldout_bins: ["2-3", "3-5"]
+text
+held-out geometry
+held-out depth
+held-out stiffness contrast
+operator metadata shift
+text
+results/tables/splits_summary.csv
+results/reports/split_report.md
+text
+No geometry_id leakage between train and test.
+No duplicated mask leakage.
+Depth-held-out split has no depth leakage.
+python
+src/models/diffusion_posterior.py
+python
+target x = E2d
+condition c = {readout, operator_id, operator_metadata, geometry_mask or geometry_embedding}
+Exported with AI Exporter 45 / 64
+
+
+--- PAGE 46 ---
+如果 目标 是  3D ：
+保 留  Gaussian noising ：
+网 络 预测 ：
+通过  config 控 制 ：
+9.2 Diffusion ablation
+训练 以下 模 型 ：
+python
+target x = E3d
+condition c = {readout, operator_id, operator_metadata, geometry_mask / 2D mask / 
+geometry_embedding}
+x  =t α  x  +t 0 σ  ϵ, ϵ∼t N(0,I)
+text
+epsilon
+x0
+or score
+yaml
+diffusion:
+  parameterization: "epsilon|x0|v"
+  timesteps: 1000
+  sampler: "ddpm|ddim|dpm_solver"
+  posterior_samples: 32
+text
+D0_unconditional
+  input: no readout, no geometry
+  target: modulus field
+D1_operator_only
+  input: readout + operator metadata
+  target: modulus field
+D2_geometry_only
+  input: clinical geometry
+  target: modulus field
+  purpose: negative control; should not infer depth/stiffness well
+Exported with AI Exporter 46 / 64
+
+
+--- PAGE 47 ---
+D2_geometry_only  非 常重 要 。 如果 它 能 很 好 预测  stiffness/depth ， 说明数 据 泄 漏 或解 耦 失 败 。
+10. Flow / bridge / stochastic interpolant 分 支
+实现为  optional ， 不 允 许 默 认 宣 传 为主 模 型 。
+10.1 只 有 满 足 以下 条件才 启 用主实 验
+必 须 能 构造  endpoint pair ：
+其 中：
+u  是  geometry-only neutral field ；
+x  是最 终  modulus field ；
+b  的  depth/stiffness 独 立 随 机化 。
+例 如 ：
+D3_operator_plus_random_geometry
+  input: readout + non-clinical random geometry
+  target: modulus field
+D4_operator_plus_clinical_geometry
+  input: readout + clinical geometry memory
+  target: modulus field
+D5_operator_plus_clinical_geometry_plus_depth_physics
+  input: readout + clinical geometry + operator metadata + depth-aware physics likelihood / 
+kernel
+  target: modulus field
+python
+src/models/flow_matching.py
+src/models/stochastic_interpolant.py
+python
+u = geometry_only_state(g)
+x = mechanics_field(g, b)
+python
+u = mask_or_signed_distance(g)
+x = E_modulus_field(g, b)
+Exported with AI Exporter 47 / 64
+
+
+--- PAGE 48 ---
+或 者 ：
+如果 没 有  u -> x  endpoint pair ， 不要 称  flow/bridge ， 只 保 留  diffusion 。
+10.2 Flow matching path
+实现 ：
+目标  velocity ：
+loss ：
+模 型 ：
+只 有  F1/F2 可以在论文 中 称 作  geometry-to-mechanics flow。
+10.3 Stochastic interpolant path
+实现 ：
+其 中：
+python
+u = neutral_modulus_template(g, E_bg=0, contrast=1, no_depth_assignment)
+x = full_modulus_field(g, b)
+x  =t (1−t)u+tx
+v (x  ,t) =\* t x−u
+L  =FM E∥v  (x  ,t,c)−θ t (x−u)∥2
+text
+F0_gaussian_flow
+  source: Gaussian noise
+  target: modulus field
+F1_geometry_to_mechanics_flow
+  source: geometry-only neutral field
+  target: modulus field
+F2_operator_conditioned_geometry_flow
+  source: geometry-only neutral field
+  target: modulus field
+  condition: readout + operator metadata
+x  =t (1−t)u+tx+γ(t)ξ
+Exported with AI Exporter 48 / 64
+
+
+--- PAGE 49 ---
+训练  drift / velocity ：
+模 型 ：
+只 有 当你 显 式 使 用 随 机 插 值项 并 训练  bridge path 时 ， 才 在 结 果 中 使 用  stochastic interpolant 标 签 。
+Stochastic interpolants 的 文 献 定位 就 是 连 接 任 意 两 个分 布 ， 并统 一  flow/diffusion 。
+10.4 Schrödinger bridge 判 定
+不要 默 认 实现 。 只 有 当 代码 实现了  entropy-regularized transport / bridge objective ， 才 允 许 写 ：
+否 则 不要 使 用  bridge 标 签 。 已 有 文 献 把  score/flow matching 与  Schrödinger bridge 联系 起 来 ， 但 这
+需 要明 确 的  endpoint distribution 和  bridge objective 。
+11. Diffusion-vs-flow 消 融 设计
+训练 并评 估 ：
+比 较 维 度 ：
+ξ∼N(0,I)
+γ(t) =σ  t(1−t)
+python
+v_theta(x_t, t, condition)
+text
+SI1_geometry_to_mechanics_stochastic_interpolant
+SI2_operator_conditioned_stochastic_interpolant
+text
+Schrödinger bridge
+text
+D4_operator_plus_clinical_geometry
+D5_operator_plus_clinical_geometry_plus_depth_physics
+F0_gaussian_flow
+F1_geometry_to_mechanics_flow
+F2_operator_conditioned_geometry_flow
+SI1_geometry_to_mechanics_stochastic_interpolant
+text
+Exported with AI Exporter 49 / 64
+
+
+--- PAGE 50 ---
+flow/bridge 值 得 引 入 的 判 断 标 准 ：
+如果  flow 只 是在  MAE 上 略 优但  calibration 差 ， 不 建议 作为主  claim 。
+12. 主 指 标 体系
+不要 把  PSNR/SSIM 放 主表 。 PSNR/SSIM 只 放  Supplementary 。
+12.1 Geometry metrics
+实现 ：
+2D ：
+1. Reconstruction accuracy
+2. Geometry support recovery
+3. Boundary preservation
+4. Depth recovery
+5. Posterior / ensemble uncertainty
+6. OOD failure detection
+7. Sampling cost
+8. Sim-to-real transfer
+text
+Flow/stochastic interpolant is worth claiming only if:
+  - same or better mechanics error than diffusion,
+  - better geometry boundary preservation,
+  - fewer sampling steps or lower inference cost,
+  - comparable or better calibration,
+  - no worse OOD detection,
+  - and clear directed path visualization exists.
+python
+metrics_geometry.py
+text
+Dice
+IoU
+Boundary F1
+Hausdorff distance
+Average symmetric surface distance
+Centroid error
+Area error
+Perimeter error
+Exported with AI Exporter 50 / 64
+
+
+--- PAGE 51 ---
+3D ：
+12.2 Mechanics metrics
+实现 ：
+3D depth-specific ：
+12.3 Probabilistic posterior metrics
+Shape descriptor MAE
+False disconnected components
+text
+Volume Dice
+Surface Dice
+Hausdorff distance 95
+Average surface distance
+Volume error
+Centroid 3D error
+Depth support IoU
+python
+metrics_mechanics.py
+text
+MAE(E)
+RMSE(E)
+NRMSE(E)
+Bias(E)
+P90 absolute error
+Lesion-region MAE
+Background-region MAE
+Boundary-region MAE
+Contrast MAE
+text
+MAE(z_top)
+MAE(z_bottom)
+MAE(thickness)
+Interval IoU for [z_top, z_bottom]
+Depth profile RMSE
+Exported with AI Exporter 51 / 64
+
+
+--- PAGE 52 ---
+实现 ：
+需 要  posterior samples ：
+指 标 ：
+CRPS 对 样 本  posterior ：
+12.4 OOD / failure metrics
+实现 ：
+定 义  failure ：
+tau 可 配 置 ：
+python
+metrics_probabilistic.py
+python
+posterior_samples: [N, M, ...]
+text
+CRPS
+Cov50 / Cov80 / Cov90 / Cov95
+Width50 / Width80 / Width90 / Width95
+UCE
+ENCE
+PIT histogram
+Negative log likelihood if density available
+CRPS(F,y) =   ∣   −M
+1
+m
+∑y~m y∣−   ∣   −2M2
+1
+m,n
+∑y~m
+  ∣y~n
+python
+metrics_ood.py
+python
+failure = 1[MAE_region > tau]
+yaml
+Exported with AI Exporter 52 / 64
+
+
+--- PAGE 53 ---
+指 标 ：
+OOD distance ：
+计 算 ：
+输 出  slope 和 置 信区间 。
+13. 实 验 矩 阵
+实现 统 一  runner ：
+生成如下表 ：
+主表 列 ：
+failure_thresholds:
+  E_mae: 0.15
+  z_bottom_mm: 1.0
+  dice_min: 0.75
+text
+AUROC_fail using total_uncertainty
+AUROC_fail using epistemic_uncertainty
+AUPRC_fail
+FPR@95TPR
+Risk-coverage curve
+AUSE
+Uncertainty-error Spearman correlation
+text
+morphology_ood_distance = distance to nearest training geometry descriptor
+depth_ood_distance = distance outside train depth support
+operator_ood_distance = distance in operator metadata
+∣e  ∣∼i a+βd  
+iout
+python
+scripts/06_evaluate_all.py
+text
+results/tables/main_ablation_table.csv
+Exported with AI Exporter 53 / 64
+
+
+--- PAGE 54 ---
+对于  2D 没 有  depth 的 任 务 ， depth 字 段 填  NA 。
+主实 验组 合
+text
+model_name
+data_dim
+split_type
+geometry_prior
+physics_randomization
+operator_conditioning
+path_type
+MAE_E
+RMSE_E
+P90AE_E
+Dice
+BoundaryF1
+HD95
+MAE_z_bottom
+MAE_thickness
+IntervalIoU
+CRPS
+Cov90
+Width90
+UCE
+AUROC_fail
+AUSE
+sampling_steps
+inference_time_ms
+text
+2D:
+  G0 + D1
+  G1 + D1
+  G2 + D1
+  G2 + D4
+  G2 + D5
+  optional G2 + F1/F2
+3D:
+  G0 + D1
+  G1 + D1
+  G2 + D1
+  G2 + D4
+  G2 + D5
+Exported with AI Exporter 54 / 64
+
+
+--- PAGE 55 ---
+Negative controls
+实现 ：
+14. Visualization ： Nature Computational Science 风格 图
+所 有 图 输 出  PDF + PNG ：
+绘 图要 求 ：
+Figure 1 ： Concept + data factorization
+文 件 ：
+  optional G2 + F1/F2/SI1
+text
+Geometry-only model should fail depth/stiffness recovery.
+Shuffled-geometry model should reduce boundary/support performance.
+Shuffled-depth labels should destroy depth recovery.
+text
+D2_geometry_only
+D4_shuffled_geometry
+D5_shuffled_depth
+D5_shuffled_operator_metadata
+text
+results/figures/*.pdf
+results/figures/*.png
+text
+PDF: vector wherever possible
+PNG: 600 dpi
+font: Arial / Helvetica compatible
+line width >= 0.75 pt
+panel labels: a, b, c...
+no rainbow colormap for quantitative maps
+use perceptually uniform colormap: viridis / magma / cividis
+uncertainty maps use separate sequential colormap
+error maps use diverging colormap centered at zero
+include scale bars where spatial maps are shown
+Exported with AI Exporter 55 / 64
+
+
+--- PAGE 56 ---
+Panel 设计 ：
+这个图 强调 ：
+Figure 2 ： Geometry memory validation
+文 件 ：
+Panel ：
+主信息 ：
+text
+figure_1_factorized_memory_physics.pdf
+text
+a. Public dermatology image / lesion mask examples
+b. Geometry-only descriptors extracted from masks
+c. Independent physical randomization: stiffness/depth/thickness distributions
+d. Compose geometry + physics into 2D/3D modulus field
+e. Forward operator H_d produces readout
+f. Posterior inference returns mean + uncertainty
+text
+clinical memory = geometry only
+physics = independent randomization
+sensor = observation operator
+text
+figure_2_geometry_memory.pdf
+text
+a. Example masks: clinical vs ellipse vs Gaussian/random
+b. Descriptor ridge plots: area, eccentricity, compactness, border irregularity
+c. UMAP/PCA of geometry descriptors
+d. MMD/Wasserstein distance bar plot
+e. Nearest-neighbor check: generated masks vs nearest training clinical masks
+f. Independence heatmap: geometry descriptors vs depth/stiffness variables
+text
+Exported with AI Exporter 56 / 64
+
+
+--- PAGE 57 ---
+Figure 3 ： 2D reconstruction ablation
+文 件 ：
+Panel ：
+配 套 ：
+不要用  PSNR 做 主图 。
+Figure 4 ： 3D posterior mechanics + depth
+文 件 ：
+Panel ：
+Clinical prior matches real lesion geometry distribution.
+Geometry is independent of depth/stiffness.
+text
+figure_3_2d_ablation.pdf
+text
+Rows: representative test cases
+Columns:
+  ground truth E2d
+  readout / corrupted observation
+  D1 operator-only mean
+  D4 clinical-memory mean
+  D5 memory+physics mean
+  D5 uncertainty
+  error maps
+text
+boxplots for MAE_E, Dice, BoundaryF1, CRPS, Cov90/Width90
+text
+figure_4_3d_depth_posterior.pdf
+text
+a. Ground truth 3D lesion support isosurface
+b. Predicted posterior mean isosurface
+Exported with AI Exporter 57 / 64
+
+
+--- PAGE 58 ---
+Figure 5 ： Uncertainty, OOD, risk
+文 件 ：
+Panel ：
+主信息 ：
+Figure 6 ： Diffusion vs flow/stochastic interpolant optional
+只 有 实现  flow/stochastic interpolant 才 生成 。
+文 件 ：
+Panel ：
+c. Axial/sagittal/coronal slices of E3d
+d. z-depth profile: true vs posterior median + 90% interval
+e. z_bottom prediction scatter with y=x line
+f. Held-out depth extrapolation slope
+g. Interval IoU for [z_top,z_bottom]
+text
+figure_5_uncertainty_ood.pdf
+text
+a. PIT histogram
+b. Coverage vs nominal coverage
+c. Cov90 vs Width90 paired plot
+d. Uncertainty vs absolute error
+e. AUROC failure detection
+f. Risk-coverage curve
+g. Error vs morphology OOD distance
+h. Error vs depth OOD distance
+text
+Clinical memory improves posterior reliability, not merely visual quality.
+text
+figure_6_diffusion_vs_flow_optional.pdf
+text
+Exported with AI Exporter 58 / 64
+
+
+--- PAGE 59 ---
+图 标 题 中 必 须 标 注 ：
+避 免 主文过度 宣 传 。
+15. 输 出报告
+生成以下报告 ：
+clinical_memory_claim_check.md 必 须 回 答
+每 条给 ：
+a. Diffusion path: Gaussian noise -> modulus field
+b. Geometry-to-mechanics flow path: geometry template -> modulus field
+c. Stochastic interpolant path if implemented
+d. Inference cost vs CRPS
+e. BoundaryF1 vs sampling steps
+f. Calibration comparison
+text
+optional method comparison
+text
+results/reports/main_results_summary.md
+results/reports/methods_reproducibility.md
+results/reports/clinical_memory_claim_check.md
+results/reports/diffusion_vs_flow_decision.md
+text
+1. Does clinical geometry prior match real lesion shape distribution?
+2. Is geometry statistically independent from depth/stiffness?
+3. Does clinical memory improve geometry recovery?
+4. Does clinical memory improve mechanics posterior after conditioning on sensor readout?
+5. Does geometry-only model fail to infer mechanical variables?
+6. Does OOD uncertainty increase when morphology/depth leaves training support?
+text
+PASS / FAIL / INCONCLUSIVE
+supporting table
+supporting figure
+Exported with AI Exporter 59 / 64
+
+
+--- PAGE 60 ---
+diffusion_vs_flow_decision.md 必 须 回 答
+Terminology decision rule ：
+16. Nature Computational Science 复 现性要 求
+实现 ：
+输 出 ：
+text
+1. Is the implemented main model still Gaussian diffusion?
+2. Was a directed geometry-to-mechanics endpoint path implemented?
+3. If yes, does flow/stochastic interpolant improve over diffusion?
+4. If no, should flow/bridge be excluded from the title and main claim?
+5. Recommended terminology for manuscript.
+text
+If no directed endpoint path:
+  use "clinically informed conditional diffusion posterior sampler"
+  do not use "flow", "bridge", "stochastic interpolant" in title.
+If directed deterministic endpoint path exists:
+  use "geometry-to-mechanics conditional flow" only in Methods/ablation.
+If stochastic endpoint bridge exists:
+  use "stochastic interpolant" only if noise term and interpolant loss are implemented.
+If entropy-regularized bridge objective exists:
+  use "Schrödinger bridge"; otherwise avoid "bridge".
+python
+scripts/08_export_reproducibility_bundle.py
+text
+results/reproducibility_bundle/
+  configs/
+  trained_model_configs/
+  data_manifest.csv
+  split_manifest.csv
+  metrics_tables/
+  figure_generation_scripts/
+Exported with AI Exporter 60 / 64
+
+
+--- PAGE 61 ---
+Nature Portfolio 要 求 核 心数 据 、 代码 、 算 法能 支持读 者 验 证 和 构 建已 发表 结 论 ； 代码 可用性 声 明 也 需
+要说明如 何 访 问 核 心自定 义 代码 。 (Nature)
+README 必 须 包 含
+可 直 接 交给  Codex 的 主  prompt
+下面这 段 可以 直 接作为  Codex 任 务 输 入 。
+  environment.yml
+  requirements.txt
+  README.md
+  CODE_AVAILABILITY_DRAFT.md
+  DATA_AVAILABILITY_DRAFT.md
+text
+1. How to build manifest
+2. How to generate decoupled dataset
+3. How to run independence tests
+4. How to train each ablation model
+5. How to reproduce each table
+6. How to reproduce each figure
+7. Expected runtime
+8. Hardware used
+9. Random seeds
+10. Known limitations
+text
+You are implementing a reproducible experimental pipeline for a Nature Computational Science 
+manuscript.
+Scientific objective:
+Test whether public-dermatology-image-derived geometry memory improves inverse biomechanical 
+sensing, while strictly decoupling geometry from mechanical variables. Clinical image memory 
+must control only lesion geometry. Stiffness, depth, thickness, background modulus, 
+heterogeneity, noise, and operator metadata must be independently randomized.
+Input:
+Existing simulation outputs include 2D modulus maps and 3D modulus volumes. Some samples may 
+include masks, readouts, and metadata; if not, infer lesion support from modulus fields and 
+document the procedure.
+Core rule:
+Do not allow clinical geometry descriptors, diagnosis labels, or image-derived features to 
+Exported with AI Exporter 61 / 64
+
+
+--- PAGE 62 ---
+directly determine stiffness or depth. Geometry and mechanics must be represented as separate 
+objects:
+  geometry g ~ p_clin(g)
+  mechanics b ~ p_phys(b)
+  field x = T(g,b)
+  readout y_d = H_d(x;q_d) + noise
+Required tasks:
+1. Build a data manifest for all 2D and 3D simulation samples.
+2. Extract or infer lesion masks.
+3. Extract 2D and 3D geometry descriptors.
+4. Build decoupled datasets by recombining geometry masks with independently sampled physical 
+variables.
+5. Run independence tests proving geometry does not predict depth/stiffness/thickness.
+6. Implement geometry priors:
+   G0 Gaussian/random field
+   G1 ellipse/cylinder analytic phantom
+   G2 clinical mask geometry
+   G3 optional learned clinical shape generator
+7. Implement model ablations:
+   D0 unconditional diffusion
+   D1 operator-only diffusion
+   D2 geometry-only negative control
+   D3 operator + random geometry
+   D4 operator + clinical geometry
+   D5 operator + clinical geometry + depth-aware physics
+8. Implement optional flow matching only if a true geometry-only endpoint u=G(g) and target 
+mechanics endpoint x=T(g,b) are constructed.
+9. Implement optional stochastic interpolant only if x_t=(1-t)u+t*x+gamma(t)*noise is 
+explicitly trained.
+10. Do not label any method as flow/bridge/stochastic interpolant unless the corresponding 
+endpoint path and loss are implemented.
+11. Evaluate with geometry metrics, mechanics metrics, probabilistic posterior metrics, 
+OOD/failure metrics. Do not use PSNR/SSIM as main metrics.
+12. Generate Nature-style figures:
+    Figure 1 factorized memory/physics/operator schematic
+    Figure 2 geometry memory validation and independence tests
+    Figure 3 2D reconstruction ablation
+    Figure 4 3D depth posterior mechanics
+    Figure 5 uncertainty/OOD/risk calibration
+    Figure 6 optional diffusion-vs-flow comparison
+13. Export reproducibility bundle with configs, manifests, metrics, figure scripts, environment 
+files, and draft data/code availability statements.
+Expected output files:
+results/data_manifest.csv
+results/tables/independence_tests.csv
+results/tables/geometry_distribution_matching.csv
+Exported with AI Exporter 62 / 64
+
+
+--- PAGE 63 ---
+17. 最 终 论文 判 断 逻 辑
+实 验 完 成后 ， 按 这个 决策 树 写 论文 ：
+情 况  A ： D5 显 著 优 于  D1/D3 ， flow 没 有 明 显优 势
+主  claim ：
+Clinical-image-informed geometry memory and depth-aware physical conditioning improve
+posterior biomechanical reconstruction.
+标 题不要 写  diffusion / flow 。
+情 况  B ： F1/F2 比  D5 更 快 且  calibration 不 差
+可以在  Methods / Results 中 加入 ：
+We further evaluated a geometry-to-mechanics conditional flow, which provides a directed
+alternative to Gaussian diffusion.
+但 标 题 仍 建议保持 ：
+clinically informed posterior mechanics
+results/tables/main_ablation_table.csv
+results/tables/ood_failure_metrics.csv
+results/figures/figure_1_factorized_memory_physics.pdf
+results/figures/figure_2_geometry_memory.pdf
+results/figures/figure_3_2d_ablation.pdf
+results/figures/figure_4_3d_depth_posterior.pdf
+results/figures/figure_5_uncertainty_ood.pdf
+results/figures/figure_6_diffusion_vs_flow_optional.pdf
+results/reports/clinical_memory_claim_check.md
+results/reports/diffusion_vs_flow_decision.md
+results/reproducibility_bundle/
+Acceptance criteria:
+- No geometry_id leakage between train/test.
+- Geometry descriptors cannot predict randomized depth/stiffness above chance.
+- Clinical geometry prior shows better distributional match to held-out lesion geometry than 
+Gaussian/ellipse priors.
+- Clinical memory improves Dice/BoundaryF1/Hausdorff and posterior CRPS/Cov90/AUROC_fail more 
+strongly than PSNR/SSIM.
+- Geometry-only model fails to recover depth/stiffness.
+- Flow/stochastic interpolant is reported only if directed geometry-to-mechanics endpoint path 
+is actually implemented.
+- All figures and tables are reproducible from scripts and configs.
+Exported with AI Exporter 63 / 64
+
+
+--- PAGE 64 ---
+情 况  C ： geometry-only model 也 能 预测  depth/stiffness
+这是 失 败 信号 。 说明数 据 泄 漏 或 随 机化不 独 立 。 必 须 回到  decoupling 阶 段 。
+情 况  D ： clinical prior 只 提高  PSNR ， 不提高  boundary / uncertainty / OOD
+不 够  NCS 。 说明  clinical informed 的 机制 没 有 被证 明 。 需 要 强 化  geometry-held-out 、 depth-held-out
+和  OOD calibration 实 验 。
+最 稳 的 最 终 定位是 ：
+This is not primarily a diffusion paper. It is a computational framework that converts
+dermatology-image-derived geometric memory into sensor-readable posterior mechanics
+through independent physical randomization and calibrated observation operators.
+Exported with AI Exporter 64 / 64

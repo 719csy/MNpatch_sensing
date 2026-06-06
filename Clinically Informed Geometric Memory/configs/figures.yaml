@@ -1,0 +1,7 @@
+style: Nature Computational Science inspired
+formats: [png_600dpi, pdf]
+primary_metrics: [MAE_E, Dice, BoundaryF1, MAE_z_bottom, CRPS, Cov90, UCE, AUROC_fail, AUSE]
+colormaps:
+  modulus: viridis
+  uncertainty: magma
+  error: coolwarm_centered

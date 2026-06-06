@@ -1,0 +1,12 @@
+seed: 20260606
+geometry_priors:
+  G0: gaussian_random_field
+  G1: ellipse_or_cylinder
+  G2: clinical_mask_geometry
+decoupled_dataset:
+  n_samples: 2048
+  mechanics_sampling: independent
+ablation_models:
+  executed_from_existing_outputs: [D1, D4, D5]
+  negative_controls: [geometry_only_independence_test]
+  optional_not_executed: [flow_matching, stochastic_interpolant, schrodinger_bridge]

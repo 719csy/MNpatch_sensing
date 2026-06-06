@@ -1,0 +1,4 @@
+candidate_prior,target,n_candidate,n_target,mmd_rbf_standardized,wasserstein_mean_standardized,energy_distance_mean_standardized,descriptor_quantile_coverage_5_95
+G2_clinical_memory_train,heldout_clinical_masks,68,17,0.0005087947418513927,0.056209194709466774,0.08741756289098121,0.9448529411764706
+G0_random_field,heldout_clinical_masks,68,17,0.8362961293387878,5.148672224386397,2.4919951605754087,0.40808823529411764
+G1_ellipse_cylinder,heldout_clinical_masks,68,17,1.468587528687816,3.8810697609245803,1.9732665672034138,0.375

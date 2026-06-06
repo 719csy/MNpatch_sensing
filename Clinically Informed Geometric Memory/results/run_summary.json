@@ -1,0 +1,23 @@
+{
+  "seed": 20260606,
+  "runtime_seconds": 18.36,
+  "source_pdf": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\Clinically Informed Geometric Memory.pdf",
+  "pdf_pages": "32-64",
+  "manifest_rows": 213,
+  "geometry_descriptors_2d": 207,
+  "geometry_descriptors_3d": 6,
+  "figures": [
+    "figure_1_factorized_memory_physics.png",
+    "figure_2_geometry_memory.png",
+    "figure_3_2d_ablation.png",
+    "figure_4_3d_depth_posterior.png",
+    "figure_5_uncertainty_ood.png"
+  ],
+  "reports": [
+    "clinical_memory_claim_check.md",
+    "data_audit.md",
+    "diffusion_vs_flow_decision.md",
+    "main_results_summary.md",
+    "methods_reproducibility.md"
+  ]
+}
