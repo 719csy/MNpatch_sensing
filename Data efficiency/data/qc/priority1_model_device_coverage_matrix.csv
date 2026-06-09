@@ -1,0 +1,40 @@
+﻿figure,dimension,device_label,model_label,n_N,n_seeds,n_rows,max_train_N,max_unique_cases,sampling_modes
+Figure 2,2D,sheet piezo,DPS inverse diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,sheet piezo,SRCNN,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,sheet piezo,U-Net,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,sheet piezo,operator-conditioned diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,sheet piezo,vanilla diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,soft MMP,DPS inverse diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,soft MMP,SRCNN,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,soft MMP,U-Net,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,soft MMP,operator-conditioned diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,soft MMP,vanilla diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,ultrasound,DPS inverse diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,ultrasound,SRCNN,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,ultrasound,U-Net,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,ultrasound,operator-conditioned diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 2,2D,ultrasound,vanilla diffusion,8,3,24,10000,162,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,sheet piezo,3D U-Net,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,sheet piezo,DPS inverse diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,sheet piezo,Eapp-only diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,sheet piezo,SRCNN 3D proxy,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,sheet piezo,direct scalar regression,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,sheet piezo,kernel GP,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,sheet piezo,operator-conditioned diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,sheet piezo,vanilla 3D diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,soft MMP,3D U-Net,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,soft MMP,DPS inverse diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,soft MMP,Eapp-only diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,soft MMP,SRCNN 3D proxy,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,soft MMP,direct scalar regression,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,soft MMP,kernel GP,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,soft MMP,operator-conditioned diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,soft MMP,vanilla 3D diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,ultrasound,3D U-Net,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,ultrasound,DPS inverse diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,ultrasound,Eapp-only diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,ultrasound,SRCNN 3D proxy,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,ultrasound,direct scalar regression,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,ultrasound,kernel GP,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,ultrasound,operator-conditioned diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement
+Figure 3,3D,ultrasound,vanilla 3D diffusion,7,3,21,5000,1232,bootstrap_with_replacement_effective_N; without_replacement

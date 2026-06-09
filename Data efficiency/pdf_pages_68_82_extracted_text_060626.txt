@@ -1,0 +1,522 @@
+﻿PDF: H:\My Drive\Manuscript\Sparse reconstruction\Data\dat aefficiency audit 060626.pdf
+Total pages: 82
+
+==========================================================================================
+PAGE 68 / index 67
+==========================================================================================
+Diffusion çš„ è¡¨ è¿° ï¼š
+è¿™ æ ·  Figure 2/3 çš„  story ä¼š ä»Ž â€œsimulation library å¾ˆ å¤§  + å›¾ å¾ˆ å¥½çœ‹ â€ å‡ çº§ ä¸º ï¼š
+We assessed simulation sufficiency using a pre-specified data-efficiency and readiness protocol
+rather than by the number of simulated samples. Learning curves were fitted across
+progressively larger domain-randomized libraries, real MMP phantom/animal/ex vivo readouts were
+tested against the simulated readout manifold, and posterior calibration and failure detection
+were evaluated before passing samples to the Figure 4 reliability analysis.
+text
+The diffusion model is used as an operator-conditioned posterior sampler for a noisy nonlinear
+inverse problem, not as an image generator. Its advantage is evaluated by CRPS, calibration,
+forward consistency and failure detection under operator shift, rather than by visual sharpness
+alone.
+text
+simulation support is sufficient,
+training is data-efficient,
+posterior is calibrated,
+uncertainty is useful,
+and the posterior bank is ready for Figure 4.
+2026-06-06 10:28:50 You Asked
+@GitHub  å¯¹ github ç›® å½• é‡Œ é¢ çš„ MN patch sensing é‡Œ é¢ çš„ data
+efficiency ï¼Œ æŒ‰ ç…§ æˆ‘ä»¬ çš„ è®¨ è®ºè¿›è¡Œ audit ï¼Œ çœ‹ ä¸€ ä¸‹æ˜¯ å¦ è¾¾ åˆ°äº†è¦ æ±‚ ï¼Œ ä¸‹
+ä¸€ æ­¥æ”¹ è¿›æ–¹ å‘ åœ¨ å“ª é‡Œ
+ChatGPT gpt-5-5-pro
+æˆ‘ æ£€ æŸ¥ äº†  GitHub é‡Œ çš„  719csy/MNpatch_sensing ï¼Œ é‡ ç‚¹ çœ‹äº†  Data efficiency/  ç›® å½•ä¸‹ çš„  NCS
+audit ã€ gate table ã€ improvement queue å’Œ å®¡ è®¡ è„š æœ¬ ã€‚ è¿™ä¸ª ä»“ åº“ç¡® å®žæ˜¯ä½ è¯´ çš„  MN patch sensing é¡¹
+ç›® ï¼Œ è·¯ å¾„ å’Œ ä»“ åº“ ä¿¡æ¯å¯¹ åº”  719csy/MNpatch_sensing ã€‚
+ç»“ è®º å¾ˆ æ˜Ž ç¡® ï¼šç›® å‰è¿˜ æ²¡ æœ‰ è¾¾ åˆ°æˆ‘ä»¬å®š ä¹‰ çš„  NCS-level data-efficiency / sim-to-real readiness è¦ æ±‚ ã€‚
+çŽ°åœ¨å¯ä»¥ä½œä¸º  simulation-grounded Figure 2/3 benchmark scaffoldï¼Œ ä½† è¿˜ä¸èƒ½ æ”¯ æ’‘ å¼º è¡¨ è¿° ï¼Œ ä¾‹ å¦‚ ï¼š
+text
+Exported with AI Exporter 68 / 82
+
+==========================================================================================
+PAGE 69 / index 68
+==========================================================================================
+çŽ° æœ‰  audit æŠ¥å‘Šè‡ª å·± ä¹Ÿç»™ å‡ºäº†ç›¸åŒ åˆ¤ æ–­ ï¼š å½“å‰ è¯ æ® â€œ ä¸  yet pass all gatesâ€ ï¼Œ é€‚ åˆ  simulation-grounded
+Figure 2/3 benchmark ï¼Œ ä½† ç¼º å¤±  gate å¿… é¡» æ˜¾ å¼ æ ‡ æ³¨ ã€‚
+1. æ€» ä½“  gate çŠ¶ æ€
+Gate å½“å‰ çŠ¶ æ€ æˆ‘ çš„ åˆ¤ æ–­
+G0 provenance / le
+akage YELLOW æœ‰  duplicate hash å’Œ  monotonicity-fail ï¼Œ éœ€ è¦  quaranti
+ne
+G1 simulator suppo
+rt MISSING çœŸ å®ž  MMP phantom / animal / ex vivo support envelop
+e æ²¡ æœ‰ å»ºç«‹
+G2 learning plateau MISSING æ²¡ æœ‰  by-N learning curves ï¼Œ ä¸èƒ½è¯´  data efficiency
+G3 method-level dat
+a efficiency MISSING æ²¡ æœ‰  N90 / DER ï¼Œ ä¸èƒ½è¯´  ours æ›´ çœ  simulation
+G4 Figure 2 reconst
+ruction YELLOW ç‚¹ é‡å»º ä¸ é”™ ï¼Œ ä½† ä¸æ˜¯ å®Œ æ•´  posterior/data-efficiency åŒ…
+G5 Figure 3 posteri
+or
+PASS,
+simulation
+only
+3D simulation posterior æŒ‡ æ ‡ å¥½ ï¼Œ ä½† ä» ç¼º  learning curve
+å’Œ çœŸ å®ž  support
+G6 calibration/shar
+pness
+PASS/YELLO
+W
+audit å†™  PASS ï¼Œ ä½† ä¸¥ æ ¼  ID tolerance ä¸‹  MMP/US Cov9
+0 ç¨ é«˜ ï¼Œ éœ€ è¦  pre/post calibration
+G7 OOD/failure utili
+ty
+PASS, but
+incomplete AUROC å¥½ ï¼Œ ä½† è¿˜ ç¼º  prevalence ã€ AUPRC ã€ retained-risk
+G8 projection consi
+stency MISSING è¿˜ä¸èƒ½  merge Figure 2 å’Œ  Figure 3
+æœ€å…³ é”® çš„ é—®é¢˜æ˜¯ ï¼šG1 ã€ G2 ã€ G3 ã€ G8 å…¨æ˜¯  missing ã€‚ è¿™ äº› æ­£å¥½æ˜¯  data-efficiency å’Œ  Figure 2/3 merge
+çš„ æ ¸ å¿ƒ  gate ã€‚ gate decision æ–‡ ä»¶ æ˜Ž ç¡® å†™ ç€  real support ã€ learning plateau ã€ DER å’Œ  projection
+consistency éƒ½æ²¡ æœ‰ å®Œ æˆ ã€‚
+2. å½“å‰èƒ½ æ”¯æŒ ä»€ ä¹ˆ  claim
+domain randomization has achieved sim-to-real transfer
+operator-conditioned diffusion is twofold more data-efficient
+simulation library is sufficient for real MMP deployment
+Figure 2 and Figure 3 can be merged as one calibrated posterior framework
+Exported with AI Exporter 69 / 82
+
+==========================================================================================
+PAGE 70 / index 69
+==========================================================================================
+çŽ°åœ¨å¯ä»¥è¯´ ï¼š
+ä½† ä¸èƒ½è¯´ ï¼š
+audit æŠ¥å‘Š çš„  manuscript-claim section ä¹Ÿ æ˜Ž ç¡® é™ åˆ¶äº†å½“å‰å¯ç”¨è¡¨ è¿° ï¼š Figure 3 å¯ä½œä¸º  strong
+simulation posterior benchmark ï¼Œ Figure 2 å¯ä½œä¸º  point reconstruction evidence ï¼› ä½†  sim-to-real
+transfer å’Œ  twofold data-efficient å¿… é¡» ç­‰  learning curves ä¸Ž  real support coverage é€šè¿‡åŽ å† è¯´ ã€‚
+3. Figure 2 å½“å‰ çŠ¶ æ€
+Figure 2 çš„ç‚¹ é‡å»ºç»“ æžœæ˜¯å¯ç”¨ çš„ï¼Œ ä½† ä¸ å®Œ æ•´ ã€‚ audit æŠ¥å‘Š ç»™ å‡º çš„  snapshot æ˜¯ ï¼š
+è¿™ äº› æ•° å€¼ è¯´æ˜Ž  2D apparent map reconstruction æœ¬ èº« ä¸ å¼±ï¼Œ å°¤ å…¶  SSIM ã€ Dice ã€ Boundary-F1 éƒ½ å¾ˆ å¥½ ã€‚
+ä½† æ˜¯  G4 ä» ç„¶ æ˜¯  YELLOW ï¼Œ å›  ä¸º ç¼º å°‘  case-level posterior mean/std maps ã€ uncertainty rejection
+curve ã€ CRPS/Cov90/Width90 å’Œ  learning-curve plateau ã€‚
+æ›´ ä¸¥ é‡ çš„ æ˜¯  Figure 2 çš„  domain-randomization class coverage ä¸ å‡ è¡¡ ã€‚ Figure 2 morphology
+phenotype æ˜¯  FAIL ï¼Œ æœ€å°ç±» åª æœ‰  5 ä¸ª ï¼Œ è€Œç›®æ ‡ æ˜¯ è‡³ å°‘  20 ï¼› source/support tier é‡Œ  real MMP
+phantom/animal/ex vivo anchors æ˜¯  0 ï¼Œ çŠ¶ æ€ ä¸º  MISSING ã€‚
+æ‰€ä»¥  Figure 2 çŽ°åœ¨ é€‚ åˆè¿™ æ · å®šä½ ï¼š
+text
+Figure 3 has strong simulation posterior benchmark metrics for operator-conditioned diffusion.
+Figure 2 has strong point reconstruction evidence on the available benchmark table.
+text
+domain randomization achieved sim-to-real transfer
+the simulation library is proven sufficient for real MMP readouts
+operator-conditioned diffusion is twofold more data-efficient
+Figure 2 and Figure 3 are already one validated posterior framework
+text
+Figure 2 / Op-cond. diffusion + mask
+MAE = 1.728 kPa
+SSIM = 0.899
+Dice = 0.974
+Boundary-F1 = 0.975
+relative MAE gain vs U-Net â‰ˆ 27.7%
+text
+Exported with AI Exporter 70 / 82
+
+==========================================================================================
+PAGE 71 / index 70
+==========================================================================================
+ä½† ä¸èƒ½å®šä½ä¸º ï¼š
+4. Figure 3 å½“å‰ çŠ¶ æ€
+Figure 3 çš„  simulation posterior æŒ‡ æ ‡ æ˜Ž æ˜¾ æ¯”  Figure 2 æ›´æˆ ç†Ÿ ã€‚ audit ä¸­
+op_conditioned_diffusion_ours  çš„ æ ¸ å¿ƒæ•° å€¼ æ˜¯ ï¼š
+è¿™ äº› é€šè¿‡äº†å½“å‰ è„š æœ¬ çš„  Figure 3 posterior gate ã€ calibration gate å’Œ  OOD/failure gate ã€‚  ä½† è¿™ä¸ª  pass
+åª èƒ½ è§£ é‡Š ä¸º  simulation posterior benchmark passï¼Œ ä¸æ˜¯  data-efficiency æˆ–  sim-to-real pass ã€‚ æŠ¥å‘Š ä¹Ÿ
+æ˜Ž ç¡® è¯´  Figure 3 â€œpasses simulation benchmark; not sufficient alone for NCS data-efficiency claimâ€ ã€‚
+Figure 2 demonstrates strong 2D apparent-map reconstruction on the current simulation/benchmark
+table.
+text
+Figure 2 proves the 2D simulator library is data-efficient and real-support validated.
+text
+MMP:
+  MAE_zbottom = 0.201 mm
+  CRPS = 0.130 mm
+  Cov90 = 0.936
+  Width90 = 0.900 mm
+  Interval IoU = 0.851
+  AUROC_fail_1mm = 1.000
+Piezo:
+  MAE_zbottom = 0.612 mm
+  CRPS = 0.333 mm
+  Cov90 = 0.906
+  Width90 = 2.078 mm
+  Interval IoU = 0.642
+  AUROC_fail_1mm = 0.812
+Ultrasound:
+  MAE_zbottom = 0.220 mm
+  CRPS = 0.140 mm
+  Cov90 = 0.938
+  Width90 = 0.931 mm
+  Interval IoU = 0.841
+  AUROC_fail_1mm = 0.995
+Exported with AI Exporter 71 / 82
+
+==========================================================================================
+PAGE 72 / index 71
+==========================================================================================
+æˆ‘ä¼šå¯¹  G6 æ›´ ä¿ å®ˆ ä¸€ç‚¹ã€‚ audit è„š æœ¬ç”¨   åˆ¤ å®š  calibration PASS ï¼› ä½† æˆ‘ä»¬ä¹‹å‰
+è®¾ å®šè¿‡  ID æƒ… å†µ æ›´ ä¸¥ æ ¼ ï¼Œ åº” æŽ¥ è¿‘  ã€‚ MMP çš„  0.936 å’Œ  US çš„  0.938 å¯¹  strict ID threshold ç¨ å¾® å
+é«˜ ï¼Œ è™½ ç„¶ ä¸æ˜¯ å¤± è´¥ ï¼Œ ä½† åº”åš  operator-specific pre/post conformal calibration ï¼Œ è€Œ ä¸æ˜¯ ç®€å• å†™
+â€œcalibration passedâ€ ã€‚ è„š æœ¬ é€» è¾‘ ç¡® å®žæ˜¯ç”¨  0.05 ä½œä¸º  PASS é˜ˆ å€¼ ã€‚
+5. æœ€å¤§ ç¼º å£ ï¼š çœŸ å®ž  MMP readout manifold support æ²¡ æœ‰ å®Œ æˆ
+è¿™æ˜¯å½“å‰æœ€ å½± å“  NCS claim çš„ é—®é¢˜ ã€‚
+å®¡ è®¡ è„š æœ¬ é‡Œ  phantom_missing = True  æ˜¯ ç¡¬ ç¼–ç  çš„ï¼Œ åŽé¢ ç›´ æŽ¥ æŠŠ  Figure 2 çš„  real MMP
+phantom/animal/ex vivo support è®¾ ä¸º  MISSING ã€‚  å®ƒ è¿˜æ˜Ž ç¡® å†™ å‡º  Figure 2 real anchors â€œnot foundâ€ ï¼Œ
+é˜ˆ å€¼ æ˜¯
+ï¼Œ è¦ æ±‚  ingest è‡³ å°‘  20 ä¸ª  physical MMP phantom anchors ä»¥ åŠ  animal/ex vivo readouts ã€‚  Figure 3
+åŒ æ ·æ²¡ æœ‰  real MMP support-envelope table ã€‚
+è¿™æ„ å‘³ ç€ çŽ°åœ¨è¿˜ æ²¡ æœ‰ è¯ æ˜Ž ï¼š
+ä¹Ÿå°± ä¸èƒ½ å¼º å†™ ï¼š
+æœ€å¤š å†™ ï¼š
+6. ç¬¬äºŒ å¤§ ç¼º å£ ï¼š æ²¡ æœ‰  learning-curve-by-N
+å½“å‰ æ²¡ æœ‰  fig2_metrics_by_N.csv ã€fig3_metrics_by_N.csv  æˆ–  learning_curve_fits.csv ã€‚ gate æ–‡ ä»¶
+æ˜Ž ç¡® å†™  G2 learning plateau å¯¹  Figure 2 å’Œ  Figure 3 éƒ½ æ˜¯  MISSING ï¼Œ G3 method-level data efficiency ä¹Ÿ
+âˆ£Cov90âˆ’0.90âˆ£â‰¤0.05
+Â±0.03
+text
+>=90% real/phantom readouts within 95% synthetic support envelope
+text
+çœŸå®ž MMP phantom / animal / ex vivo readouts è½åœ¨æ¨¡æ‹Ÿ readout manifold å†…ã€‚
+text
+Domain randomization bridges the sim-to-real gap.
+text
+The simulator defines a broad operator-conditioned benchmark; real-readout support coverage
+remains an explicit validation gate.
+Exported with AI Exporter 72 / 82
+
+==========================================================================================
+PAGE 73 / index 72
+==========================================================================================
+å›  æ­¤ æ— æ³• ä¼° è®¡  DER_MAE / DER_CRPS ã€‚  GitHub æœç´¢ è¿™ äº›  expected output filenames æ—¶ ï¼Œ ä¹Ÿ åªæ‰¾ åˆ°
+audit report ã€ improvement queue å’Œ è„š æœ¬ ï¼Œ æ²¡ æœ‰ æ‰¾ åˆ° çœŸ æ­£ çš„  by-N metric æ–‡ ä»¶ ã€‚
+æ‰€ä»¥çŽ°åœ¨ä¸èƒ½è¯´ ï¼š
+çŽ° æœ‰  improvement queue ä¹Ÿ æŠŠ  â€œNo actual learning-curve-by-N filesâ€ åˆ— ä¸º  priority 1 ï¼Œ å¹¶ è¦ æ±‚è¿ è¡Œ
+stratified N-grid training/evaluation ï¼Œ è¾“ å‡º  N90 ã€ N95 ã€ AULC ã€ last-doubling gain å’Œ  seed SD ã€‚
+7. ç¬¬ ä¸‰å¤§ ç¼º å£ ï¼š Figure 2/3 ä¸èƒ½ ç›´ æŽ¥  merge
+G8 projection consistency æ˜¯  MISSING ã€‚ audit æ–‡ ä»¶ å†™ å¾— å¾ˆ æ¸… æ¥š ï¼š projection arrays å­˜ åœ¨ ï¼Œ ä½† æ²¡ æœ‰
+projection_consistency_metrics.csv ï¼Œ å›  æ­¤ ä¸èƒ½ æŠŠ  Figure 2 å’Œ  Figure 3 ä½œä¸º å• ä¸€  posterior framework
+åˆ å¹¶ ã€‚
+è¿™ ä¸€ æ­¥å¿… é¡» åš ï¼š
+å¹¶ è¦ æ±‚ ï¼š
+è¿™ äº› é˜ˆ å€¼ å·² ç»åœ¨  metric gate table é‡Œ å®š ä¹‰ ã€‚
+8. ä»£ç  / å·¥ ç¨‹ å±‚ é¢ çš„  audit
+8.1 å½“å‰  audit è„š æœ¬ä¸ å¤Ÿ å¯ å¤ çŽ°
+run_ncs_data_efficiency_audit.py  é‡Œè·¯ å¾„ æ˜¯ ç¡¬ ç¼–ç  çš„  Windows æœ¬åœ° è·¯ å¾„ ï¼š
+text
+operator-conditioned diffusion reaches N90 with fewer simulations
+simulation library has saturated
+current N is enough
+E  (x,y) vs. P  [E (x,y,z)]app2D z 3D
+text
+NMAE â‰¤ 0.10â€“0.15
+SSIM â‰¥ 0.80â€“0.85
+centroid shift â‰¤ 0.5â€“1.0 mm
+area difference â‰¤ 15â€“20%
+contrast-rank Spearman Ï â‰¥ 0.80
+python
+ROOT = Path(r"H:\My Drive\Manuscript\Sparse reconstruction")
+DATA_EFF = ROOT / "Data" / "Data efficiency"
+Exported with AI Exporter 73 / 82
+
+==========================================================================================
+PAGE 74 / index 73
+==========================================================================================
+è¿™ä¼š å¯¼ è‡´  Codex / GitHub CI / clean environment ä¸èƒ½ ç›´ æŽ¥ å¤ çŽ° å®¡ è®¡ ã€‚  ç¬¬ ä¸€ è½® æ”¹ è¿› åº” æŠŠ å®ƒ æ”¹ æˆ  CLI ï¼š
+8.2 å½“å‰  support gate æ˜¯ å  ä½ ï¼Œ ä¸æ˜¯ çœŸ å®ž è®¡ ç®—
+è„š æœ¬ ä¸­  Figure 2 çš„  real anchors current_n è¢« å›º å®šä¸º  0 ï¼Œ status æ˜¯  MISSING ï¼Œ note æ˜¯  â€œNo physical
+MMP phantom raw/reference files were foundâ€ ã€‚  å›  æ­¤ çŽ°åœ¨ çš„  support gate åª æ˜¯æŠ¥å‘Š ç¼º å¤± ï¼Œ ä¸æ˜¯ å·² ç»
+è®¡ ç®—å¤± è´¥ æˆ– é€šè¿‡ ã€‚
+8.3 å½“å‰  Figure 3 PASS é˜ˆ å€¼ å å®½
+è„š æœ¬ é‡Œ  Figure 3 posterior pass åª æ£€ æŸ¥ ï¼š
+calibration pass åª æ£€ æŸ¥ ï¼š
+failure utility pass åª æ£€ æŸ¥ ï¼š
+è¿™ äº› æ˜¯åˆç† çš„ ç¬¬ ä¸€ å±‚  gate ï¼Œ ä½† å¯¹  NCS ä¸»æ–‡è¿˜ä¸ å¤Ÿ ã€‚ è¿˜è¦åŠ   CRPS improvement ã€ AUPRC ã€ risk at
+retained 80% ã€ AUSE ã€ failure prevalence ã€ PIT/UCE/ENCE ã€‚ å½“å‰ è„š æœ¬ å·² ç» æœ‰ è¿™ äº› ç›®æ ‡ æ–‡ å­— ï¼Œ ä½† æ²¡ æœ‰ å…¨
+éƒ¨å®žçŽ°ä¸º ç¡¬ æ€§æ•° å€¼ åˆ¤ å®š ã€‚
+...
+FIG2 = ROOT / "Figure2_data_reconstruction_20260526"
+FIG3_DATA = ROOT / "Data" / "fig3"
+bash
+python scripts/run_ncs_data_efficiency_audit.py \
+  --root /path/to/project \
+  --fig2-dir ... \
+  --fig3-dir ... \
+  --real-mmp-dir ... \
+  --out ...
+python
+mae_zbottom_mm <= 0.75
+interval_iou_mean >= 0.55
+python
+abs(Cov90 - 0.90) <= 0.05
+python
+AUROC_fail_tau_1mm >= 0.80
+Exported with AI Exporter 74 / 82
+
+==========================================================================================
+PAGE 75 / index 74
+==========================================================================================
+ä¸‹ ä¸€ æ­¥æ”¹ è¿›æ–¹ å‘
+Priority 1 â€” è·‘ çœŸ æ­£ çš„  learning-curve-by-N
+è¿™æ˜¯æœ€ ä¼˜å…ˆ ã€‚ æ²¡ æœ‰ è¿™ ä¸€ æ­¥ ï¼Œ data efficiency è¿™ä¸ª ç« èŠ‚å°± æ˜¯ ç©º çš„ã€‚
+Codex è¦ç”Ÿæˆ ï¼š
+Figure 2 N-grid ï¼š
+Figure 3 N-grid ï¼š
+æ¯ ä¸ª  N è‡³ å°‘  3 seeds ã€‚ çŽ° æœ‰ è„š æœ¬ å·² ç» è®¡ åˆ’ äº†è¿™ äº›  N-grid å’Œæ–¹æ³• åˆ— è¡¨ ï¼Œ åŒ… æ‹¬  Figure 2 çš„  U-Net ã€ vanilla
+diffusion ã€ op-cond diffusion ï¼Œ ä»¥ åŠ  Figure 3 çš„  direct scalar regression ã€ 3D U-Net ã€ kernel/GP ã€
+vanilla 3D diffusion ã€ DPS inverse diffusion å’Œ  op-conditioned diffusion ã€‚
+å¿… é¡»è¾“ å‡º ï¼š
+Pass æ¡ä»¶ ï¼š
+text
+data/qc/fig2_metrics_by_N.csv
+data/qc/fig3_metrics_by_N.csv
+data/qc/learning_curve_fits.csv
+text
+N = 50, 100, 200, 500, 1000, 2000, 5000, 10000
+text
+N = 100, 250, 500, 1000, 1600, 3000, 5000
+text
+N90
+N95
+AULC
+last-doubling gain
+seed SD
+DER_MAE
+DER_CRPS
+DER_calibrated_score
+text
+Exported with AI Exporter 75 / 82
+
+==========================================================================================
+PAGE 76 / index 75
+==========================================================================================
+Priority 2 â€” å»ºç«‹  real MMP support envelope
+è¿™ ä¸€ æ­¥ ç”¨æ¥å›ž åº”  domain randomization / sim-to-real ã€‚
+éœ€ è¦  ingest ï¼š
+ç”Ÿæˆ ï¼š
+æ¯ ä¸ª  readout æ å– ï¼š
+è®¡ ç®— ï¼š
+last-doubling gain < 3â€“5%
+current library size â‰¥ N90
+DER_CRPS â‰¥ 2 if claiming data efficiency
+seed SD < 10% of mean
+text
+>=20 physical MMP phantom anchors
+all available animal MMP readouts
+all available ex vivo MMP readouts
+paired reference if available: mechanical tester, AFM, histology, phantom truth
+text
+data/qc/support_coverage_real_mmp.csv
+figures/qc/support_umap.png
+figures/qc/support_distance_histograms.png
+text
+raw statistics
+spatial features
+spectral features
+operator-physics features
+frozen readout encoder embedding
+text
+kNN distance
+Mahalanobis distance
+MMD
+two-sample classifier AUC
+conformal support p-value
+Exported with AI Exporter 76 / 82
+
+==========================================================================================
+PAGE 77 / index 76
+==========================================================================================
+Pass æ¡ä»¶ ï¼š
+çŽ° æœ‰  improvement queue å·² æŠŠ è¿™ ä¸€ æ­¥åˆ— ä¸º  priority 2 ã€‚
+Priority 3 â€” ä¿® å¤  Figure 2 posterior evidence
+Figure 2 çŽ°åœ¨ çš„  map fidelity å¥½ ï¼Œ ä½†  posterior evidence ä¸ å¤Ÿ ã€‚ è¦ è¾“ å‡º ï¼š
+æ¯ ä¸ª  case ä¿ å­˜ ï¼š
+æŒ‡ æ ‡ ï¼š
+support_score
+text
+overall â‰¥90% real readouts inside 95% synthetic support envelope
+phantom / animal / ex vivo æ¯ç»„ â‰¥80%
+two-sample classifier AUC â‰¤0.70 after matching
+text
+fig2_case_level_posteriors.csv
+fig2_uncertainty_risk.csv
+fig2_pixelwise_crps.csv
+fig2_calibration_metrics.csv
+text
+posterior_mean_Eapp
+posterior_std_Eapp
+boundary_posterior
+contrast_posterior
+forward_residual
+uncertainty_score
+failure_label
+text
+MAE(Eapp)
+RMSE(Eapp)
+SSIM
+Dice
+Boundary-F1
+Hausdorff95
+contrast error
+pixelwise CRPS
+Exported with AI Exporter 77 / 82
+
+==========================================================================================
+PAGE 78 / index 77
+==========================================================================================
+Pass æ¡ä»¶ ï¼š
+Priority 4 â€” è¡¥ é½  Figure 3 çš„  operator-specific calibration
+Figure 3 å½“å‰ ç‚¹ æŒ‡ æ ‡ å’Œ  posterior æŒ‡ æ ‡ å¥½ ï¼Œ ä½† ä¸»æ–‡ åº” æ›´ ä¸¥ è°¨ ã€‚
+è¦ æ–° å¢ž ï¼š
+ç‰¹ åˆ« æ˜¯  Piezo ã€‚ çŽ°åœ¨  Piezo çš„  Width90 = 2.078 mm ï¼Œ æ¯”  MMP/US æ˜Ž æ˜¾ å®½ ï¼Œ è¿™åœ¨ç§‘å­¦ä¸Šåˆç† ï¼Œ å›  ä¸º
+piezo æ˜¯  surface-biased operator ï¼› ä½† ä¸»æ–‡è¦æ˜Ž ç¡® å†™ æˆ ï¼š
+ä¸è¦ å†™ ï¼š
+Priority 5 â€” åš  Figure 2/3 projection consistency
+çŽ° æœ‰  G8 æ˜¯  MISSING ï¼Œ ä¸èƒ½  merge Figure 2/3 ã€‚ Codex éœ€ è¦å®š ä¹‰  paired cases ï¼š
+Cov90
+Width90
+UCE/ENCE
+riskâ€“coverage
+AUSE
+text
+uncertainty rejection top 20% åŽï¼ŒMAE æˆ– CRPS ä¸‹é™ â‰¥25%
+Cov90 æŽ¥è¿‘ 0.90ï¼Œä¸èƒ½é æžå®½ Width90 å–èƒœ
+text
+calibration_prepost_metrics.csv
+pit_histograms_by_operator.png
+uce_ence_by_operator.csv
+risk_coverage_by_operator_depth.csv
+failure_prevalence_auprc.csv
+text
+Piezo shows broader posterior and higher multimodality under depth ambiguity, rather than
+universal depth recovery.
+text
+Ours beats all operators in depth recovery.
+Exported with AI Exporter 78 / 82
+
+==========================================================================================
+PAGE 79 / index 78
+==========================================================================================
+è¾“ å‡º ï¼š
+Pass æ¡ä»¶ ï¼š
+è¿™ ä¸€ æ­¥ å·² ç»åœ¨  improvement queue ä¸­ åˆ— ä¸º  priority 4 ã€‚
+Priority 6 â€” æ¸… ç†  duplicate-hash å’Œ  monotonicity-fail
+G0 ç›® å‰æ˜¯  YELLOW ï¼š
+è¿™ä¼š å½± å“  data-efficiency learning curves ï¼Œ å›  ä¸º é‡å¤æ · æœ¬ æˆ– å¼‚ å¸¸  strain trace ä¼š é€  æˆ è™š å‡ çš„
+performance plateau ã€‚ gate report è¦ æ±‚  quarantine duplicate-hash å’Œ  monotonicity-fail cases ï¼Œ å¹¶ è¡¥
+å……  config_id split audit ã€‚
+éœ€ è¦ è¾“ å‡º ï¼š
+text
+case_id
+config_id
+operator_id
+Eapp_2D_posterior
+E_xyz_3D_posterior
+projection_operator Pz
+text
+projection_consistency_metrics.csv
+projection_consistency_examples.png
+text
+NMAE(Eapp_2D, Pz[E3D]) â‰¤ 0.10â€“0.15
+SSIM â‰¥ 0.80â€“0.85
+centroid shift â‰¤ 1 mm
+area difference â‰¤ 15â€“20%
+text
+duplicate_hash = 209
+strain_monotonicity_fail = 38
+text
+qc_exclusion_manifest.csv
+split_leakage_audit.csv
+duplicate_hash_manifest.csv
+Exported with AI Exporter 79 / 82
+
+==========================================================================================
+PAGE 80 / index 79
+==========================================================================================
+Pass æ¡ä»¶ ï¼š
+ç»™  Codex çš„ å…· ä½“ æ‰§ è¡Œ æ¸…å•
+strain_monotonicity_fail_manifest.csv
+text
+duplicate_hash_cases = 0 in train/test overlap
+monotonicity_fail excluded or explicitly labeled
+all exclusions logged
+text
+1. Refactor audit script
+   - Remove hardcoded H:\ paths.
+   - Add argparse CLI.
+   - Make it runnable from repo root and CI.
+2. Add data manifests
+   - data/manifests/fig2_sim_manifest.csv
+   - data/manifests/fig3_sim_manifest.csv
+   - data/manifests/real_mmp_manifest.csv
+   - enforce sample_id, config_id, source_label, operator_id, split, seed.
+3. Quarantine source QC failures
+   - duplicate hash cases
+   - monotonicity-fail traces
+   - suspicious repeated configs
+   - write qc_exclusion_manifest.csv.
+4. Run learning curves
+   - Figure 2: N = 50,100,200,500,1k,2k,5k,10k.
+   - Figure 3: N = 100,250,500,1k,1.6k,3k,5k.
+   - methods: U-Net/direct, vanilla diffusion, DPS/kernel-GP, op-conditioned diffusion.
+   - seeds: at least 3.
+   - split by config_id, not scan_id.
+5. Fit learning curves
+   - fit m(N)=m_inf + a*N^-alpha.
+   - compute N90, N95, AULC, last-doubling gain, DER.
+   - save learning_curve_fits.csv.
+6. Build real MMP support envelope
+   - ingest phantom/animal/ex vivo readouts.
+   - extract raw/spatial/spectral/physics/encoder features.
+Exported with AI Exporter 80 / 82
+
+==========================================================================================
+PAGE 81 / index 80
+==========================================================================================
+Final audit judgment
+å½“å‰ ç›® å½• é‡Œ çš„  data-efficiency å·¥ä½œ å·² ç» æœ‰ä¸€ ä¸ª æ¸… æ™° çš„  gate frameworkï¼Œ è¿™æ˜¯å¥½ çš„ ï¼› ä½† å®ƒ çŽ°åœ¨æ›´å¤šæ˜¯
+readiness audit scaffoldï¼Œ ä¸æ˜¯ å·² ç»é€šè¿‡ çš„  data-efficiency evidence ã€‚
+æˆ‘ çš„ åˆ¤ å®š ï¼š
+   - compute kNN, Mahalanobis, MMD, two-sample AUC, conformal support p-value.
+   - save support_coverage_real_mmp.csv.
+7. Complete Figure 2 posterior metrics
+   - export posterior mean/std Eapp maps.
+   - compute CRPS, Cov90, Width90, UCE/ENCE, riskâ€“coverage, AUSE.
+8. Complete Figure 3 calibration/failure metrics
+   - pre/post conformal calibration.
+   - PIT, UCE, ENCE.
+   - AUPRC_fail, failure prevalence, retained-risk curves.
+9. Compute Figure 2/3 projection consistency
+   - compare Eapp_2D with Pz[E_xyz].
+   - save projection_consistency_metrics.csv.
+10. Re-run gate decision
+   - output gate_decisions.json and figure4_entry_report.md.
+   - only export fig4_ready_posterior_bank.npz if all hard gates pass.
+text
+Figure 2:
+  point reconstruction: near-pass / yellow
+  data efficiency: missing
+  real support: missing
+  posterior reliability: incomplete
+Figure 3:
+  simulation posterior benchmark: pass
+  calibration: pass but should be operator-specific and pre/post validated
+  OOD utility: pass but needs AUPRC/prevalence/retained-risk
+  data efficiency: missing
+  real support: missing
+Figure 2 + Figure 3 merge:
+  not ready until projection consistency passes
+Figure 4 entry:
+  not ready for strong reliability/sim-to-real claim
+Exported with AI Exporter 81 / 82
+
+==========================================================================================
+PAGE 82 / index 81
+==========================================================================================
+æœ€ çŸ­ è·¯ å¾„ æ˜¯ ï¼šå…ˆ è¡¥  learning curves å’Œ  real MMP support envelopeã€‚ è¿™ ä¸¤ ä¸ªä¸è¿‡ ï¼Œ å…¶ ä»– ç¾ŽåŒ– ã€ Figure
+4 posterior bank ã€ Image API/NanoBanana éƒ½ åª èƒ½ä½œä¸º å±•ç¤º å±‚ ï¼Œ ä¸èƒ½ å‡ çº§ ä¸»æ–‡  claim ã€‚
+  ready only for a provisional simulation benchmark narrative
+Exported with AI Exporter 82 / 82

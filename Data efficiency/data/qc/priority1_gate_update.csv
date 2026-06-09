@@ -1,0 +1,5 @@
+﻿gate,figure,status,plateau_pass_operator_conditioned,seed_sd_pass_operator_conditioned,N90_observed_operator_conditioned,note
+G2_learning_plateau_priority1,Figure 2,YELLOW,True,False,True,Priority 1 learning curves generated; status uses operator-conditioned model across all devices.
+G3_method_level_data_efficiency_priority1,Figure 2,YELLOW,True,False,True,"DER_CRPS>=2 signal is checked together with plateau, seed-SD, and observed-N90 gates before allowing a manuscript-level PASS."
+G2_learning_plateau_priority1,Figure 3,YELLOW,False,False,False,Priority 1 learning curves generated; status uses operator-conditioned model across all devices.
+G3_method_level_data_efficiency_priority1,Figure 3,YELLOW,False,False,False,"DER_CRPS>=2 signal is checked together with plateau, seed-SD, and observed-N90 gates before allowing a manuscript-level PASS."
