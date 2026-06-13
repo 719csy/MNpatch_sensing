@@ -1,0 +1,5 @@
+Figure 4 OOD analysis reused the full512 Method 2b COMSOL/diffusion cache and completed seed-level posterior metrics.
+ID samples were held-out iid_support cases, while OOD samples comprised unseen morphology, deeper depth range, unseen layer-modulus variation, and operator-noise groups.
+Performance retention was computed as OOD/ID for higher-better metrics and ID/OOD for lower-better errors.
+Uncertainty shift and risk-coverage used posterior_std_norm_mean at the seed-test-group level because full per-sample posterior arrays were not stored by the completed evaluator.
+Representative cases were regenerated from existing checkpoints; missing-channel visualization used a controlled sensor-mask perturbation of an ID held-out case and was not included as a full metric family.

@@ -1,0 +1,75 @@
+seed: 42
+case_seed: 4
+device: auto
+strict_no_fake_real_anchor: true
+
+paths:
+  mn_root: "H:/My Drive/MN_simulation"
+  clinical_ontology_root: "H:/My Drive/Clincal_ontology"
+  run_root: "H:/My Drive/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_full512_20260611"
+  cache_dir: "H:/My Drive/MN_simulation/outputs/rspi_joint_052026/method2b_512_targetmap_diffusion_full512_20260611"
+  output_dir: "H:/My Drive/Manuscript/AI for skin cancer/Figure/AS Figure 4/fig4_ood_pipeline/outputs"
+
+data:
+  manifest_csv: "method2b_512_diffusion_ready_manifest.csv"
+  cache_npz: "method2b_512_diffusion_ready_cache.npz"
+  expected_seeds: [1, 2, 3, 4, 5]
+
+models:
+  figure_methods:
+    train_mean_prior: "Mean prior"
+    srcnn_bz_single_channel: "SRCNN"
+    unet_canonical_bxyz: "U-Net"
+    vanilla_diffusion: "Vanilla diffusion"
+    explicit_residual_target_diffusion: "Conditional diffusion"
+  conditional_model: "explicit_residual_target_diffusion"
+  representative_posterior_samples: 12
+  timesteps: 200
+  base_channels: 16
+
+ood_taxonomy:
+  morphology:
+    figure_label: "Morphology OOD"
+    current_family: "ood_unseen_shape"
+    status: "available_existing"
+  size:
+    figure_label: "Size OOD"
+    current_family: ""
+    status: "not_available_in_current_full512_metrics"
+  depth:
+    figure_label: "Depth OOD"
+    current_family: "ood_unseen_depth_range"
+    status: "available_existing"
+  mechanical_background:
+    figure_label: "Mechanical-background OOD"
+    current_family: "ood_unseen_layer_modulus"
+    status: "available_existing"
+  noise_drift:
+    figure_label: "Noise/drift OOD"
+    current_family: "ood_unseen_operator_noise"
+    status: "available_existing"
+  missing_channel:
+    figure_label: "Missing-channel OOD"
+    current_family: ""
+    status: "representative_case_synthetic_perturbation_only"
+  compression_mismatch:
+    figure_label: "Compression-mismatch OOD"
+    current_family: ""
+    status: "not_available_in_current_full512_metrics"
+
+metrics:
+  higher_better: ["ssim_norm", "psnr_norm", "spearman_pixel"]
+  lower_better: ["mae_kpa", "rmse_kpa", "mae_norm", "rmse_norm"]
+  uncertainty_score: "posterior_std_norm_mean"
+  risk_metric: "1_minus_ssim_norm"
+  coverage_grid: [0.05, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00]
+  failure_definition:
+    source: "existing posterior evaluator"
+    column: "failure_auroc_top10_abs_error"
+    note: "Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py."
+
+plotting:
+  dpi: 600
+  colormap_stiffness: "viridis"
+  colormap_uncertainty: "magma"
+  style: "advanced_science_compact"

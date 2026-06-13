@@ -1,0 +1,26 @@
+model,method_label,scenario_key,scenario_label,failure_auroc_mean,failure_auroc_std,n_rows,definition
+train_mean_prior,Mean prior,iid_test,ID held-out,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+srcnn_bz_single_channel,SRCNN,iid_test,ID held-out,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+unet_canonical_bxyz,U-Net,iid_test,ID held-out,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+vanilla_diffusion,Vanilla diffusion,iid_test,ID held-out,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+explicit_residual_target_diffusion,Conditional diffusion,iid_test,ID held-out,0.7945843157142047,0.014684305994825758,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+train_mean_prior,Mean prior,ood_unseen_depth_range,Depth OOD,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+srcnn_bz_single_channel,SRCNN,ood_unseen_depth_range,Depth OOD,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+unet_canonical_bxyz,U-Net,ood_unseen_depth_range,Depth OOD,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+vanilla_diffusion,Vanilla diffusion,ood_unseen_depth_range,Depth OOD,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+explicit_residual_target_diffusion,Conditional diffusion,ood_unseen_depth_range,Depth OOD,0.796651564616327,0.009088652763708927,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+train_mean_prior,Mean prior,ood_unseen_layer_modulus,Mechanical-background OOD,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+srcnn_bz_single_channel,SRCNN,ood_unseen_layer_modulus,Mechanical-background OOD,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+unet_canonical_bxyz,U-Net,ood_unseen_layer_modulus,Mechanical-background OOD,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+vanilla_diffusion,Vanilla diffusion,ood_unseen_layer_modulus,Mechanical-background OOD,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+explicit_residual_target_diffusion,Conditional diffusion,ood_unseen_layer_modulus,Mechanical-background OOD,0.811800920522584,0.038038165637074337,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+train_mean_prior,Mean prior,ood_unseen_operator_noise,Noise/drift OOD,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+srcnn_bz_single_channel,SRCNN,ood_unseen_operator_noise,Noise/drift OOD,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+unet_canonical_bxyz,U-Net,ood_unseen_operator_noise,Noise/drift OOD,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+vanilla_diffusion,Vanilla diffusion,ood_unseen_operator_noise,Noise/drift OOD,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+explicit_residual_target_diffusion,Conditional diffusion,ood_unseen_operator_noise,Noise/drift OOD,0.7750756358464287,0.02431121631342564,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+train_mean_prior,Mean prior,ood_unseen_shape,Morphology OOD,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+srcnn_bz_single_channel,SRCNN,ood_unseen_shape,Morphology OOD,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+unet_canonical_bxyz,U-Net,ood_unseen_shape,Morphology OOD,0.5,0.0,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+vanilla_diffusion,Vanilla diffusion,ood_unseen_shape,Morphology OOD,,0.0,0,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.
+explicit_residual_target_diffusion,Conditional diffusion,ood_unseen_shape,Morphology OOD,0.7978335378632124,0.010154617230136007,5,Pixel-level top-10-percent absolute-error failure AUROC from rspi_03_eval_posterior_metrics.py.

@@ -1,0 +1,6 @@
+seed,seed_dir,posterior_metrics_found,posterior_aggregate_found,training_metrics_found,status
+1,H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\seed_1,True,True,True,complete
+2,H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\seed_2,True,True,True,complete
+3,H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\seed_3,True,True,True,complete
+4,H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\seed_4,True,True,True,complete
+5,H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\seed_5,True,True,True,complete
