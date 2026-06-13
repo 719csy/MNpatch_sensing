@@ -41,6 +41,20 @@ def bh_fdr(p_values: pd.Series) -> pd.Series:
     return pd.Series(out, index=p_values.index)
 
 
+def mask_degenerate_ence(metrics: pd.DataFrame) -> pd.DataFrame:
+    """ENCE is undefined for deterministic posterior outputs with zero interval width."""
+    out = metrics.copy()
+    if "ence" not in out.columns:
+        return out
+    zero_width = pd.Series(False, index=out.index)
+    for col in ("width90_norm", "posterior_std_norm_mean"):
+        if col in out.columns:
+            values = pd.to_numeric(out[col], errors="coerce")
+            zero_width = zero_width | (values.notna() & (values <= 1e-12))
+    out.loc[zero_width, "ence"] = np.nan
+    return out
+
+
 def paired_tests(metrics: pd.DataFrame, ours_models: list[str], metric_cols: list[str], n_boot: int) -> pd.DataFrame:
     key_cols = ["dataset", "split_mode", "fold"]
     if "seed" in metrics.columns:
@@ -138,7 +152,7 @@ def main() -> None:
 
     out_dir = args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
-    metrics = pd.read_csv(args.metrics)
+    metrics = mask_degenerate_ence(pd.read_csv(args.metrics))
     metric_cols = [c.strip() for c in args.metrics_cols.split(",") if c.strip() and c.strip() in metrics.columns]
     ours_models = [c.strip() for c in args.ours_models.split(",") if c.strip()]
     stats_df = paired_tests(metrics, ours_models, metric_cols, int(args.bootstrap))

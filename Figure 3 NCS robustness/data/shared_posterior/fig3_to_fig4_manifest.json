@@ -1,0 +1,21 @@
+{
+  "seed": 20260531,
+  "seeds": [
+    20260531,
+    20260532,
+    20260533
+  ],
+  "source": "SIMULATED_BENCHMARK plus existing frozen MMP posterior64 aggregate metrics",
+  "posterior_bank": "data/shared_posterior/fig3_to_fig4_posterior_bank.npz",
+  "metrics_used": [
+    "data/fig3/metrics/depth_metrics.csv",
+    "data/fig3/metrics/risk_coverage.csv"
+  ],
+  "paths_for_fig4_reliability": [
+    "data/fig3/metrics/calibration_metrics.csv",
+    "data/fig3/metrics/multimodality_metrics.csv"
+  ],
+  "operator_metadata": "data/fig3/metadata/operator_metadata.csv",
+  "prior_spec": "data/fig3/domain_randomization/prior_spec.json",
+  "guardrail": "Do not present generated benchmark as paired real hardware experiment."
+}

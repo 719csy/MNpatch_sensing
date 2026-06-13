@@ -11,5 +11,7 @@
     "forward_residual",
     "multimodality_metrics"
   ],
-  "fig4_bridge": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\data\\shared_posterior\\fig3_to_fig4_posterior_bank.npz"
+  "fig4_bridge": "data/shared_posterior/fig3_to_fig4_posterior_bank.npz",
+  "fig4_bridge_manifest": "data/shared_posterior/fig3_to_fig4_manifest.json",
+  "fig4_bridge_scope": "PACKAGED_RELATIVE_PATH"
 }

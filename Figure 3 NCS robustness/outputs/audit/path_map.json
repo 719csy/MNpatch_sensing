@@ -1,0 +1,22 @@
+{
+  "note": "Author-local absolute paths in audit/provenance files identify original COMSOL/Colab sources; packaged equivalents are relative to 'Figure 3 NCS robustness/'.",
+  "package_root": "Figure 3 NCS robustness/",
+  "mappings": [
+    {
+      "author_local_root": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\fig3",
+      "package_relative_root": "data/fig3"
+    },
+    {
+      "author_local_root": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\Data\\shared_posterior",
+      "package_relative_root": "data/shared_posterior"
+    },
+    {
+      "author_local_root": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\figures\\figure3",
+      "package_relative_root": "figures"
+    },
+    {
+      "author_local_root": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611",
+      "package_relative_root": "outputs"
+    }
+  ]
+}
