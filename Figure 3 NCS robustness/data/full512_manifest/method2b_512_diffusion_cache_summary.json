@@ -1,0 +1,43 @@
+{
+  "step": "method2b_512_incremental_cache_append",
+  "decision": "METHOD2B_512_CACHE_READY",
+  "cache_ready": true,
+  "sample_count": 512,
+  "base_sample_count": 418,
+  "appended_sample_count": 94,
+  "missing_candidate_count": 94,
+  "excluded_case_count": 0,
+  "targeted_root": "H:\\My Drive\\MN_simulation\\outputs\\method2b\\fig3_ncs_robustness_20260531_n512\\targeted_comsol",
+  "stable_strains": [
+    "0",
+    "0.02",
+    "0.08"
+  ],
+  "input_shape": [
+    512,
+    9,
+    64,
+    64
+  ],
+  "target_shape": [
+    512,
+    64,
+    64
+  ],
+  "split_role_counts": {
+    "train": 230,
+    "ood_test": 192,
+    "iid_test": 52,
+    "validation": 38
+  },
+  "ood_family_counts": {
+    "iid_support": 320,
+    "ood_unseen_shape": 64,
+    "ood_unseen_depth_range": 64,
+    "ood_unseen_layer_modulus": 32,
+    "ood_unseen_operator_noise": 32
+  },
+  "manifest_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_targetmap_diffusion_full512_20260611\\method2b_512_diffusion_ready_manifest.csv",
+  "cache_npz": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_targetmap_diffusion_full512_20260611\\method2b_512_diffusion_ready_cache.npz",
+  "excluded_cases_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_targetmap_diffusion_full512_20260611\\method2b_512_diffusion_excluded_cases.csv"
+}

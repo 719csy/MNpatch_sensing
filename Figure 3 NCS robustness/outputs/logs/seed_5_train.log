@@ -1,0 +1,83 @@
+COMMAND
+/usr/bin/python3 /content/fig3_colab_work/MN_simulation/scripts/step3j_method1_train_canonical_diffusion_cv.py --cache /content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_targetmap_diffusion_20260601/method2b_512_diffusion_ready_cache.npz --manifest /content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_targetmap_diffusion_20260601/method2b_512_diffusion_ready_manifest.csv --cache-summary /content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_targetmap_diffusion_20260601/method2b_512_diffusion_cache_summary.json --out-dir /content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_5/training --split-modes fig3_true_ood --device cuda --batch-size 16 --base-channels 16 --regressor-epochs 24 --diffusion-epochs 48 --residual-diffusion-epochs 48 --surrogate-epochs 16 --timesteps 200 --posterior-samples 4 --img2img-start-step 10 --lr 1e-3 --guidance-scale 0.06 --residual-scale-quantile 0.995 --residual-scale-floor 0.03 --seed 5
+
+{
+  "step": "step3j_method1_train_canonical_diffusion_cv",
+  "decision": "FORMAL_CV_TRAINING_COMPLETED",
+  "training_allowed": true,
+  "device": "cuda",
+  "sample_count": 512,
+  "input_shape": [
+    512,
+    9,
+    64,
+    64
+  ],
+  "target_shape": [
+    512,
+    64,
+    64
+  ],
+  "channel_count": 9,
+  "srcnn_channel": 0,
+  "srcnn_channel_name": "method2b_delta_Bz_cmr_S0.02_dense64",
+  "split_modes": [
+    "fig3_true_ood"
+  ],
+  "fold_rows": 45,
+  "models": [
+    "explicit_residual_likelihood_guided_diffusion",
+    "explicit_residual_target_diffusion",
+    "likelihood_guided_diffusion",
+    "prior_init_diffusion_unet",
+    "residual_likelihood_guided_diffusion",
+    "srcnn_bz_single_channel",
+    "train_mean_prior",
+    "unet_canonical_bxyz",
+    "vanilla_diffusion"
+  ],
+  "epochs": {
+    "regressor_epochs": 24,
+    "diffusion_epochs": 48,
+    "residual_diffusion_epochs": 48,
+    "surrogate_epochs": 16,
+    "timesteps": 200,
+    "posterior_samples": 4,
+    "img2img_start_step": 10,
+    "residual_scale_quantile": 0.995,
+    "residual_scale_floor": 0.03
+  },
+  "best_by_split": [
+    {
+      "split_mode": "fig3_true_ood",
+      "model": "unet_canonical_bxyz",
+      "n_folds": 5,
+      "mae_norm_mean": 0.07557345926761627,
+      "mae_norm_std": 0.005469881205741697,
+      "rmse_norm_mean": 0.15791280443958458,
+      "rmse_norm_std": 0.012151922046708001,
+      "psnr_norm_mean": 16.05609026492286,
+      "psnr_norm_std": 0.6432878900777028,
+      "ssim_norm_mean": 0.39654456644247355,
+      "ssim_norm_std": 0.020194578210722243,
+      "mae_kpa_mean": 3.004097414016724,
+      "mae_kpa_std": 0.3097464606929876,
+      "rmse_kpa_mean": 9.817163530027038,
+      "rmse_kpa_std": 1.1839566244892237,
+      "spearman_pixel_mean": 0.5284332423847242,
+      "spearman_pixel_std": 0.03514918632756084,
+      "posterior_std_norm_mean_mean": NaN,
+      "posterior_std_norm_mean_std": NaN,
+      "residual_scale_mean": NaN,
+      "residual_scale_std": NaN
+    }
+  ],
+  "outputs": {
+    "metrics_csv": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_5/training/step3j_canonical_cv_metrics.csv",
+    "aggregate_csv": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_5/training/step3j_canonical_cv_aggregate.csv",
+    "history_csv": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_5/training/step3j_canonical_cv_training_history.csv",
+    "summary_json": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_5/training/step3j_canonical_cv_training_summary.json"
+  },
+  "formal_model_quality_claim": true,
+  "cache_summary": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_targetmap_diffusion_20260601/method2b_512_diffusion_cache_summary.json"
+}

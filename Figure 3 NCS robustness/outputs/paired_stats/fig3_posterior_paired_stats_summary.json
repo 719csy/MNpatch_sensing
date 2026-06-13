@@ -1,0 +1,22 @@
+{
+  "metrics": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\aggregate\\method2b_512_five_seed_posterior_metrics.csv",
+  "stats_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_posterior_paired_stats_full512_20260611\\fig3_posterior_paired_stats.csv",
+  "report_md": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_posterior_paired_stats_full512_20260611\\fig3_posterior_paired_stats.md",
+  "ours_models": [
+    "residual_likelihood_guided_diffusion",
+    "prior_init_diffusion_unet",
+    "explicit_residual_target_diffusion"
+  ],
+  "metric_cols": [
+    "mae_kpa",
+    "rmse_kpa",
+    "mae_norm",
+    "rmse_norm",
+    "crps_norm",
+    "uce",
+    "ence",
+    "ause_abs_error",
+    "width90_norm"
+  ],
+  "n_comparisons": 132
+}

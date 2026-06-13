@@ -1,0 +1,122 @@
+{
+  "ncs_gate_status": "PASS",
+  "ncs_gate_reason": "minimum high-fidelity, paired benchmark and posterior aggregate gates passed",
+  "method2b_512": {
+    "planned_cases": 512,
+    "complete_cases": 512,
+    "expected_strain_rows": 1536,
+    "complete_strain_rows": 1536,
+    "remaining_cases": 0,
+    "observed_seconds_per_case": 1743,
+    "estimated_remaining_hours": 0.0,
+    "plan_summary": "H:\\My Drive\\MN_simulation\\outputs\\method2b\\fig3_ncs_robustness_20260531_n512\\fig3_domain_randomized_3d_plan_summary.json"
+  },
+  "paired_device": {
+    "manifest": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_paired_device_benchmark_20260531\\fig3_paired_device_benchmark_manifest_method1_mmp.csv",
+    "rows": 150,
+    "conditions": 15,
+    "mmp_complete_rows": 150,
+    "piezo_complete_rows": 150,
+    "us_complete_rows": 150,
+    "all_three_complete_rows": 150,
+    "mmp_missing_unique_condition_loads": 0,
+    "piezo_missing_rows": 0,
+    "us_missing_rows": 0
+  },
+  "posterior": {
+    "aggregate_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\aggregate\\method2b_512_five_seed_posterior_aggregate.csv",
+    "metrics_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\aggregate\\method2b_512_five_seed_posterior_metrics.csv",
+    "command_plan_json": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\method2b_512_five_seed_ood_command_plan.json",
+    "aggregate_rows": 7,
+    "metrics_ready": true,
+    "seed_count": 5,
+    "aggregate_preview": [
+      {
+        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "split_mode": "fig3_true_ood",
+        "model": "unet_canonical_bxyz",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.1588055854551152,
+        "rmse_kpa_mean": 9.875645446263496,
+        "cov90_mean": 0.0,
+        "width90_norm_mean": 0.0
+      },
+      {
+        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "split_mode": "fig3_true_ood",
+        "model": "residual_likelihood_guided_diffusion",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.1592821068834399,
+        "rmse_kpa_mean": 9.90574185071942,
+        "cov90_mean": 0.040279177352786,
+        "width90_norm_mean": 0.0287334929406642
+      },
+      {
+        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "split_mode": "fig3_true_ood",
+        "model": "prior_init_diffusion_unet",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.1592883304040175,
+        "rmse_kpa_mean": 9.90593276150866,
+        "cov90_mean": 0.0403157512471079,
+        "width90_norm_mean": 0.0287368404865264
+      },
+      {
+        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "split_mode": "fig3_true_ood",
+        "model": "explicit_residual_target_diffusion",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.1614545088066744,
+        "rmse_kpa_mean": 9.961938680437878,
+        "cov90_mean": 0.8199664759635925,
+        "width90_norm_mean": 0.1888411760330199
+      },
+      {
+        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "split_mode": "fig3_true_ood",
+        "model": "srcnn_bz_single_channel",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.2040057857018627,
+        "rmse_kpa_mean": 11.844879854655948,
+        "cov90_mean": 0.0,
+        "width90_norm_mean": 0.0
+      },
+      {
+        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "split_mode": "fig3_true_ood",
+        "model": "train_mean_prior",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.2193798366309056,
+        "rmse_kpa_mean": 12.248070389729888,
+        "cov90_mean": NaN,
+        "width90_norm_mean": NaN
+      },
+      {
+        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "split_mode": "fig3_true_ood",
+        "model": "vanilla_diffusion",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.4617956384248244,
+        "rmse_kpa_mean": 14.802496610589566,
+        "cov90_mean": NaN,
+        "width90_norm_mean": NaN
+      }
+    ]
+  },
+  "statistics": {
+    "stats_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_posterior_paired_stats_full512_20260611\\fig3_posterior_paired_stats.csv",
+    "summary_json": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_posterior_paired_stats_full512_20260611\\fig3_posterior_paired_stats_summary.json",
+    "stats_ready": true,
+    "n_comparisons": 132
+  },
+  "outputs": {
+    "mmp_missing_queue": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_missing_method1_mmp_readout_queue.csv",
+    "piezo_missing_queue": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_missing_piezo_full_comsol_queue.csv",
+    "us_missing_queue": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_missing_us_full_comsol_queue.csv",
+    "piezo_runner_manifest": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_missing_piezo_runner_manifest.csv",
+    "us_runner_manifest": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_missing_us_runner_manifest.csv",
+    "method2b_queue": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_method2b_512_completion_queue.csv",
+    "summary_json": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_ncs_robustness_audit_summary.json",
+    "report_md": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\Figure3_NCS_robustness_audit.md"
+  }
+}

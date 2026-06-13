@@ -1,0 +1,15 @@
+{
+  "posterior_samples": [
+    "E_xyz",
+    "z_top",
+    "z_bottom",
+    "thickness"
+  ],
+  "summaries": [
+    "posterior_mean_volume",
+    "posterior_uncertainty_volume",
+    "forward_residual",
+    "multimodality_metrics"
+  ],
+  "fig4_bridge": "H:\\My Drive\\Manuscript\\Sparse reconstruction\\data\\shared_posterior\\fig3_to_fig4_posterior_bank.npz"
+}

@@ -1,0 +1,30 @@
+{
+  "readout_y_d": {
+    "MMP": [
+      8,
+      8
+    ],
+    "PIEZO": [
+      7,
+      7
+    ],
+    "US": [
+      64,
+      64
+    ]
+  },
+  "operator_token_d": [
+    3
+  ],
+  "metadata_q_d": [
+    "depth_kernel",
+    "lateral_psf",
+    "noise",
+    "contact"
+  ],
+  "latent_E_xyz": [
+    24,
+    64,
+    64
+  ]
+}
