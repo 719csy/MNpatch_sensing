@@ -1,37 +1,37 @@
 # Figure 3 Paired Posterior Statistics
 
-- Metrics source: `Figure 3 NCS robustness\outputs\posterior_aggregate\method2b_512_five_seed_posterior_metrics.csv`.
-- Ours models tested: `residual_likelihood_guided_diffusion, prior_init_diffusion_unet, explicit_residual_target_diffusion`.
+- Metrics source: `H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\aggregate\method2b_512_five_seed_posterior_metrics.csv`.
+- Ours models tested: `likelihood_guided_diffusion, likelihood_guided_diffusion_calibrated90, prior_init_diffusion_unet, prior_init_diffusion_unet_calibrated90, residual_likelihood_guided_diffusion, residual_likelihood_guided_diffusion_calibrated90, explicit_residual_target_diffusion, explicit_residual_target_diffusion_calibrated90, explicit_residual_likelihood_guided_diffusion, explicit_residual_likelihood_guided_diffusion_calibrated90`.
 - Effect size is `baseline_minus_ours`; positive values favor ours for error metrics.
 
 ## Top Comparisons
-- `ause_abs_error` `srcnn_bz_single_channel` minus `residual_likelihood_guided_diffusion`: mean `0.07155`, 95% CI `[0.06918, 0.07418]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `srcnn_bz_single_channel` minus `prior_init_diffusion_unet`: mean `0.07155`, 95% CI `[0.06916, 0.07418]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `srcnn_bz_single_channel` minus `explicit_residual_target_diffusion`: mean `0.06683`, 95% CI `[0.06458, 0.06932]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `unet_canonical_bxyz` minus `residual_likelihood_guided_diffusion`: mean `0.04616`, 95% CI `[0.0445, 0.0479]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `unet_canonical_bxyz` minus `prior_init_diffusion_unet`: mean `0.04615`, 95% CI `[0.04448, 0.04786]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `unet_canonical_bxyz` minus `explicit_residual_target_diffusion`: mean `0.04144`, 95% CI `[0.03945, 0.0433]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `explicit_residual_target_diffusion` minus `residual_likelihood_guided_diffusion`: mean `0.004729`, 95% CI `[0.003751, 0.005767]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `explicit_residual_target_diffusion` minus `prior_init_diffusion_unet`: mean `0.00472`, 95% CI `[0.003726, 0.00572]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `prior_init_diffusion_unet` minus `residual_likelihood_guided_diffusion`: mean `9.594e-06`, 95% CI `[-4.948e-05, 6.974e-05]`, Wilcoxon FDR `0.701`, n `25`.
-- `ause_abs_error` `residual_likelihood_guided_diffusion` minus `prior_init_diffusion_unet`: mean `-9.594e-06`, 95% CI `[-6.818e-05, 5.176e-05]`, Wilcoxon FDR `0.701`, n `25`.
-- `ause_abs_error` `prior_init_diffusion_unet` minus `explicit_residual_target_diffusion`: mean `-0.00472`, 95% CI `[-0.005728, -0.003717]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ause_abs_error` `residual_likelihood_guided_diffusion` minus `explicit_residual_target_diffusion`: mean `-0.004729`, 95% CI `[-0.005742, -0.003743]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `crps_norm` `srcnn_bz_single_channel` minus `explicit_residual_target_diffusion`: mean `0.057`, 95% CI `[0.05297, 0.06063]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `crps_norm` `srcnn_bz_single_channel` minus `residual_likelihood_guided_diffusion`: mean `0.04363`, 95% CI `[0.04104, 0.04608]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `crps_norm` `srcnn_bz_single_channel` minus `prior_init_diffusion_unet`: mean `0.04363`, 95% CI `[0.04094, 0.0461]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `crps_norm` `unet_canonical_bxyz` minus `explicit_residual_target_diffusion`: mean `0.01606`, 95% CI `[0.01276, 0.01861]`, Wilcoxon FDR `6.49e-07`, n `25`.
-- `crps_norm` `prior_init_diffusion_unet` minus `explicit_residual_target_diffusion`: mean `0.01337`, 95% CI `[0.01004, 0.01586]`, Wilcoxon FDR `3.59e-06`, n `25`.
-- `crps_norm` `residual_likelihood_guided_diffusion` minus `explicit_residual_target_diffusion`: mean `0.01337`, 95% CI `[0.01007, 0.01588]`, Wilcoxon FDR `3.59e-06`, n `25`.
-- `crps_norm` `unet_canonical_bxyz` minus `residual_likelihood_guided_diffusion`: mean `0.002688`, 95% CI `[0.002429, 0.002956]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `crps_norm` `unet_canonical_bxyz` minus `prior_init_diffusion_unet`: mean `0.002687`, 95% CI `[0.002433, 0.002954]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `crps_norm` `prior_init_diffusion_unet` minus `residual_likelihood_guided_diffusion`: mean `9.495e-07`, 95% CI `[-9.88e-06, 1.126e-05]`, Wilcoxon FDR `0.571`, n `25`.
-- `crps_norm` `residual_likelihood_guided_diffusion` minus `prior_init_diffusion_unet`: mean `-9.495e-07`, 95% CI `[-1.144e-05, 9.972e-06]`, Wilcoxon FDR `0.571`, n `25`.
-- `crps_norm` `explicit_residual_target_diffusion` minus `residual_likelihood_guided_diffusion`: mean `-0.01337`, 95% CI `[-0.01585, -0.01011]`, Wilcoxon FDR `3.59e-06`, n `25`.
-- `crps_norm` `explicit_residual_target_diffusion` minus `prior_init_diffusion_unet`: mean `-0.01337`, 95% CI `[-0.01585, -0.01015]`, Wilcoxon FDR `3.59e-06`, n `25`.
-- `ence` `residual_likelihood_guided_diffusion` minus `explicit_residual_target_diffusion`: mean `11.9`, 95% CI `[11.14, 12.75]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ence` `prior_init_diffusion_unet` minus `explicit_residual_target_diffusion`: mean `11.89`, 95% CI `[11.12, 12.71]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ence` `residual_likelihood_guided_diffusion` minus `prior_init_diffusion_unet`: mean `0.003736`, 95% CI `[-0.01726, 0.02767]`, Wilcoxon FDR `1`, n `25`.
-- `ence` `prior_init_diffusion_unet` minus `residual_likelihood_guided_diffusion`: mean `-0.003736`, 95% CI `[-0.02757, 0.01736]`, Wilcoxon FDR `1`, n `25`.
-- `ence` `explicit_residual_target_diffusion` minus `prior_init_diffusion_unet`: mean `-11.89`, 95% CI `[-12.74, -11.14]`, Wilcoxon FDR `9.88e-08`, n `25`.
-- `ence` `explicit_residual_target_diffusion` minus `residual_likelihood_guided_diffusion`: mean `-11.9`, 95% CI `[-12.71, -11.14]`, Wilcoxon FDR `9.88e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion` minus `residual_likelihood_guided_diffusion_calibrated90`: mean `0.07505`, 95% CI `[0.07035, 0.07946]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion_calibrated90` minus `residual_likelihood_guided_diffusion_calibrated90`: mean `0.07505`, 95% CI `[0.07044, 0.0795]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion` minus `residual_likelihood_guided_diffusion`: mean `0.07505`, 95% CI `[0.07048, 0.07946]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion_calibrated90` minus `residual_likelihood_guided_diffusion`: mean `0.07505`, 95% CI `[0.07052, 0.07958]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion` minus `prior_init_diffusion_unet`: mean `0.075`, 95% CI `[0.07044, 0.07951]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion` minus `prior_init_diffusion_unet_calibrated90`: mean `0.075`, 95% CI `[0.07044, 0.07941]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion_calibrated90` minus `prior_init_diffusion_unet`: mean `0.075`, 95% CI `[0.07036, 0.07947]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion_calibrated90` minus `prior_init_diffusion_unet_calibrated90`: mean `0.075`, 95% CI `[0.07035, 0.0794]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion_calibrated90` minus `residual_likelihood_guided_diffusion_calibrated90`: mean `0.07473`, 95% CI `[0.07021, 0.07896]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion` minus `residual_likelihood_guided_diffusion_calibrated90`: mean `0.07473`, 95% CI `[0.07026, 0.07893]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion_calibrated90` minus `residual_likelihood_guided_diffusion`: mean `0.07473`, 95% CI `[0.07024, 0.07892]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion` minus `residual_likelihood_guided_diffusion`: mean `0.07473`, 95% CI `[0.07028, 0.07899]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion_calibrated90` minus `prior_init_diffusion_unet`: mean `0.07468`, 95% CI `[0.0702, 0.07892]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion` minus `prior_init_diffusion_unet`: mean `0.07468`, 95% CI `[0.07034, 0.07895]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion_calibrated90` minus `prior_init_diffusion_unet_calibrated90`: mean `0.07468`, 95% CI `[0.0702, 0.07891]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion` minus `prior_init_diffusion_unet_calibrated90`: mean `0.07468`, 95% CI `[0.07018, 0.07889]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `srcnn_bz_single_channel` minus `residual_likelihood_guided_diffusion_calibrated90`: mean `0.07083`, 95% CI `[0.06839, 0.07352]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `srcnn_bz_single_channel` minus `residual_likelihood_guided_diffusion`: mean `0.07083`, 95% CI `[0.06848, 0.07351]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `srcnn_bz_single_channel` minus `prior_init_diffusion_unet`: mean `0.07078`, 95% CI `[0.06827, 0.07341]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `srcnn_bz_single_channel` minus `prior_init_diffusion_unet_calibrated90`: mean `0.07078`, 95% CI `[0.06833, 0.07345]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion` minus `explicit_residual_target_diffusion`: mean `0.0699`, 95% CI `[0.06546, 0.07439]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion_calibrated90` minus `explicit_residual_target_diffusion`: mean `0.0699`, 95% CI `[0.06554, 0.07444]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion` minus `explicit_residual_target_diffusion_calibrated90`: mean `0.0699`, 95% CI `[0.06556, 0.07429]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion_calibrated90` minus `explicit_residual_target_diffusion_calibrated90`: mean `0.0699`, 95% CI `[0.06549, 0.07434]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion_calibrated90` minus `explicit_residual_target_diffusion`: mean `0.06959`, 95% CI `[0.06536, 0.07388]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion` minus `explicit_residual_target_diffusion`: mean `0.06959`, 95% CI `[0.06532, 0.07386]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion_calibrated90` minus `explicit_residual_target_diffusion_calibrated90`: mean `0.06959`, 95% CI `[0.06528, 0.07382]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `likelihood_guided_diffusion` minus `explicit_residual_target_diffusion_calibrated90`: mean `0.06959`, 95% CI `[0.06532, 0.07378]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion` minus `explicit_residual_likelihood_guided_diffusion`: mean `0.06953`, 95% CI `[0.06513, 0.07382]`, Wilcoxon FDR `9.77e-08`, n `25`.
+- `ause_abs_error` `vanilla_diffusion` minus `explicit_residual_likelihood_guided_diffusion_calibrated90`: mean `0.06953`, 95% CI `[0.06519, 0.07389]`, Wilcoxon FDR `9.77e-08`, n `25`.

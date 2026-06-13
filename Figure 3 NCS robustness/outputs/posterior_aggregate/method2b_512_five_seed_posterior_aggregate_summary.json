@@ -3,7 +3,7 @@
   "decision": "METHOD2B_512_FIVE_SEED_POSTERIOR_AGGREGATED",
   "run_root": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611",
   "metrics_file_count": 5,
-  "row_count": 175,
+  "row_count": 375,
   "seeds": [
     1,
     2,
@@ -15,17 +15,25 @@
     "fig3_true_ood"
   ],
   "models": [
+    "explicit_residual_likelihood_guided_diffusion",
+    "explicit_residual_likelihood_guided_diffusion_calibrated90",
     "explicit_residual_target_diffusion",
+    "explicit_residual_target_diffusion_calibrated90",
+    "likelihood_guided_diffusion",
+    "likelihood_guided_diffusion_calibrated90",
     "prior_init_diffusion_unet",
+    "prior_init_diffusion_unet_calibrated90",
     "residual_likelihood_guided_diffusion",
+    "residual_likelihood_guided_diffusion_calibrated90",
     "srcnn_bz_single_channel",
     "train_mean_prior",
     "unet_canonical_bxyz",
-    "vanilla_diffusion"
+    "vanilla_diffusion",
+    "vanilla_diffusion_calibrated90"
   ],
   "best_by_split": [
     {
-      "dataset": "method2b_512_full_comsol_colab_cuda",
+      "dataset": "method2b_512_full_comsol_recalibrated_9model",
       "split_mode": "fig3_true_ood",
       "model": "unet_canonical_bxyz",
       "n_folds": 25,
@@ -77,16 +85,18 @@
       "failure_auroc_top10_abs_error_std": 0.0,
       "uce_mean": 0.15671186677895707,
       "uce_std": 0.010129613066662891,
-      "ence_mean": 15671186.67789571,
-      "ence_std": 1012961.3066662892,
+      "ence_mean": NaN,
+      "ence_std": NaN,
       "ause_abs_error_mean": 0.059889554650462466,
       "ause_abs_error_std": 0.0054742734101506235,
       "pit_mean_mean": 0.11014727085828778,
       "pit_mean_std": 0.006820216013390103,
       "posterior_std_norm_mean_mean": 0.0,
       "posterior_std_norm_mean_std": 0.0,
-      "n_posterior_samples_mean": NaN,
-      "n_posterior_samples_std": NaN,
+      "calibration_target_coverage_mean": NaN,
+      "calibration_target_coverage_std": NaN,
+      "calibration_scale_90_mean": NaN,
+      "calibration_scale_90_std": NaN,
       "residual_scale_mean": NaN,
       "residual_scale_std": NaN
     }

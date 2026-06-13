@@ -158,6 +158,8 @@ def calibration_errors(std: np.ndarray, sq_err: np.ndarray, n_bins: int = 10) ->
     sq_err = sq_err[mask]
     if len(std) < n_bins:
         return {"uce": float("nan"), "ence": float("nan")}
+    if float(np.nanmean(std)) <= EPS:
+        return {"uce": float("nan"), "ence": float("nan")}
     order = np.argsort(std)
     bins = np.array_split(order, n_bins)
     uce = 0.0
@@ -346,22 +348,30 @@ def evaluate_fold(
         "val_count": int(len(fold["val_idx"])),
         "test_count": int(len(fold["test_idx"])),
     }
-    rows: list[dict[str, Any]] = []
-    rows.append({"model": "train_mean_prior", **constant_mean_metrics(test_loader, stats.target_mean_norm), **split_payload})
+    only_models = {x.strip() for x in str(args.only_models).split(",") if x.strip()}
 
-    srcnn = SRCNN()
-    srcnn.load_state_dict(load_state(fold_dir / "srcnn_best.pt"))
-    srcnn.to(device)
-    srcnn_pred, target, logs, kpas, ids = collect_regressor_predictions("srcnn", srcnn, test_loader, device)
-    row = {"model": "srcnn_bz_single_channel", **metric_summary(srcnn_pred, target, logs, kpas, ids), **deterministic_as_posterior_metrics(srcnn_pred, target), **split_payload}
-    rows.append(row)
+    def want_model(name: str) -> bool:
+        return not only_models or name in only_models
+
+    rows: list[dict[str, Any]] = []
+    if want_model("train_mean_prior"):
+        rows.append({"model": "train_mean_prior", **constant_mean_metrics(test_loader, stats.target_mean_norm), **split_payload})
+
+    if want_model("srcnn_bz_single_channel"):
+        srcnn = SRCNN()
+        srcnn.load_state_dict(load_state(fold_dir / "srcnn_best.pt"))
+        srcnn.to(device)
+        srcnn_pred, target, logs, kpas, ids = collect_regressor_predictions("srcnn", srcnn, test_loader, device)
+        row = {"model": "srcnn_bz_single_channel", **metric_summary(srcnn_pred, target, logs, kpas, ids), **deterministic_as_posterior_metrics(srcnn_pred, target), **split_payload}
+        rows.append(row)
 
     unet = SmallUNet(cache["input64"].shape[1], out_ch=1, base=int(args.base_channels))
     unet.load_state_dict(load_state(fold_dir / "unet_best.pt"))
     unet.to(device)
-    unet_pred, target, logs, kpas, ids = collect_regressor_predictions("unet", unet, test_loader, device)
-    row = {"model": "unet_canonical_bxyz", **metric_summary(unet_pred, target, logs, kpas, ids), **deterministic_as_posterior_metrics(unet_pred, target), **split_payload}
-    rows.append(row)
+    if want_model("unet_canonical_bxyz"):
+        unet_pred, target, logs, kpas, ids = collect_regressor_predictions("unet", unet, test_loader, device)
+        row = {"model": "unet_canonical_bxyz", **metric_summary(unet_pred, target, logs, kpas, ids), **deterministic_as_posterior_metrics(unet_pred, target), **split_payload}
+        rows.append(row)
 
     surrogate = SurrogateForward()
     surrogate.load_state_dict(load_state(fold_dir / "surrogate_forward.pt"))
@@ -375,6 +385,9 @@ def evaluate_fold(
         ("vanilla_diffusion", None, 0.0),
         ("likelihood_guided_diffusion", surrogate, float(args.guidance_scale)),
     ]:
+        if not (want_model(model_name) or want_model(f"{model_name}_calibrated90")):
+            continue
+
         def sample_fn(batch: dict[str, Any]) -> torch.Tensor:
             return sample_direct_diffusion(
                 diffusion,
@@ -389,14 +402,19 @@ def evaluate_fold(
             )
 
         test_batches = collect_sample_batches(test_loader, sample_fn)
-        rows.append({"model": model_name, **eval_samples(*test_batches), **split_payload})
+        if want_model(model_name):
+            rows.append({"model": model_name, **eval_samples(*test_batches), **split_payload})
         val_batches = collect_sample_batches(val_loader, sample_fn) if val_loader is not None else None
-        append_calibrated_row(rows, args, model_name, val_batches, test_batches, split_payload)
+        if want_model(f"{model_name}_calibrated90"):
+            append_calibrated_row(rows, args, model_name, val_batches, test_batches, split_payload)
 
     for model_name, guidance_surrogate, guidance_scale in [
         ("prior_init_diffusion_unet", None, 0.0),
         ("residual_likelihood_guided_diffusion", surrogate, float(args.guidance_scale)),
     ]:
+        if not (want_model(model_name) or want_model(f"{model_name}_calibrated90")):
+            continue
+
         def sample_fn(batch: dict[str, Any]) -> torch.Tensor:
             return sample_diffusion_img2img(
                 diffusion,
@@ -412,9 +430,11 @@ def evaluate_fold(
             )
 
         test_batches = collect_sample_batches(test_loader, sample_fn)
-        rows.append({"model": model_name, **eval_samples(*test_batches), **split_payload})
+        if want_model(model_name):
+            rows.append({"model": model_name, **eval_samples(*test_batches), **split_payload})
         val_batches = collect_sample_batches(val_loader, sample_fn) if val_loader is not None else None
-        append_calibrated_row(rows, args, model_name, val_batches, test_batches, split_payload)
+        if want_model(f"{model_name}_calibrated90"):
+            append_calibrated_row(rows, args, model_name, val_batches, test_batches, split_payload)
 
     residual_checkpoint = torch.load(fold_dir / "explicit_residual_target_diffusion.pt", map_location="cpu", weights_only=False)
     residual_scale = float(residual_checkpoint.get("residual_scale", args.residual_scale))
@@ -425,6 +445,9 @@ def evaluate_fold(
         ("explicit_residual_target_diffusion", None, 0.0),
         ("explicit_residual_likelihood_guided_diffusion", surrogate, float(args.guidance_scale)),
     ]:
+        if not (want_model(model_name) or want_model(f"{model_name}_calibrated90")):
+            continue
+
         def sample_fn(batch: dict[str, Any]) -> torch.Tensor:
             return sample_residual_diffusion(
                 residual_diffusion,
@@ -441,13 +464,23 @@ def evaluate_fold(
         test_batches = collect_sample_batches(test_loader, sample_fn)
         row = {"model": model_name, **eval_samples(*test_batches), **split_payload}
         row["residual_scale"] = residual_scale
-        rows.append(row)
+        if want_model(model_name):
+            rows.append(row)
         val_batches = collect_sample_batches(val_loader, sample_fn) if val_loader is not None else None
-        append_calibrated_row(rows, args, model_name, val_batches, test_batches, split_payload, residual_scale=residual_scale)
+        if want_model(f"{model_name}_calibrated90"):
+            append_calibrated_row(rows, args, model_name, val_batches, test_batches, split_payload, residual_scale=residual_scale)
     return rows
 
 
 def aggregate_posterior(metrics: pd.DataFrame) -> pd.DataFrame:
+    metrics = metrics.copy()
+    if "ence" in metrics.columns:
+        degenerate = pd.Series(False, index=metrics.index)
+        for col in ("width90_norm", "posterior_std_norm_mean"):
+            if col in metrics.columns:
+                values = pd.to_numeric(metrics[col], errors="coerce")
+                degenerate = degenerate | (values.notna() & (values <= 1e-12))
+        metrics.loc[degenerate, "ence"] = np.nan
     rows: list[dict[str, Any]] = []
     numeric_cols = [
         c
@@ -503,9 +536,11 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         if int(args.max_folds) > 0:
             folds = folds[: int(args.max_folds)]
         for fold in folds:
+            print(f"FOLD_START split_mode={split_mode} fold={fold}", flush=True)
             fold_rows = evaluate_fold(args, split_mode, fold, manifest, cache, channel_names, device)
             rows.extend(fold_rows)
             pd.DataFrame(rows).to_csv(io_path(out_dir / "rspi_posterior_metrics.csv"), index=False)
+            print(f"FOLD_DONE split_mode={split_mode} fold={fold} total_rows={len(rows)}", flush=True)
     metrics = pd.DataFrame(rows)
     aggregate = aggregate_posterior(metrics)
     metrics_path = out_dir / "rspi_posterior_metrics.csv"
@@ -573,6 +608,7 @@ def main() -> None:
     parser.add_argument("--coverage-calibration", choices=["none", "validation"], default="none")
     parser.add_argument("--calibration-coverage", type=float, default=0.90)
     parser.add_argument("--calibration-max-scale", type=float, default=50.0)
+    parser.add_argument("--only-models", default="", help="Optional comma-separated model allow-list, including calibrated90 names.")
     parser.add_argument("--seed", type=int, default=23)
     run(parser.parse_args())
 

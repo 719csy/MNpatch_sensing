@@ -3,9 +3,11 @@ from __future__ import annotations
 import json
 import os
 import shlex
+import shutil
 import subprocess
 import sys
 import time
+import traceback
 import urllib.request
 from pathlib import Path, PurePosixPath
 
@@ -37,6 +39,7 @@ GUIDANCE_SCALE = os.environ.get("METHOD2B_RECAL_GUIDANCE_SCALE", "0.06")
 RESIDUAL_SCALE = os.environ.get("METHOD2B_RECAL_RESIDUAL_SCALE", "0.25")
 CALIBRATION_COVERAGE = os.environ.get("METHOD2B_RECAL_COVERAGE", "0.90")
 CALIBRATION_MAX_SCALE = os.environ.get("METHOD2B_RECAL_MAX_SCALE", "50")
+EXTRA_ARGS = shlex.split(os.environ.get("METHOD2B_RECAL_EXTRA_ARGS", ""))
 EVAL_DIR_NAME = os.environ.get("METHOD2B_RECAL_EVAL_DIR", f"posterior_recalibrated_9model_{RUN_TAG}")
 AGG_DIR_NAME = os.environ.get("METHOD2B_RECAL_AGG_DIR", f"aggregate_recalibrated_9model_{RUN_TAG}")
 LOGS_DIR_NAME = os.environ.get("METHOD2B_RECAL_LOGS_DIR", f"logs_recalibrated_9model_{RUN_TAG}")
@@ -260,6 +263,7 @@ def main() -> None:
                 CALIBRATION_MAX_SCALE,
                 "--seed",
                 str(seed),
+                *EXTRA_ARGS,
             ],
             logs_dir / f"seed_{seed}_posterior_recalibrated_9model.log",
             cwd=MN_WORK,
@@ -299,4 +303,30 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        failure_dir = WORK_ROOT / f"method2b_512_recalibrated_9model_failure_{RUN_TAG}"
+        failure_dir.mkdir(parents=True, exist_ok=True)
+        (failure_dir / "traceback.txt").write_text(traceback.format_exc(), encoding="utf-8")
+        try:
+            for src in WORK_ROOT.rglob("*"):
+                if not src.is_file():
+                    continue
+                if src.is_relative_to(failure_dir):
+                    continue
+                if RUN_TAG not in str(src):
+                    continue
+                if src.suffix.lower() not in {".log", ".txt", ".json", ".csv", ".md"}:
+                    continue
+                rel = src.relative_to(WORK_ROOT)
+                dst = failure_dir / rel
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(src, dst)
+            drive_access = build_drive_access()
+            drive_access.upload_folder(failure_dir, OUTPUT_DRIVE_REL / f"failure_recalibrated_9model_{RUN_TAG}")
+            print(f"Uploaded failure diagnostics to {rel_to_log_path(OUTPUT_DRIVE_REL / f'failure_recalibrated_9model_{RUN_TAG}')}", flush=True)
+        except Exception:
+            print("Failed to upload failure diagnostics:", flush=True)
+            print(traceback.format_exc(), flush=True)
+        raise

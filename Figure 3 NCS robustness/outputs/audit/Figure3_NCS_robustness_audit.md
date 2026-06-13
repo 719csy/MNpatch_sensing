@@ -26,14 +26,11 @@
 - Method2b 512 completion queue: `H:\My Drive\MN_simulation\outputs\rspi_joint_052026\fig3_ncs_robustness_audit_20260531\fig3_method2b_512_completion_queue.csv`.
 
 ## Colab posterior aggregate
-- Required aggregate: `outputs/posterior_aggregate/method2b_512_five_seed_posterior_aggregate.csv`.
-- Required metrics: `outputs/posterior_aggregate/method2b_512_five_seed_posterior_metrics.csv`.
-- Existing aggregate rows: `7`.
+- Required aggregate: `H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\aggregate\method2b_512_five_seed_posterior_aggregate.csv`.
+- Required metrics: `H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\aggregate\method2b_512_five_seed_posterior_metrics.csv`.
+- Existing aggregate rows: `15`.
 - Command plan: `H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2b_512_five_seed_ood_full512_20260611\method2b_512_five_seed_ood_command_plan.json`.
-- Paired statistics: `outputs/paired_stats/fig3_posterior_paired_stats.csv`.
+- Paired statistics: `H:\My Drive\MN_simulation\outputs\rspi_joint_052026\fig3_posterior_paired_stats_full512_20260611\fig3_posterior_paired_stats.csv`.
 
 ## Reviewer gate
 - Do not claim Nature Computational Science-level robustness until the full512 five-seed/OOD posterior aggregate exists and paired bootstrap/statistical tests are recomputed from that final aggregate.
-
-## Scope note
-- Strict audit PASS is a repository completeness gate; posterior calibration caveats are documented in README.md.

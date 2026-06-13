@@ -27,12 +27,12 @@
     "aggregate_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\aggregate\\method2b_512_five_seed_posterior_aggregate.csv",
     "metrics_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\aggregate\\method2b_512_five_seed_posterior_metrics.csv",
     "command_plan_json": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\method2b_512_five_seed_ood_command_plan.json",
-    "aggregate_rows": 7,
+    "aggregate_rows": 15,
     "metrics_ready": true,
     "seed_count": 5,
     "aggregate_preview": [
       {
-        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
         "split_mode": "fig3_true_ood",
         "model": "unet_canonical_bxyz",
         "n_folds": 25,
@@ -42,37 +42,87 @@
         "width90_norm_mean": 0.0
       },
       {
-        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
         "split_mode": "fig3_true_ood",
         "model": "residual_likelihood_guided_diffusion",
         "n_folds": 25,
-        "rmse_norm_mean": 0.1592821068834399,
-        "rmse_kpa_mean": 9.90574185071942,
-        "cov90_mean": 0.040279177352786,
-        "width90_norm_mean": 0.0287334929406642
+        "rmse_norm_mean": 0.1592860102274216,
+        "rmse_kpa_mean": 9.905498508745117,
+        "cov90_mean": 0.0392283748835324,
+        "width90_norm_mean": 0.0276200194656848
       },
       {
-        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
+        "split_mode": "fig3_true_ood",
+        "model": "residual_likelihood_guided_diffusion_calibrated90",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.1592860102208517,
+        "rmse_kpa_mean": 9.905498565752566,
+        "cov90_mean": 0.9064789199829102,
+        "width90_norm_mean": 0.3506017732620239
+      },
+      {
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
+        "split_mode": "fig3_true_ood",
+        "model": "prior_init_diffusion_unet_calibrated90",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.1592841294455077,
+        "rmse_kpa_mean": 9.906092808466816,
+        "cov90_mean": 0.9064586234092712,
+        "width90_norm_mean": 0.3505794298648834
+      },
+      {
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
         "split_mode": "fig3_true_ood",
         "model": "prior_init_diffusion_unet",
         "n_folds": 25,
-        "rmse_norm_mean": 0.1592883304040175,
-        "rmse_kpa_mean": 9.90593276150866,
-        "cov90_mean": 0.0403157512471079,
-        "width90_norm_mean": 0.0287368404865264
+        "rmse_norm_mean": 0.1592841293246703,
+        "rmse_kpa_mean": 9.906092829102784,
+        "cov90_mean": 0.0393487783148884,
+        "width90_norm_mean": 0.0276209407299756
       },
       {
-        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
         "split_mode": "fig3_true_ood",
         "model": "explicit_residual_target_diffusion",
         "n_folds": 25,
-        "rmse_norm_mean": 0.1614545088066744,
-        "rmse_kpa_mean": 9.961938680437878,
-        "cov90_mean": 0.8199664759635925,
-        "width90_norm_mean": 0.1888411760330199
+        "rmse_norm_mean": 0.1618920617544235,
+        "rmse_kpa_mean": 9.964334370785132,
+        "cov90_mean": 0.8026800060272217,
+        "width90_norm_mean": 0.18039758592844
       },
       {
-        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
+        "split_mode": "fig3_true_ood",
+        "model": "explicit_residual_target_diffusion_calibrated90",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.161892062025639,
+        "rmse_kpa_mean": 9.964334377577837,
+        "cov90_mean": 0.907365264892578,
+        "width90_norm_mean": 0.3212316071987152
+      },
+      {
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
+        "split_mode": "fig3_true_ood",
+        "model": "explicit_residual_likelihood_guided_diffusion_calibrated90",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.1617802887662678,
+        "rmse_kpa_mean": 9.969486830271746,
+        "cov90_mean": 0.906862735748291,
+        "width90_norm_mean": 0.3187868601083755
+      },
+      {
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
+        "split_mode": "fig3_true_ood",
+        "model": "explicit_residual_likelihood_guided_diffusion",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.1617802883571879,
+        "rmse_kpa_mean": 9.969486870569114,
+        "cov90_mean": 0.8027881097793579,
+        "width90_norm_mean": 0.1799340218305587
+      },
+      {
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
         "split_mode": "fig3_true_ood",
         "model": "srcnn_bz_single_channel",
         "n_folds": 25,
@@ -82,7 +132,7 @@
         "width90_norm_mean": 0.0
       },
       {
-        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
         "split_mode": "fig3_true_ood",
         "model": "train_mean_prior",
         "n_folds": 25,
@@ -92,22 +142,52 @@
         "width90_norm_mean": NaN
       },
       {
-        "dataset": "method2b_512_full_comsol_colab_cuda",
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
         "split_mode": "fig3_true_ood",
         "model": "vanilla_diffusion",
         "n_folds": 25,
-        "rmse_norm_mean": 0.4617956384248244,
-        "rmse_kpa_mean": 14.802496610589566,
-        "cov90_mean": NaN,
-        "width90_norm_mean": NaN
+        "rmse_norm_mean": 0.4616439555729974,
+        "rmse_kpa_mean": 14.802820085788897,
+        "cov90_mean": 0.0496287302672862,
+        "width90_norm_mean": 0.2506503278017044
+      },
+      {
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
+        "split_mode": "fig3_true_ood",
+        "model": "vanilla_diffusion_calibrated90",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.4616439554597995,
+        "rmse_kpa_mean": 14.8028201278836,
+        "cov90_mean": 0.8982355785369873,
+        "width90_norm_mean": 2.231841526031494
+      },
+      {
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
+        "split_mode": "fig3_true_ood",
+        "model": "likelihood_guided_diffusion_calibrated90",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.4617976175954313,
+        "rmse_kpa_mean": 14.80810349974088,
+        "cov90_mean": 0.8958290791511536,
+        "width90_norm_mean": 2.240313630104065
+      },
+      {
+        "dataset": "method2b_512_full_comsol_recalibrated_9model",
+        "split_mode": "fig3_true_ood",
+        "model": "likelihood_guided_diffusion",
+        "n_folds": 25,
+        "rmse_norm_mean": 0.4617976156023154,
+        "rmse_kpa_mean": 14.808103519747156,
+        "cov90_mean": 0.0491756147146224,
+        "width90_norm_mean": 0.2502652394771576
       }
     ]
   },
   "statistics": {
-    "stats_csv": "outputs/paired_stats/fig3_posterior_paired_stats.csv",
-    "summary_json": "outputs/paired_stats/fig3_posterior_paired_stats_summary.json",
+    "stats_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_posterior_paired_stats_full512_20260611\\fig3_posterior_paired_stats.csv",
+    "summary_json": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_posterior_paired_stats_full512_20260611\\fig3_posterior_paired_stats_summary.json",
     "stats_ready": true,
-    "n_comparisons": 126
+    "n_comparisons": 1190
   },
   "outputs": {
     "mmp_missing_queue": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_missing_method1_mmp_readout_queue.csv",
@@ -118,6 +198,5 @@
     "method2b_queue": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_method2b_512_completion_queue.csv",
     "summary_json": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\fig3_ncs_robustness_audit_summary.json",
     "report_md": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_ncs_robustness_audit_20260531\\Figure3_NCS_robustness_audit.md"
-  },
-  "audit_scope_note": "Strict audit PASS is a repository completeness gate; posterior calibration caveats are documented in README.md."
+  }
 }

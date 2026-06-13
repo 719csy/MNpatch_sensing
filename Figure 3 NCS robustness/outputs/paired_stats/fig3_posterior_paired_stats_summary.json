@@ -1,11 +1,18 @@
 {
-  "metrics": "Figure 3 NCS robustness\\outputs\\posterior_aggregate\\method2b_512_five_seed_posterior_metrics.csv",
-  "stats_csv": "Figure 3 NCS robustness\\outputs\\paired_stats\\fig3_posterior_paired_stats.csv",
-  "report_md": "Figure 3 NCS robustness\\outputs\\paired_stats\\fig3_posterior_paired_stats.md",
+  "metrics": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\aggregate\\method2b_512_five_seed_posterior_metrics.csv",
+  "stats_csv": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_posterior_paired_stats_full512_20260611\\fig3_posterior_paired_stats.csv",
+  "report_md": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\fig3_posterior_paired_stats_full512_20260611\\fig3_posterior_paired_stats.md",
   "ours_models": [
-    "residual_likelihood_guided_diffusion",
+    "likelihood_guided_diffusion",
+    "likelihood_guided_diffusion_calibrated90",
     "prior_init_diffusion_unet",
-    "explicit_residual_target_diffusion"
+    "prior_init_diffusion_unet_calibrated90",
+    "residual_likelihood_guided_diffusion",
+    "residual_likelihood_guided_diffusion_calibrated90",
+    "explicit_residual_target_diffusion",
+    "explicit_residual_target_diffusion_calibrated90",
+    "explicit_residual_likelihood_guided_diffusion",
+    "explicit_residual_likelihood_guided_diffusion_calibrated90"
   ],
   "metric_cols": [
     "mae_kpa",
@@ -18,5 +25,5 @@
     "ause_abs_error",
     "width90_norm"
   ],
-  "n_comparisons": 126
+  "n_comparisons": 1190
 }

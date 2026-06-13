@@ -12,8 +12,10 @@ This directory contains the core data, analysis outputs, scripts, and manuscript
 - Strain rows: `1536 / 1536`
 - Paired MMP / piezo / ultrasound benchmark rows: `150 / 150`
 - Full512 posterior training seeds: `5`
-- Posterior metric rows: `175`
-- Paired statistical comparisons: `126` after masking undefined ENCE for deterministic zero-width outputs
+- Posterior metric rows: `375`
+- Posterior aggregate models: `15`
+- Posterior evaluation samples: `32`
+- Paired statistical comparisons: `1190` after masking undefined ENCE for deterministic zero-width outputs
 
 ## Key Files
 
@@ -34,29 +36,37 @@ This directory contains the core data, analysis outputs, scripts, and manuscript
 
 Five-seed true-OOD posterior aggregate, sorted by `rmse_norm_mean`:
 
-| model | folds | rmse_norm_mean | rmse_kpa_mean | cov90_mean | width90_norm_mean |
-|---|---:|---:|---:|---:|---:|
-| unet_canonical_bxyz | 25 | 0.158806 | 9.87565 | 0.00000 | 0.00000 |
-| residual_likelihood_guided_diffusion | 25 | 0.159282 | 9.90574 | 0.04028 | 0.02873 |
-| prior_init_diffusion_unet | 25 | 0.159288 | 9.90593 | 0.04032 | 0.02874 |
-| explicit_residual_target_diffusion | 25 | 0.161455 | 9.96194 | 0.81997 | 0.18884 |
-| srcnn_bz_single_channel | 25 | 0.204006 | 11.84488 | 0.00000 | 0.00000 |
-| train_mean_prior | 25 | 0.219380 | 12.24807 | n/a | n/a |
-| vanilla_diffusion | 25 | 0.461796 | 14.80250 | n/a | n/a |
+| model | folds | rmse_norm_mean | rmse_kpa_mean | cov90_mean | width90_norm_mean | ence_mean |
+|---|---:|---:|---:|---:|---:|---:|
+| unet_canonical_bxyz | 25 | 0.15881 | 9.87565 | 0.00000 | 0.00000 | n/a |
+| prior_init_diffusion_unet | 25 | 0.15928 | 9.90609 | 0.03935 | 0.02762 | 13.78102 |
+| prior_init_diffusion_unet_calibrated90 | 25 | 0.15928 | 9.90609 | 0.90646 | 0.35058 | 0.25983 |
+| residual_likelihood_guided_diffusion_calibrated90 | 25 | 0.15929 | 9.90550 | 0.90648 | 0.35060 | 0.25730 |
+| residual_likelihood_guided_diffusion | 25 | 0.15929 | 9.90550 | 0.03923 | 0.02762 | 13.77027 |
+| explicit_residual_likelihood_guided_diffusion | 25 | 0.16178 | 9.96949 | 0.80279 | 0.17993 | 1.98816 |
+| explicit_residual_likelihood_guided_diffusion_calibrated90 | 25 | 0.16178 | 9.96949 | 0.90686 | 0.31879 | 0.71341 |
+| explicit_residual_target_diffusion | 25 | 0.16189 | 9.96433 | 0.80268 | 0.18040 | 1.99252 |
+| explicit_residual_target_diffusion_calibrated90 | 25 | 0.16189 | 9.96433 | 0.90737 | 0.32123 | 0.72463 |
+| srcnn_bz_single_channel | 25 | 0.20401 | 11.84488 | 0.00000 | 0.00000 | n/a |
+| train_mean_prior | 25 | 0.21938 | 12.24807 | n/a | n/a | n/a |
+| vanilla_diffusion_calibrated90 | 25 | 0.46164 | 14.80282 | 0.89824 | 2.23184 | 0.39280 |
+| vanilla_diffusion | 25 | 0.46164 | 14.80282 | 0.04963 | 0.25065 | 5.17810 |
+| likelihood_guided_diffusion | 25 | 0.46180 | 14.80810 | 0.04918 | 0.25027 | 5.18632 |
+| likelihood_guided_diffusion_calibrated90 | 25 | 0.46180 | 14.80810 | 0.89583 | 2.24031 | 0.39338 |
 
 The strict audit uses completed high-fidelity case count, paired device benchmark completeness, five-seed posterior aggregate availability, and paired bootstrap/statistical outputs as repository-readiness gates. It is not, by itself, a scientific calibration certificate.
 
 ## Posterior Calibration Caveat
 
-The five-seed true-OOD aggregate is internally consistent, but the interval calibration is not yet manuscript-strong for every posterior variant. `residual_likelihood_guided_diffusion` and `prior_init_diffusion_unet` have competitive RMSE but under-dispersed 90% intervals (`cov90` about `4%`, `width90_norm` about `0.029`). `explicit_residual_target_diffusion` is the best-calibrated reported probabilistic model in this package (`cov90` about `82%`, `width90_norm` about `0.189`) but still under-covers a nominal 90% interval.
+The five-seed true-OOD aggregate is internally consistent and now includes validation-calibrated 90% interval variants. The uncalibrated residual/prior-initialized variants remain sharply under-dispersed (`cov90` about `4%`, `width90_norm` about `0.028`), so they should be described as low-RMSE reconstructions rather than calibrated posteriors. The `_calibrated90` variants reach the intended 90% coverage on the held-out true-OOD aggregate (`cov90` about `0.906` to `0.907` for prior/residual/explicit residual variants) with wider intervals.
 
-Training logs include train-time diagnostic CV with `--posterior-samples 4`; the posterior aggregate reported here comes from the posterior evaluation pass with `--posterior-samples 64`. Figure panels using denser sampling should not be described as if they are the same sampling depth as train-time CV diagnostics.
+Training logs include train-time diagnostic CV with `--posterior-samples 4`; the manuscript aggregate reported here comes from the recalibrated posterior evaluation pass with `--posterior-samples 32`. Figure panels using denser visualization samples should not be described as if they are the same sampling depth as train-time CV diagnostics.
 
-For manuscript language, the current evidence supports "depth-aware reconstruction with uncertainty estimates" more strongly than fully calibrated "90% posterior recovery" for all variants. A final NCS-level claim should either use the better-calibrated explicit residual target variant for interval claims, apply/re-run calibration, or explicitly discuss the under-coverage.
+For manuscript language, use the calibrated variants for posterior coverage claims and the uncalibrated variants only for point-reconstruction/error comparisons. Vanilla diffusion can also be calibrated to about 90% coverage, but only by expanding intervals roughly sevenfold relative to the calibrated residual/prior variants.
 
 ## Model Accounting
 
-The training logs contain nine model names. The posterior aggregate in this package reports seven models. The two unreported trained variants are `likelihood_guided_diffusion` and `explicit_residual_likelihood_guided_diffusion`; they are present in logs but absent from the final posterior aggregate. This package now treats that as an explicit exclusion rather than a silent omission. Before manuscript submission, those two variants should either be evaluated into the aggregate or excluded with a pre-specified rationale.
+The posterior aggregate now includes all nine trained/evaluated model families plus validation-calibrated 90% variants where posterior sampling supports interval calibration. The previously omitted `likelihood_guided_diffusion` and `explicit_residual_likelihood_guided_diffusion` variants are included, along with their `_calibrated90` counterparts. Paired bootstrap/Wilcoxon statistics test the full non-vanilla diffusion posterior family rather than a hand-picked subset.
 
 ## Metric Handling
 

@@ -13,6 +13,20 @@ DEFAULT_METRICS = Path(
     r"H:\My Drive\MN_simulation\outputs\rspi_joint_052026\method2c_targetmap_posterior64_colab_cuda_20260531_194518\rspi_posterior_metrics.csv"
 )
 DEFAULT_OUT = Path(r"H:\My Drive\MN_simulation\outputs\rspi_joint_052026\fig3_posterior_paired_stats_20260531")
+DEFAULT_OURS_MODELS = ",".join(
+    [
+        "likelihood_guided_diffusion",
+        "likelihood_guided_diffusion_calibrated90",
+        "prior_init_diffusion_unet",
+        "prior_init_diffusion_unet_calibrated90",
+        "residual_likelihood_guided_diffusion",
+        "residual_likelihood_guided_diffusion_calibrated90",
+        "explicit_residual_target_diffusion",
+        "explicit_residual_target_diffusion_calibrated90",
+        "explicit_residual_likelihood_guided_diffusion",
+        "explicit_residual_likelihood_guided_diffusion_calibrated90",
+    ]
+)
 
 
 def bootstrap_ci(values: np.ndarray, rng: np.random.Generator, n_boot: int = 10000) -> tuple[float, float]:
@@ -42,7 +56,7 @@ def bh_fdr(p_values: pd.Series) -> pd.Series:
 
 
 def mask_degenerate_ence(metrics: pd.DataFrame) -> pd.DataFrame:
-    """ENCE is undefined for deterministic posterior outputs with zero interval width."""
+    """ENCE is undefined when a reported posterior has effectively zero width."""
     out = metrics.copy()
     if "ence" not in out.columns:
         return out
@@ -145,7 +159,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Paired bootstrap/statistical tests for Figure 3 posterior metrics.")
     parser.add_argument("--metrics", type=Path, default=DEFAULT_METRICS)
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT)
-    parser.add_argument("--ours-models", default="residual_likelihood_guided_diffusion,prior_init_diffusion_unet,explicit_residual_target_diffusion")
+    parser.add_argument("--ours-models", default=DEFAULT_OURS_MODELS)
     parser.add_argument("--metrics-cols", default="mae_kpa,rmse_kpa,mae_norm,rmse_norm,crps_norm,uce,ence,ause_abs_error,width90_norm")
     parser.add_argument("--bootstrap", type=int, default=10000)
     args = parser.parse_args()

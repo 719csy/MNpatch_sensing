@@ -11,8 +11,8 @@
   },
   {
     "RelativePath": "colab\\method2b_512_recalibrated_variant_eval.py",
-    "Bytes": 12818,
-    "SHA256": "13bbfda404e61cd988edcf112a0c9a18485039151bef4904d10f2a9c43622c73"
+    "Bytes": 14279,
+    "SHA256": "287d791b84fd72c87ccd6c8b38adc2d3690c0a06f639849ce1ef59f1eb4b6f6f"
   },
   {
     "RelativePath": "data\\fig3\\domain_randomization\\example_volumes.npz",
@@ -207,7 +207,7 @@
   {
     "RelativePath": "figures\\figure3_actual_data_visualization.pdf",
     "Bytes": 402658,
-    "SHA256": "4b5fead4314b52430b244c8db746b53293e4043387ed9c38ddcc0109e0358a9b"
+    "SHA256": "2bca3ec2d2bd73403ecca6707a0f4ae971202491f6dcb5fea06aad71e1f823d6"
   },
   {
     "RelativePath": "figures\\figure3_actual_data_visualization.png",
@@ -217,7 +217,7 @@
   {
     "RelativePath": "figures\\figure3_final_locked_overlay.pdf",
     "Bytes": 15642528,
-    "SHA256": "b47e628de4a5ad5d53d1c9e18ac2ac901de09bbc4b09dfd025d807f2e6bbe6e5"
+    "SHA256": "f372f5549df6a04e6338a8eb2d94c607a5bcd649aeeb8c04e80de993fe31d4e2"
   },
   {
     "RelativePath": "figures\\figure3_final_locked_overlay.png",
@@ -226,13 +226,13 @@
   },
   {
     "RelativePath": "outputs\\audit\\fig3_ncs_robustness_audit_summary.json",
-    "Bytes": 5725,
-    "SHA256": "ec5902f2406609df4a01edf88f55faed28016a62847b2dfba3049a8754ec31b2"
+    "Bytes": 8952,
+    "SHA256": "af281cc40a1594e17bb119810ace513a4de8875223134d62fb16ad7d1d3362eb"
   },
   {
     "RelativePath": "outputs\\audit\\Figure3_NCS_robustness_audit.md",
-    "Bytes": 2494,
-    "SHA256": "cec7417fea04a0c6e0670da50ad8e2287aa90393c6703eca18f21cf917c96f0f"
+    "Bytes": 2598,
+    "SHA256": "71b3617e4a8eabea2ed96baac75033cff591689bb76955823d0e35bd2d0adb6c"
   },
   {
     "RelativePath": "outputs\\audit\\path_map.json",
@@ -306,113 +306,118 @@
   },
   {
     "RelativePath": "outputs\\paired_stats\\fig3_posterior_paired_stats.csv",
-    "Bytes": 31031,
-    "SHA256": "178658595f63a7638c015d56c8980d93b979098065c905f32a87d6122b67d318"
+    "Bytes": 310894,
+    "SHA256": "32a883f16c285c51e8e46ce942da36837e652d938d508f5e06f19faf20c9ecd1"
   },
   {
     "RelativePath": "outputs\\paired_stats\\fig3_posterior_paired_stats.md",
-    "Bytes": 5350,
-    "SHA256": "57017d756e074cc69ab079f7bc12bccd07daec04282fe81a74c02eaf17822a24"
+    "Bytes": 6022,
+    "SHA256": "ba3714402a89d9a51c85e3af87ce2fb640daed28276017becbe1660ad57b2f0f"
   },
   {
     "RelativePath": "outputs\\paired_stats\\fig3_posterior_paired_stats_summary.json",
-    "Bytes": 648,
-    "SHA256": "bc1dd214248c54b90374cef7b99a1f27fb50c1488c5487912b186fe0a0f09f3d"
+    "Bytes": 1177,
+    "SHA256": "774e9032032587a26d5aaa2ddcc8822e7c9720eb0133e51fd2594f257c0851d5"
   },
   {
     "RelativePath": "outputs\\posterior_aggregate\\method2b_512_five_seed_posterior_aggregate.csv",
-    "Bytes": 6505,
-    "SHA256": "20b88f5310a49917abcd94b5db82cf4f04dd7fc4856cdb5be5da3e5d81e7941a"
+    "Bytes": 16256,
+    "SHA256": "7493a4072c22a0f03b0b82d03afd4cd8ecd2aa0809fef2c02c98fd090f1d3e19"
+  },
+  {
+    "RelativePath": "outputs\\posterior_aggregate\\method2b_512_five_seed_posterior_aggregate_CN.md",
+    "Bytes": 398,
+    "SHA256": "3213ddd60ce27ffc29aaad8b3635082a757800dcfa6f1314eff1609e90a1874a"
   },
   {
     "RelativePath": "outputs\\posterior_aggregate\\method2b_512_five_seed_posterior_aggregate_summary.json",
-    "Bytes": 3615,
-    "SHA256": "39603e7402c05b78ce72a74c1514d13123ce3ddc7fe50ba1c84909f6b5ebd3f8"
+    "Bytes": 4088,
+    "SHA256": "897a47e8cce2b1fe954fdc768507cc9cedb5ba333cc28e8bef5a6ffefedf2dd2"
   },
   {
     "RelativePath": "outputs\\posterior_aggregate\\method2b_512_five_seed_posterior_metrics.csv",
-    "Bytes": 545690,
-    "SHA256": "467ecced8e0d7bbd384739df43c643f2a4ce0ded7588be58c8d2d7f25800d11a"
+    "Bytes": 1215024,
+    "SHA256": "664baeab5889de66d6bf6e55c33ea3d581d8ef6bd0a5ccd36888ea3d02783cfb"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_1\\rspi_posterior_aggregate.csv",
-    "Bytes": 6384,
-    "SHA256": "311f74233ebc4b5310bc9c11e221d6af73a09451194c12289694d722c4fa0b71"
+    "Bytes": 15886,
+    "SHA256": "820b040975a19757a88815dd22202f70b9fa29acdfadb1161b033ecf481b6ca4"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_1\\rspi_posterior_metrics.csv",
-    "Bytes": 104877,
-    "SHA256": "caf34d4842929028a44821580b390785ddf16485e46c3b50831a47571260cb0c"
+    "Bytes": 232755,
+    "SHA256": "6ad47c6fe399f50df6c24a87a927ec44b67487dece1234a583bd6de0b4fa08f5"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_1\\rspi_posterior_metrics_summary.json",
-    "Bytes": 3613,
-    "SHA256": "cabda65fc1a56d2a9199edb5badce6676b4261a320bb522635b0f1a4bb47d731"
+    "Bytes": 4160,
+    "SHA256": "69e0b94f71d5d9faf3c462ffe9527bb4c3a9a332dbc26f6eefafe7ab57d2dc6d"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_2\\rspi_posterior_aggregate.csv",
-    "Bytes": 6397,
-    "SHA256": "ff804730f508193550ebe3636a93baeae97467b2cf671239be7606ee08e51406"
+    "Bytes": 15875,
+    "SHA256": "bfd739d834e7904a12660afffc2b5d2572b8f870a250ccc98c39d559b70b9313"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_2\\rspi_posterior_metrics.csv",
-    "Bytes": 104876,
-    "SHA256": "c9cd1f4a371deee0144a8b965a59f14e8479ba93c0bce9b6250321a70eceeb1a"
+    "Bytes": 232711,
+    "SHA256": "32010a4df87133759b1e2f3d95fe993f3ff30eb860c361d399403d823e8d57a8"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_2\\rspi_posterior_metrics_summary.json",
-    "Bytes": 3617,
-    "SHA256": "5c5e6456fff19254e62f95ab31b4fe65cea76e9d79578edd623f32eb9ed43e81"
+    "Bytes": 4164,
+    "SHA256": "ae495cea30177cab78c0782fc87f0f25825b9c0d1c793100118093fcb0b1d875"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_3\\rspi_posterior_aggregate.csv",
-    "Bytes": 6386,
-    "SHA256": "3e961c6d53d80caee56b17114e29a14281ea17f9e09f0c54139d0fdaaef52a3d"
+    "Bytes": 15844,
+    "SHA256": "d0c081cc0fef47d8d01df475a233748ec7326d056cc5c8e0e9a02d75842a8093"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_3\\rspi_posterior_metrics.csv",
-    "Bytes": 104850,
-    "SHA256": "1f4441d940e5a3cfc1dacdf43c7ff32c4cfc30a5b7d27ed8025211f5a3d4195f"
+    "Bytes": 232722,
+    "SHA256": "0e0dc0abf5475f8aa14f04e44387208766661f88de94493ea54eef7542b41788"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_3\\rspi_posterior_metrics_summary.json",
-    "Bytes": 3614,
-    "SHA256": "6db9cc8980c8832505fe75756c6b18e26e764adb4ce4549981e9ec3c7aff9c8f"
+    "Bytes": 4161,
+    "SHA256": "b002cafba4ca2dd60803fa7a33ca3cfd20ac5abd4f65e91bf9cb3aadb6460b5a"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_4\\rspi_posterior_aggregate.csv",
-    "Bytes": 6404,
-    "SHA256": "106cb168ffd45d54f58f49bd23085629a7cd3f2800a24640ec81de73a8e6e1d1"
+    "Bytes": 15856,
+    "SHA256": "6f0853cb2260e37eedca643915577d572649a91e1ddeb9c33a363699d1967ed5"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_4\\rspi_posterior_metrics.csv",
-    "Bytes": 104877,
-    "SHA256": "df639a15eb1437c99ad6e5ca99d76d5720390dbe2bba5964e5411dd46b8cf0da"
+    "Bytes": 232736,
+    "SHA256": "d51291a2025e37090fa9b3f31ec8799baf6cc536d9c18edf52fb61c4257656e3"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_4\\rspi_posterior_metrics_summary.json",
-    "Bytes": 3616,
-    "SHA256": "a9862d22b56accf80d512af176f2008a990bf2850ecdc0ed8f152e4837b3dec3"
+    "Bytes": 4163,
+    "SHA256": "3f2cdc1bc3a56d35bf41da44f9fbf8856be44735c7130f8396af31bf39d59fe5"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_5\\rspi_posterior_aggregate.csv",
-    "Bytes": 6394,
-    "SHA256": "2ac5290d796479ec63e584a8e361f9803c445225ff5cf0dc2db5db47cb4ce52c"
+    "Bytes": 15840,
+    "SHA256": "8e78eda5fd6f727f5557d096c1a8d55f883748c00bce2d148be799586de9a93e"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_5\\rspi_posterior_metrics.csv",
-    "Bytes": 104875,
-    "SHA256": "918962b7a9266661e39e3a3648412b90e0d0f7a73aaf029977f1445ed88266bf"
+    "Bytes": 232730,
+    "SHA256": "51e8d4c353c6db81fa5c00f5365c8d7f958cf41603ebdb039c972cd7b40bd585"
   },
   {
     "RelativePath": "outputs\\seed_metrics\\seed_5\\rspi_posterior_metrics_summary.json",
-    "Bytes": 3611,
-    "SHA256": "3525f5e2931f7bc227b20240768b4ea9dff60d745fb5919f7254fea4db8c8fe8"
+    "Bytes": 4158,
+    "SHA256": "65ebf430b354cb4b45ce6f2121168e68544fea50685e8f4fbd2153b0b7d1db4d"
   },
   {
     "RelativePath": "README.md",
-    "Bytes": 5881,
-    "SHA256": "5fba80632f2ed7c0a99d1b8e49009c39b0e82e771b6af966bd13cf1292637ed6"
+    "Bytes": 6794,
+    "SHA256": "42fa492c1284b22bf8c2b8c26b477c301ab093645388a700a7d2ab6cec2f46d5"
   },
   {
     "RelativePath": "scripts\\fig3_build_hybrid_realdata_on_v3.py",
@@ -436,8 +441,8 @@
   },
   {
     "RelativePath": "scripts\\fig3_posterior_paired_stats.py",
-    "Bytes": 7803,
-    "SHA256": "027cd8ea5b86515d6fa33e19e6a777b7e65cc9f733cb286d171cade854e96d1d"
+    "Bytes": 8280,
+    "SHA256": "350e79c0027042661c953d7d662c148c4103e78bf0d1b11f7e70fbbbe589496e"
   },
   {
     "RelativePath": "scripts\\fig3_render_realdata_dashboard.py",
@@ -451,7 +456,7 @@
   },
   {
     "RelativePath": "scripts\\rspi_03_eval_posterior_metrics.py",
-    "Bytes": 25640,
-    "SHA256": "a1990378cff1d288417b8b49c30c42b64066608275e9fedf2ef94ccb68be4100"
+    "Bytes": 27434,
+    "SHA256": "f64ea50cc32fc2c78251a4b31404b5d5860ef05f0d449727106c5700107c81bf"
   }
 ]

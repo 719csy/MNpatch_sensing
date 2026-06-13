@@ -1,7 +1,7 @@
 {
   "step": "rspi_03_eval_posterior_metrics",
   "decision": "RSPI_POSTERIOR_METRICS_COMPLETED",
-  "dataset": "method2b_512_full_comsol_colab_cuda",
+  "dataset": "method2b_512_full_comsol_recalibrated_9model",
   "device": "cuda",
   "sample_count": 512,
   "input_shape": [
@@ -15,18 +15,21 @@
     64,
     64
   ],
-  "training_dir": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_4/training",
-  "posterior_samples": 64,
+  "training_dir": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_recalibrated_9model_20260613_recalibrated_9model_posterior32_b16_s1s5_progress/seed_4/training",
+  "posterior_samples": 32,
   "timesteps": 200,
   "img2img_start_step": 10,
   "base_channels": 16,
+  "guidance_scale": 0.06,
+  "coverage_calibration": "validation",
+  "calibration_coverage": 0.9,
   "split_modes": [
     "fig3_true_ood"
   ],
-  "fold_rows": 35,
+  "fold_rows": 75,
   "best_by_split_rmse": [
     {
-      "dataset": "method2b_512_full_comsol_colab_cuda",
+      "dataset": "method2b_512_full_comsol_recalibrated_9model",
       "split_mode": "fig3_true_ood",
       "model": "unet_canonical_bxyz",
       "n_folds": 5,
@@ -84,15 +87,17 @@
       "pit_mean_std": 0.0035588934660690935,
       "posterior_std_norm_mean_mean": 0.0,
       "posterior_std_norm_mean_std": 0.0,
-      "n_posterior_samples_mean": NaN,
-      "n_posterior_samples_std": NaN,
+      "calibration_target_coverage_mean": NaN,
+      "calibration_target_coverage_std": NaN,
+      "calibration_scale_90_mean": NaN,
+      "calibration_scale_90_std": NaN,
       "residual_scale_mean": NaN,
       "residual_scale_std": NaN
     }
   ],
   "outputs": {
-    "metrics_csv": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_4/posterior/rspi_posterior_metrics.csv",
-    "aggregate_csv": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_4/posterior/rspi_posterior_aggregate.csv",
-    "summary_json": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_five_seed_ood_colab_cuda_full512_chrome_a100_20260612/seed_4/posterior/rspi_posterior_metrics_summary.json"
+    "metrics_csv": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_recalibrated_9model_20260613_recalibrated_9model_posterior32_b16_s1s5_progress/seed_4/posterior_recalibrated_9model_20260613_recalibrated_9model_posterior32_b16_s1s5_progress/rspi_posterior_metrics.csv",
+    "aggregate_csv": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_recalibrated_9model_20260613_recalibrated_9model_posterior32_b16_s1s5_progress/seed_4/posterior_recalibrated_9model_20260613_recalibrated_9model_posterior32_b16_s1s5_progress/rspi_posterior_aggregate.csv",
+    "summary_json": "/content/fig3_colab_work/MN_simulation/outputs/rspi_joint_052026/method2b_512_recalibrated_9model_20260613_recalibrated_9model_posterior32_b16_s1s5_progress/seed_4/posterior_recalibrated_9model_20260613_recalibrated_9model_posterior32_b16_s1s5_progress/rspi_posterior_metrics_summary.json"
   }
 }
