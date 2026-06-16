@@ -1,0 +1,10 @@
+{
+  "seed": 20260531,
+  "train_z_bottom_min_mm": 1.6,
+  "train_z_bottom_max_mm": 11.0,
+  "held_out_depth_groups": [
+    "shallow_edge",
+    "ood_deep"
+  ],
+  "note": "Used for simulated depth-posterior extrapolation distance d_out."
+}

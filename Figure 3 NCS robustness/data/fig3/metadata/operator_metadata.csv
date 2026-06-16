@@ -1,0 +1,4 @@
+operator,native_readout,source
+MMP,8x8 Hall/magnetic coupling matrix,SIMULATED_BENCHMARK
+PIEZO,7x7 surface voltage/electrode map,SIMULATED_BENCHMARK
+US,64x64 axial strain surrogate,SIMULATED_BENCHMARK

@@ -1,0 +1,222 @@
+{
+  "seed": 20260531,
+  "created_by": "scripts/fig3_data_pipeline.py",
+  "data_contract": "REAL_EXPERIMENTAL data are never synthesized; missing paired real hardware data remain marked MISSING.",
+  "config": "configs/figure3_required_assets.yaml",
+  "required_assets": [
+    {
+      "path": "data/fig3/latent_truth/volume_E_xyz.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/metadata/cases.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/metadata/operator_metadata.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/metadata/train_depth_support.json",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/panel_a/eapp_common.npy",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/panel_a/alternative_3d_states.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/panel_a/projections.npy",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/domain_randomization/parameter_table.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/domain_randomization/prior_spec.json",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/domain_randomization/prior_qc.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/domain_randomization/example_volumes.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/domain_randomization/histograms.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/operators/mmp_kernel.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/operators/piezo_sheet_kernel.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/operators/ultrasound_strain_kernel.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/operators/lateral_psf.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/operators/operator_readouts_examples.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/model_io/io_shapes.json",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/model_io/posterior_outputs.json",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/posteriors/posterior_samples_E_xyz.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/posteriors/posterior_mean_volume.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/posteriors/posterior_uncertainty_volume.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/posteriors/zbottom_samples.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/posteriors/forward_residuals.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/metrics/depth_metrics.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/metrics/calibration_metrics.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/metrics/risk_coverage.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/metrics/error_vs_extrapolation.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/fig3/metrics/multimodality_metrics.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/shared_posterior/fig3_to_fig4_posterior_bank.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    {
+      "path": "data/shared_posterior/fig3_to_fig4_manifest.json",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    }
+  ],
+  "source_assets": {
+    "mmp_method2c_cache": {
+      "path": "H:\\My Drive\\MN_simulation\\outputs\\method2c\\targetmap_diffusion\\method2c_targetmap_diffusion_ready_cache.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    "mmp_existing_posterior64": {
+      "path": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2c_targetmap_posterior64\\rspi_posterior_aggregate.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    "mmp_claim_contract": {
+      "path": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\rspi_current_benchmark_contract_CN.md",
+      "exists": true,
+      "label": "PROVENANCE"
+    },
+    "piezo_surrogate_dataset": {
+      "path": "H:\\My Drive\\MN_simulation\\piezo_passive_benchmark\\outputs\\n7_matched_20260525\\piezo_surrogate_dataset.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    "piezo_surrogate_metrics": {
+      "path": "H:\\My Drive\\MN_simulation\\piezo_passive_benchmark\\outputs\\n7_matched_20260525\\piezo_surrogate_case_metrics.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    "piezo_qc": {
+      "path": "H:\\My Drive\\MN_simulation\\piezo_passive_benchmark\\outputs\\n7_matched_20260525\\piezo_qc_report.md",
+      "exists": true,
+      "label": "PROVENANCE"
+    },
+    "ultrasound_surrogate_dataset": {
+      "path": "H:\\My Drive\\MN_simulation\\ultrasound_strain_benchmark\\outputs\\n7_matched_20260525\\us_surrogate_dataset.npz",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    "ultrasound_surrogate_metrics": {
+      "path": "H:\\My Drive\\MN_simulation\\ultrasound_strain_benchmark\\outputs\\n7_matched_20260525\\us_surrogate_case_metrics.csv",
+      "exists": true,
+      "label": "SIMULATED_BENCHMARK"
+    },
+    "ultrasound_qc": {
+      "path": "H:\\My Drive\\MN_simulation\\ultrasound_strain_benchmark\\outputs\\n7_matched_20260525\\us_qc_report.md",
+      "exists": true,
+      "label": "PROVENANCE"
+    },
+    "real_paired_mmp_piezo_us_experiment": {
+      "path": "",
+      "exists": false,
+      "label": "MISSING",
+      "note": "Not synthesized; Figure 3 uses simulation-derived benchmark operators."
+    },
+    "optional_method2c_54case_magnetic_repair": {
+      "path": "H:\\My Drive\\MN_simulation\\outputs\\method2c\\method2c_bxyz_magnetic_only_reexport_plan.csv",
+      "exists": true,
+      "label": "OPTIONAL_REPAIR_PLAN"
+    }
+  },
+  "all_required_generated": true
+}

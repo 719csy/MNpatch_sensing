@@ -1,0 +1,17 @@
+{
+  "step": "method2b_512_five_seed_ood_orchestrator",
+  "decision": "DRY_RUN_COMMAND_PLAN_WRITTEN",
+  "run_root": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611",
+  "cache_summary": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_targetmap_diffusion_full512_20260611\\method2b_512_diffusion_cache_summary.json",
+  "sample_count": 512,
+  "expected_sample_count": 512,
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "split_modes": "fig3_true_ood",
+  "command_plan_json": "H:\\My Drive\\MN_simulation\\outputs\\rspi_joint_052026\\method2b_512_five_seed_ood_full512_20260611\\method2b_512_five_seed_ood_command_plan.json"
+}
