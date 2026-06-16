@@ -1,0 +1,8 @@
+taxonomy_key,figure_label,current_family,status,n_manifest_samples,evidence
+morphology,Morphology OOD,ood_unseen_shape,available_existing,64,current full512 manifest
+size,Size OOD,,not_available_in_current_full512_metrics,0,not present in current full512 manifest
+depth,Depth OOD,ood_unseen_depth_range,available_existing,64,current full512 manifest
+mechanical_background,Mechanical-background OOD,ood_unseen_layer_modulus,available_existing,32,current full512 manifest
+noise_drift,Noise/drift OOD,ood_unseen_operator_noise,available_existing,32,current full512 manifest
+missing_channel,Missing-channel OOD,,representative_case_synthetic_perturbation_only,0,not present in current full512 manifest
+compression_mismatch,Compression-mismatch OOD,,not_available_in_current_full512_metrics,0,not present in current full512 manifest

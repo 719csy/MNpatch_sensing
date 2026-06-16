@@ -1,0 +1,21 @@
+model,method_label,scenario_key,scenario_label,id_vs_ood_auroc,granularity
+train_mean_prior,Mean prior,ood_unseen_depth_range,Depth OOD,,seed_test_group
+train_mean_prior,Mean prior,ood_unseen_layer_modulus,Mechanical-background OOD,,seed_test_group
+train_mean_prior,Mean prior,ood_unseen_operator_noise,Noise/drift OOD,,seed_test_group
+train_mean_prior,Mean prior,ood_unseen_shape,Morphology OOD,,seed_test_group
+srcnn_bz_single_channel,SRCNN,ood_unseen_depth_range,Depth OOD,0.5,seed_test_group
+srcnn_bz_single_channel,SRCNN,ood_unseen_layer_modulus,Mechanical-background OOD,0.5,seed_test_group
+srcnn_bz_single_channel,SRCNN,ood_unseen_operator_noise,Noise/drift OOD,0.5,seed_test_group
+srcnn_bz_single_channel,SRCNN,ood_unseen_shape,Morphology OOD,0.5,seed_test_group
+unet_canonical_bxyz,U-Net,ood_unseen_depth_range,Depth OOD,0.5,seed_test_group
+unet_canonical_bxyz,U-Net,ood_unseen_layer_modulus,Mechanical-background OOD,0.5,seed_test_group
+unet_canonical_bxyz,U-Net,ood_unseen_operator_noise,Noise/drift OOD,0.5,seed_test_group
+unet_canonical_bxyz,U-Net,ood_unseen_shape,Morphology OOD,0.5,seed_test_group
+vanilla_diffusion,Vanilla diffusion,ood_unseen_depth_range,Depth OOD,0.64,seed_test_group
+vanilla_diffusion,Vanilla diffusion,ood_unseen_layer_modulus,Mechanical-background OOD,0.44,seed_test_group
+vanilla_diffusion,Vanilla diffusion,ood_unseen_operator_noise,Noise/drift OOD,0.6799999999999999,seed_test_group
+vanilla_diffusion,Vanilla diffusion,ood_unseen_shape,Morphology OOD,0.68,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,ood_unseen_depth_range,Depth OOD,0.6,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,ood_unseen_layer_modulus,Mechanical-background OOD,0.5599999999999999,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,ood_unseen_operator_noise,Noise/drift OOD,0.72,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,ood_unseen_shape,Morphology OOD,0.64,seed_test_group

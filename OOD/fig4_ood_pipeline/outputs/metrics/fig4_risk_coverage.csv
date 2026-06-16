@@ -1,0 +1,56 @@
+model,method_label,coverage,risk_1_minus_ssim,n_accepted_groups,n_total_groups,uncertainty_available,granularity
+train_mean_prior,Mean prior,0.05,0.9668201810787791,2,25,False,seed_test_group
+train_mean_prior,Mean prior,0.1,0.9672915700409646,3,25,False,seed_test_group
+train_mean_prior,Mean prior,0.2,0.9690035288835555,5,25,False,seed_test_group
+train_mean_prior,Mean prior,0.3,0.9683615443175838,8,25,False,seed_test_group
+train_mean_prior,Mean prior,0.4,0.9690035288835555,10,25,False,seed_test_group
+train_mean_prior,Mean prior,0.5,0.9686084614583421,13,25,False,seed_test_group
+train_mean_prior,Mean prior,0.6,0.9690035288835553,15,25,False,seed_test_group
+train_mean_prior,Mean prior,0.7,0.9687182024097901,18,25,False,seed_test_group
+train_mean_prior,Mean prior,0.8,0.9690035288835552,20,25,False,seed_test_group
+train_mean_prior,Mean prior,0.9,0.9687802299040869,23,25,False,seed_test_group
+train_mean_prior,Mean prior,1.0,0.9690035288835552,25,25,False,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.05,0.8625826362650304,2,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.1,0.8675812638606518,3,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.2,0.8526179112359668,5,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.3,0.850564603786132,8,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.4,0.848303344593688,10,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.5,0.8431937463961118,13,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.6,0.8418577460575108,15,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.7,0.8410876118762093,18,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.8,0.8416295273511564,20,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,0.9,0.8413647074594215,23,25,True,seed_test_group
+srcnn_bz_single_channel,SRCNN,1.0,0.8418353653566626,25,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.05,0.638886952235435,2,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.1,0.6641670676091542,3,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.2,0.6410599836327422,5,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.3,0.6254496419009787,8,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.4,0.6230418226466728,10,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.5,0.6114731313792999,13,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.6,0.6147752804920459,15,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.7,0.6084820520447201,18,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.8,0.609746416823831,20,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,0.9,0.6084790925945414,23,25,True,seed_test_group
+unet_canonical_bxyz,U-Net,1.0,0.6084882201705701,25,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.05,0.9522054421686335,2,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.1,0.9506776115598862,3,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.2,0.9545103250757585,5,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.3,0.9521108418477104,8,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.4,0.9520871435853433,10,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.5,0.9544557243594283,13,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.6,0.9551000431589319,15,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.7,0.9543839239002752,18,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.8,0.9552822285758829,20,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,0.9,0.9549601473571537,23,25,True,seed_test_group
+vanilla_diffusion,Vanilla diffusion,1.0,0.9552989091966166,25,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.05,0.7207941378807076,2,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.1,0.6852455299574499,3,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.2,0.6707123879952213,5,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.3,0.7010059760158094,8,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.4,0.7071043589152396,10,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.5,0.7297048149719978,13,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.6,0.7350868720017995,15,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.7,0.7428208785977326,18,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.8,0.7489424271553826,20,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,0.9,0.7619901728252942,23,25,True,seed_test_group
+explicit_residual_target_diffusion,Conditional diffusion,1.0,0.7716532457516027,25,25,True,seed_test_group

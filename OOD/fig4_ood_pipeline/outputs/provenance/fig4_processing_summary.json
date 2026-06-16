@@ -1,0 +1,16 @@
+{
+  "status": "completed",
+  "output_dir": "H:\\My Drive\\Manuscript\\AI for skin cancer\\Figure\\AS Figure 4\\fig4_ood_pipeline\\outputs",
+  "manifest_rows": 512,
+  "complete_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "missing_or_incomplete_seeds": [],
+  "panel_dir": "H:\\My Drive\\Manuscript\\AI for skin cancer\\Figure\\AS Figure 4\\fig4_ood_pipeline\\outputs\\panels",
+  "metrics_dir": "H:\\My Drive\\Manuscript\\AI for skin cancer\\Figure\\AS Figure 4\\fig4_ood_pipeline\\outputs\\metrics",
+  "selected_cases_generated": 4
+}

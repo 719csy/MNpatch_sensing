@@ -1,0 +1,5 @@
+anchor_type,found_candidate_file_count,status,candidate_examples,required_note
+phantom,0,missing,,Only B8/reference-map schema-compatible files should be treated as real anchors.
+animal,20,candidate_files_found_needs_manual_schema_check,H:\My Drive\MN_simulation\magnetic_sensitivity_shape_ratio\shape_ratio_registry.csv;H:\My Drive\MN_simulation\data audit 050726 (1+2)\fig3_qc_registration.csv;H:\My Drive\MN_simulation\data audit 050726 (1+2)\rspi_role_separated_joint_model_draft.json;H:\My Drive\MN_simulation\Model\shape ratio\shape_ratio_stl_summary_H1p40mm.csv;H:\My Drive\MN_simulation\Model\shape ratio\shape_ratio_stl_summary_H1p00_H0p50.csv,Only B8/reference-map schema-compatible files should be treated as real anchors.
+ex_vivo,0,missing,,Only B8/reference-map schema-compatible files should be treated as real anchors.
+clinical_complex,0,missing,,Only B8/reference-map schema-compatible files should be treated as real anchors.

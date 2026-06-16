@@ -1,0 +1,8 @@
+split_role,scenario_key,scenario_label,n_samples
+iid_test,iid_test,ID held-out,52
+ood_test,ood_unseen_depth_range,Depth OOD,64
+ood_test,ood_unseen_layer_modulus,Mechanical-background OOD,32
+ood_test,ood_unseen_operator_noise,Noise/drift OOD,32
+ood_test,ood_unseen_shape,Morphology OOD,64
+train,iid_support,Iid Support,230
+validation,iid_support,Iid Support,38
